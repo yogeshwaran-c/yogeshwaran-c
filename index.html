@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yogeshwaran C - Full Stack Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for the message box */
+        #message-box {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stays in place on scroll */
+            top: 20px; /* Position from the top */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Fine-tune centering */
+            background-color: #e0f2fe; /* Light blue background */
+            color: #0369a1; /* Blue text */
+            padding: 16px; /* Spacing inside */
+            border-radius: 6px; /* Rounded corners */
+            border: 1px solid #06b6d4; /* Blue border */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            z-index: 50; /* Ensure it's on top of most content */
+        }
+
+        /* Class to show the message box */
+        #message-box.show {
+            display: block;
+        }
+
+        /* --- Professional Styling --- */
+        body {
+            font-family: 'Inter', sans-serif; /* Apply Inter font */
+            color: #334155; /* Default text color (Slate 700) */
+            background-color: #f9fafd; /* Light background */
+        }
+
+        header {
+            background-image: linear-gradient(to bottom right, #1d4ed8, #2563eb); /* Blue gradient */
+            /* Creates the angled bottom edge */
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .header-title {
+            font-size: 4rem; /* Custom large size for main title */
+            color: #f9fafb; /* Light text color */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* Text shadow for depth */
+        }
+
+        .header-subtitle {
+            font-size: 1.8rem; /* Custom size for subtitle */
+            font-weight: 500; /* Medium weight */
+            color: #f0f4f5; /* Slightly off-white */
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+        }
+
+        .section-title {
+            font-size: 3.5rem; /* Large size for section headings */
+            color: #1e293b; /* Dark text color (Slate 800) */
+            margin-bottom: 4rem; /* Space below title */
+            text-align: left; /* Align section titles left */
+            border-bottom: 2px solid #cbd5e0; /* Light gray bottom border */
+            padding-bottom: 1.5rem; /* Space between text and border */
+            position: relative; /* Needed for the ::before pseudo-element */
+        }
+
+        /* Decorative underline for section titles */
+        .section-title::before {
+            content: '';
+            position: absolute;
+            bottom: -10px; /* Position below the border */
+            left: 0;
+            width: 50%; /* Half the width of the title */
+            height: 4px; /* Thickness */
+            background-image: linear-gradient(to right, #60a5fa, #3b82f6); /* Blue gradient */
+            border-radius: 5px; /* Rounded ends */
+        }
+
+        /* Style for the contact section title (overrides default color) */
+        #contact .section-title {
+             color: #ffffff; /* White text for the dark background */
+             border-bottom: none; /* Remove the default border */
+             padding-bottom: 0.5rem; /* Adjust padding as border is removed */
+        }
+         /* Adjust the ::before element for the contact title */
+        #contact .section-title::before {
+             bottom: -15px; /* Adjust position slightly */
+             background-image: linear-gradient(to right, #a5f3fc, #67e8f9); /* Lighter cyan gradient */
+        }
+
+
+        .card {
+            background-color: #ffffff; /* White background */
+            border: 1px solid #e2e8f0; /* Light gray border */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Default shadow */
+            border-radius: 20px; /* More rounded corners */
+            padding: 30px; /* Inner spacing */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Smooth transitions */
+             background-image: linear-gradient(to bottom, #ffffff, #f7fafc); /* Subtle gradient */
+        }
+
+        .card:hover {
+            transform: translateY(-12px); /* Lift effect on hover */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+            border-color: #67e8f9; /* Cyan border highlight on hover */
+        }
+
+        .text-lg {
+            font-size: 1.125rem; /* Tailwind's text-lg */
+            line-height: 1.75; /* Tailwind's leading-relaxed */
+            color: #4b5563; /* Gray 600 for body text */
+        }
+
+        .font-medium {
+            font-weight: 600; /* Semibold */
+            color: #1e293b; /* Darker text */
+        }
+
+        .contact-link {
+            color: #1e40af; /* Dark blue for links */
+            font-weight: 700; /* Bold */
+        }
+         /* Specific style for contact links in the dark section */
+        #contact .contact-link {
+             color: #ffffff; /* White text */
+             font-weight: 500; /* Medium weight */
+             transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #172554; /* Darker blue on hover */
+        }
+         #contact .contact-link:hover {
+             color: #a5f3fc; /* Light cyan on hover */
+         }
+
+        .list-disc {
+            list-style-type: disc; /* Standard bullet points */
+        }
+
+        .list-inside {
+            list-style-position: inside; /* Bullets inside the text block */
+        }
+
+        .bg-card-gradient {
+            /* Gradient for specific cards like education, certifications */
+            background-image: linear-gradient(to bottom, #f0f9ff, #e0f7fa);
+            border-radius: 20px; /* Consistent rounded corners */
+        }
+
+        .text-gradient {
+            /* Example of a gradient text */
+            background: linear-gradient(to right, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* --- New Styles for Professional Blue Theme --- */
+        /* These seem mostly like Tailwind classes, ensure they don't conflict if not needed */
+        .bg-blue-gradient {
+            background-image: linear-gradient(to bottom right, #2563eb, #3b82f6);
+        }
+        .text-blue-600 { color: #2563eb; }
+        .hover\:text-blue-700:hover { color: #1e40af; }
+        .border-blue-500 { border-color: #60a5fa; }
+        .bg-blue-100 { background-color: #e0f7fa; }
+        .text-blue-700 { color: #0369a1; }
+        .border-blue-400 { border-color: #06b6d4; }
+        .focus\:ring-blue-500:focus { --tw-ring-color: #60a5fa; }
+        .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+        .from-blue-50 { --tw-gradient-from: #eff6ff; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(239, 246, 255, 0)); }
+        .to-cyan-50 { --tw-gradient-to: #ecfeff; }
+
+
+        /* --- Creative Layout Styles --- */
+        #introduction {
+            padding: 4rem;
+            margin-bottom: 6rem;
+            /* Angled shape for introduction section */
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+        }
+
+        #experience, #education, #certifications, #skills {
+            margin-bottom: 6rem; /* Consistent spacing between sections */
+        }
+
+        #experience .card { /* Target cards specifically in experience */
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.15); /* Custom shadow */
+        }
+
+        #contact {
+            padding: 4rem 0; /* Vertical padding, horizontal handled by container */
+            /* Modified clip-path for a more subtle angle */
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .btn-primary {
+            display: inline-block; /* Ensure button behaves like a block for margin */
+            background-image: linear-gradient(to right, #60a5fa, #3b82f6); /* Blue gradient */
+            color: white;
+            padding: 14px 28px; /* Button size */
+            border-radius: 10px; /* Rounded corners */
+            font-weight: 600; /* Semibold */
+            transition: background-image 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Smooth transitions */
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Button shadow */
+        }
+
+        .btn-primary:hover {
+            background-image: linear-gradient(to right, #67e8f9, #06b6d4); /* Cyan gradient on hover */
+            transform: translateY(-4px); /* Lift effect */
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+        }
+
+        .btn-outline-primary {
+            display: inline-block; /* Ensure button behaves like a block for margin */
+            border: 2px solid #ffffff; /* White border */
+            color: #ffffff; /* White text */
+            padding: 12px 26px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Slight white background on hover */
+            color: #ffffff; /* Keep text white */
+            transform: translateY(-4px); /* Lift effect */
+            border-color: #a5f3fc; /* Light cyan border */
+        }
+
+        .shadow-lg {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Tailwind's shadow-lg */
+        }
+
+        .rounded-full {
+            border-radius: 9999px; /* Tailwind's rounded-full */
+        }
+
+        .experience-card {
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+            backdrop-filter: blur(5px); /* Subtle blur effect */
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(226, 232, 240, 0.6); /* Subtle border */
+        }
+
+        .experience-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-badge, .language-badge {
+             display: inline-block; /* Allow margin */
+             background-color: #e0f7fa; /* Light cyan background */
+             color: #3b82f6; /* Blue text */
+             padding: 8px 15px;
+             border-radius: 20px; /* Pill shape */
+             font-size: 0.9rem;
+             font-weight: 500; /* Medium weight */
+             margin: 5px; /* Spacing around badges */
+             border: 1px solid #60a5fa; /* Blue border */
+             transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .skill-badge:hover, .language-badge:hover {
+             background-color: #3b82f6; /* Blue background on hover */
+             color: white; /* White text on hover */
+             transform: scale(1.05); /* Slight zoom effect */
+             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Specific styling for language badges if needed, currently same as skill */
+        .language-badge {
+             background-color: #f0f9ff; /* Lighter blue background */
+             color: #2563eb; /* Slightly darker blue text */
+             border: 1px solid #93c5fd; /* Lighter blue border */
+        }
+         .language-badge:hover {
+             background-color: #2563eb;
+             color: white;
+         }
+    </style>
+</head>
+<body class="bg-gray-100 font-inter">
+
+    <div id="message-box"></div> <header class="bg-blue-gradient text-white py-16 md:py-20 rounded-b-3xl shadow-lg relative overflow-hidden">
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h1 class="header-title text-5xl md:text-6xl font-bold">Yogeshwaran C</h1>
+            <p class="header-subtitle text-xl md:text-2xl mt-4">Full Stack & Python Developer</p>
+            <a href="#contact" class="btn-primary mt-8">Contact Me</a>
+        </div>
+        </header>
+
+    <main class="container mx-auto px-4 py-16">
+
+        <section id="introduction" class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg shadow-md p-8 md:p-12 mb-16 card">
+            <h2 class="section-title">Introduction</h2>
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-4">About Me</h3>
+                    <p class="text-gray-700 text-lg">
+                        Hello! I'm Yogeshwaran C, a seasoned Full Stack & Python Developer dedicated to crafting impactful web solutions.
+                    </p>
+                    <p class="text-gray-700 mt-6 text-lg">
+                        I am passionate about staying at the forefront of technology and applying the latest advancements to create innovative and efficient applications.
+                    </p>
+                </div>
+                <div class="w-full md:w-1/2 flex justify-center">
+                    <img src="https://placehold.co/400x400/3b82f6/ffffff?text=YC"
+                         alt="Yogeshwaran C Profile Picture Placeholder"
+                         class="rounded-full shadow-lg w-64 h-64 md:w-80 md:h-80 object-cover border-4 border-white">
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="mb-16">
+            <h2 class="section-title">Experience</h2>
+            <div class="space-y-8">
+                <div class="experience-card card">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-3">Finstein</h3>
+                    <p class="text-gray-700 mb-1 text-lg font-medium">Full Stack Developer</p>
+                    <p class="text-gray-500 mb-3 text-sm">October 2022 - Present</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 text-lg">
+                        <li>Spearheaded the development and maintenance of critical web applications using Azure Functions, AngularJS, and related technologies.</li>
+                        <li>Collaborated closely with cross-functional teams, including designers, product managers, and QA engineers, to deliver high-quality software solutions.</li>
+                        <li>Optimized application performance through code refactoring, database query optimization, and caching strategies, resulting in a 30% improvement in page load times.</li>
+                        <li>Implemented robust security measures to protect sensitive data and ensure compliance with industry best practices.</li>
+                    </ul>
+                </div>
+                <div class="experience-card card">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-3">Finstein</h3>
+                    <p class="text-gray-700 mb-1 text-lg font-medium">Associate Trainee</p>
+                    <p class="text-gray-500 mb-3 text-sm">July 2022 - October 2022</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600 text-lg">
+                        <li>Gained foundational experience in front-end development, with a focus on HTML5 and CSS.</li>
+                        <li>Assisted senior developers in the development and maintenance of web projects, contributing to key features and functionality.</li>
+                        <li>Participated in code reviews and learned best practices for software development.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="mb-16">
+            <h2 class="section-title">Education</h2>
+            <div class="bg-card-gradient rounded-lg shadow-md p-6 card">
+                <h3 class="text-2xl font-semibold text-blue-600 mb-3">University College of Engineering Villupuram</h3>
+                <p class="text-gray-700 mb-1 text-lg font-medium">Bachelor's Degree, Information Technology</p>
+                <p class="text-gray-500 mb-2 text-sm">2018 - 2022</p>
+                <p class="text-gray-700 mb-1 text-lg">Grade: 7.4 CGPA</p>
+            </div>
+        </section>
+
+        <section id="certifications" class="mb-16">
+            <h2 class="section-title">Licenses & Certifications</h2>
+            <div class="space-y-6">
+                <div class="bg-card-gradient rounded-lg p-6 card">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-3">PYTHON WORKSHOP</h3>
+                    <p class="text-gray-700 mb-1 text-lg">Skillslash Academy</p>
+                    <p class="text-gray-500 text-sm mb-1">Issued March 2022</p>
+                    <p class="text-gray-600 text-sm">Credential ID: 186451</p>
+                </div>
+                <div class="bg-card-gradient rounded-lg p-6 card">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-3">Python</h3>
+                    <p class="text-gray-700 mb-1 text-lg">Infocus Training Centre, Villupuram</p>
+                     <p class="text-gray-500 text-sm mb-1">Issued January 2020</p>
+                    <p class="text-gray-600 text-sm">Credential ID: CG01409</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="mb-16">
+            <h2 class="section-title">Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-card-gradient rounded-lg p-6 card">
+                    <h4 class="text-xl font-semibold text-blue-600 mb-4 text-center">Technical Skills</h4>
+                    <div class="flex flex-wrap justify-center">
+                        <span class="skill-badge">Azure Functions</span>
+                        <span class="skill-badge">NestJS</span>
+                        <span class="skill-badge">MySQL</span>
+                        <span class="skill-badge">Node.js</span>
+                        <span class="skill-badge">JavaScript</span>
+                        <span class="skill-badge">TypeScript</span>
+                        <span class="skill-badge">HTML5</span>
+                        <span class="skill-badge">CSS3</span>
+                        <span class="skill-badge">AngularJS</span>
+                        <span class="skill-badge">React.js</span>
+                        <span class="skill-badge">Vue.js</span>
+                        <span class="skill-badge">Flask</span>
+                        <span class="skill-badge">Python</span>
+                        <span class="skill-badge">Web Development</span>
+                        <span class="skill-badge">Agile Methodologies</span>
+                        <span class="skill-badge">DevOps Basics</span>
+                        <span class="skill-badge">Cloud Computing (Azure)</span>
+                    </div>
+                </div>
+                <div class="bg-card-gradient rounded-lg p-6 card">
+                    <h4 class="text-xl font-semibold text-blue-600 mb-4 text-center">Languages</h4>
+                    <div class="flex flex-wrap justify-center">
+                        <span class="language-badge">English (Professional Working Proficiency)</span>
+                        <span class="language-badge">Hindi (Limited Working Proficiency)</span>
+                        <span class="language-badge">Tamil (Native or Bilingual Proficiency)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="bg-blue-gradient text-white py-16 rounded-t-3xl shadow-lg relative overflow-hidden">
+             <div class="container mx-auto px-4 pl-16 relative z-10">
+                <h2 class="section-title">Contact Me</h2>
+                <p class="text-gray-100 mb-8 text-lg max-w-3xl">
+                    Welcome to my portfolio! I'm excited to showcase my work. Feel free to reach out for collaboration or inquiries!
+                </p>
+                <div class="flex flex-col md:flex-row gap-8 mb-8">
+                    <div class="flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail text-blue-100 flex-shrink-0"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        <a href="mailto:yogeshwaran.c.dev@gmail.com" class="contact-link text-lg break-all">ycyogesh183@gmail.com</a>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin text-blue-100 flex-shrink-0"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                        <a href="https://www.linkedin.com/in/yogeshwaran-c-070720192/" target="_blank" rel="noopener noreferrer" class="contact-link text-lg break-all">linkedin.com/in/yogeshwaran-c-070720192/</a>
+                    </div>
+                </div>
+                <div class="mt-12 text-center">
+                     <a href="#" class="btn-outline-primary">Back to Top</a>
+                </div>
+            </div>
+             </section>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-6 mt-0"> <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">&copy; <span id="current-year"></span> Yogeshwaran C. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * Displays a temporary message box at the top of the screen.
+         * @param {string} message - The message to display.
+         * @param {string} [type='info'] - The type of message ('success', 'error', 'info'). Affects styling.
+         */
+        function showMessage(message, type = 'info') {
+            const messageBox = document.getElementById('message-box');
+            if (!messageBox) return; // Exit if message box element not found
+
+            messageBox.textContent = message;
+
+            // Determine colors based on type
+            let bgColor, textColor, borderColor;
+            switch (type) {
+                case 'success':
+                    bgColor = 'bg-green-100';
+                    textColor = 'text-green-700';
+                    borderColor = 'border-green-400';
+                    break;
+                case 'error':
+                    bgColor = 'bg-red-100';
+                    textColor = 'text-red-700';
+                    borderColor = 'border-red-400';
+                    break;
+                default: // 'info' or any other value
+                    bgColor = 'bg-blue-100';    // Changed from #e0f2fe to match Tailwind
+                    textColor = 'text-blue-700';    // Changed from #0369a1 to match Tailwind
+                    borderColor = 'border-blue-400';  // Changed from #06b6d4 to match Tailwind
+            }
+
+            // Apply Tailwind classes for styling
+            // Note: The base styles in <style> are overridden here by more specific Tailwind classes via JS
+            messageBox.className = `fixed top-5 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded shadow-md z-50 border ${bgColor} ${textColor} ${borderColor}`;
+
+            // Show the message box
+            messageBox.classList.add('show'); // Uses the .show class defined in CSS
+
+            // Hide the message box after 3 seconds
+            setTimeout(() => {
+                messageBox.classList.remove('show');
+                // Reset className to ensure it's hidden properly next time
+                 messageBox.className = '';
+                 messageBox.style.display = 'none'; // Force hide
+            }, 3000);
+        }
+
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Example: Show a welcome message when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Use 'info' type for the welcome message
+            showMessage('Welcome to my portfolio!', 'info');
+
+            // Smooth scroll for internal links (like Back to Top)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    // Check if it's just a placeholder link or the Back to Top link
+                    if (this.getAttribute('href') === '#') {
+                         e.preventDefault();
+                         window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        // Logic for scrolling to specific sections if needed
+                        const targetId = this.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            e.preventDefault();
+                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
