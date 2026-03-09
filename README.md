@@ -4,7 +4,7 @@
 
 **Full Stack Developer** · Building AI-powered platforms & enterprise SaaS
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-0e0e0e?style=for-the-badge&logo=googlechrome&logoColor=d4a843)](https://yogeshwaran-c.github.io/yogeshwaran-c/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-0e0e0e?style=for-the-badge&logo=googlechrome&logoColor=d4a843)](https://yogeshwaran.com/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yogeshwaran-c-070720192)
 [![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ycyogesh183@gmail.com)
 
@@ -107,6 +107,6 @@ Full Stack Developer with nearly 4 years of experience architecting scalable web
 
 *Building systems that automate the complex and deliver the impactful.*
 
-**[yogeshwaran-c.github.io/yogeshwaran-c](https://yogeshwaran-c.github.io/yogeshwaran-c/)**
+**[yogeshwaran.com](https://yogeshwaran.com/)**
 
 </div>
