@@ -8,7 +8,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  @page { size: 210mm 297mm; margin: 14mm 16mm 12mm 16mm; }
+  @page { size: 210mm 297mm; margin: 0; }
 
   body {
     font-family: 'Open Sans', Calibri, Arial, sans-serif;
@@ -16,11 +16,18 @@
     line-height: 1.42;
     color: #333;
     background: #fff;
-    max-width: 178mm;
+    max-width: 210mm;
     margin: 0 auto;
-    padding: 14mm 16mm 12mm 16mm;
+    padding: 14mm 16mm;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+  }
+
+  @media print {
+    body {
+      max-width: none;
+      margin: 0;
+    }
   }
 
   /* ── HEADER ── */
@@ -233,6 +240,7 @@
   }
 
   /* Page break control */
+  .page2-start { page-break-before: always; padding-top: 14mm; }
   .project-label { page-break-after: avoid; }
   .exp-block { page-break-inside: avoid; }
 </style>
@@ -259,7 +267,7 @@
   <!-- SUMMARY -->
   <div class="section">
     <div class="section-title">Professional Summary</div>
-    <p class="summary">Full Stack Developer with 3.5+ years of experience building scalable web applications, AI-powered automation systems, and enterprise SaaS platforms. Proficient in Python, TypeScript, Angular, NestJS, and FastAPI with hands-on expertise in cloud services (AWS, Azure), real-time systems, and LLM-driven document processing. Proven ability to architect end-to-end solutions from database design to production deployment, integrating payment gateways, messaging services, and AI/ML pipelines.</p>
+    <p class="summary">Full Stack Developer with nearly 4 years of experience building scalable web applications, AI-powered automation systems, and enterprise SaaS platforms. Proficient in Python, TypeScript, Angular, NestJS, and FastAPI with hands-on expertise in cloud services (AWS, Azure), real-time systems, and LLM-driven document processing. Proven ability to architect end-to-end solutions from database design to production deployment, integrating payment gateways, messaging services, and AI/ML pipelines.</p>
   </div>
 
   <!-- SKILLS -->
@@ -303,6 +311,7 @@
       <li>Containerized application with Docker; managed AWS EC2 deployments with Nginx via custom shell scripts</li>
     </ul>
 
+    <div class="page2-start"></div>
     <div class="project-label">Insurance Market Recommendation System</div>
     <ul class="bullets">
       <li>Built conversational AI system for insurance market discovery through natural language queries with real-time SSE streaming responses</li>
@@ -317,21 +326,6 @@
     <ul class="bullets">
       <li>Developed AI-powered chatbot for a fitness application and an appointment scheduling system for a healthcare platform</li>
       <li>Integrated Twilio and MSG91 for SMS/messaging services and Firebase for push notifications across multiple products</li>
-    </ul>
-  </div>
-
-  <div class="exp-block">
-    <div class="exp-header">
-      <span class="exp-title">Associate Developer</span>
-      <span class="exp-date">Jul 2022 &ndash; Oct 2022</span>
-    </div>
-    <div class="exp-meta">
-      <span class="exp-company">Finstein</span>
-      <span class="exp-location">Chennai, Tamil Nadu, India</span>
-    </div>
-    <ul class="bullets">
-      <li>Contributed to feature development using Angular and Node.js, building frontend components and REST API endpoints</li>
-      <li>Participated in code reviews and agile sprints, gaining exposure to production-grade full-stack development practices</li>
     </ul>
   </div>
 
