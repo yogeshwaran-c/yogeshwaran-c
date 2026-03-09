@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yogeshwaran C - Resume</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @page { size: 210mm 297mm; margin: 0; }
+
+  body {
+    font-family: 'Open Sans', Calibri, Arial, sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.42;
+    color: #333;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+    border-bottom: 2.5px solid #1b4f72;
+  }
+
+  .header h1 {
+    font-family: 'Raleway', 'Segoe UI', sans-serif;
+    font-size: 26pt;
+    font-weight: 800;
+    color: #1b4f72;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+  }
+
+  .header .subtitle {
+    font-family: 'Raleway', 'Segoe UI', sans-serif;
+    font-size: 11.5pt;
+    font-weight: 600;
+    color: #2874a6;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+  }
+
+  .contact-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    font-size: 9pt;
+    color: #444;
+  }
+
+  .contact-row a {
+    color: #2874a6;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .sep { color: #bbb; }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 13px;
+  }
+
+  .section-title {
+    font-family: 'Raleway', 'Segoe UI', sans-serif;
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #1b4f72;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding-bottom: 3px;
+    margin-bottom: 8px;
+    border-bottom: 1.5px solid #d4e6f1;
+  }
+
+  /* ── SUMMARY ── */
+  .summary {
+    font-size: 9.5pt;
+    color: #333;
+    line-height: 1.5;
+    text-align: justify;
+  }
+
+  /* ── SKILLS ── */
+  .skills-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.3pt;
+  }
+
+  .skills-table td {
+    padding: 3.5px 0;
+    vertical-align: top;
+    border-bottom: 1px solid #eaf2f8;
+  }
+
+  .skills-table td:first-child {
+    width: 120px;
+    font-weight: 600;
+    color: #1b4f72;
+    padding-right: 12px;
+    white-space: nowrap;
+  }
+
+  .skills-table td:last-child { color: #333; }
+  .skills-table tr:last-child td { border-bottom: none; }
+
+  /* ── EXPERIENCE ── */
+  .exp-block {
+    margin-bottom: 10px;
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1px;
+  }
+
+  .exp-title {
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #1b4f72;
+  }
+
+  .exp-date {
+    font-size: 9pt;
+    color: #666;
+    font-weight: 600;
+  }
+
+  .exp-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .exp-company {
+    font-size: 10pt;
+    font-weight: 600;
+    color: #2874a6;
+  }
+
+  .exp-location {
+    font-size: 8.5pt;
+    color: #888;
+  }
+
+  .project-label {
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: #1b4f72;
+    font-style: italic;
+    margin: 8px 0 4px 0;
+  }
+
+  ul.bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul.bullets li {
+    font-size: 9.3pt;
+    color: #333;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 3.5px;
+    line-height: 1.45;
+  }
+
+  ul.bullets li::before {
+    content: "";
+    position: absolute;
+    left: 1px;
+    top: 6px;
+    width: 5px;
+    height: 5px;
+    background: #2874a6;
+    border-radius: 50%;
+  }
+
+  /* ── EDUCATION ── */
+  .edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2px;
+  }
+
+  .edu-degree {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #1b4f72;
+  }
+
+  .edu-date {
+    font-size: 9pt;
+    color: #666;
+    font-weight: 600;
+  }
+
+  .edu-school {
+    font-size: 9.5pt;
+    color: #2874a6;
+    font-weight: 500;
+  }
+
+  /* ── BOTTOM GRID ── */
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 40px;
+  }
+
+  .bottom-grid .section { margin-bottom: 0; }
+
+  .inline-list {
+    font-size: 9.3pt;
+    color: #333;
+    line-height: 1.45;
+  }
+
+  /* Page break control */
+  .project-label { page-break-after: avoid; }
+  .exp-block { page-break-inside: avoid; }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>YOGESHWARAN C</h1>
+    <div class="subtitle">Full Stack Developer</div>
+    <div class="contact-row">
+      <span>8760233346</span>
+      <span class="sep">|</span>
+      <a href="mailto:ycyogesh183@gmail.com">ycyogesh183@gmail.com</a>
+      <span class="sep">|</span>
+      <span>Chennai, Tamil Nadu, India</span>
+      <span class="sep">|</span>
+      <a href="https://linkedin.com/in/yogeshwaran-c-070720192">LinkedIn</a>
+      <span class="sep">|</span>
+      <a href="https://github.com/yogeshwaran-c">GitHub</a>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="section">
+    <div class="section-title">Professional Summary</div>
+    <p class="summary">Full Stack Developer with 3.5+ years of experience building scalable web applications, AI-powered automation systems, and enterprise SaaS platforms. Proficient in Python, TypeScript, Angular, NestJS, and FastAPI with hands-on expertise in cloud services (AWS, Azure), real-time systems, and LLM-driven document processing. Proven ability to architect end-to-end solutions from database design to production deployment, integrating payment gateways, messaging services, and AI/ML pipelines.</p>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <div class="section-title">Technical Skills</div>
+    <table class="skills-table">
+      <tr><td>Languages</td><td>Python, TypeScript, JavaScript, SQL, HTML5, CSS3/SCSS</td></tr>
+      <tr><td>Frontend</td><td>Angular (17/19), React, Vue.js, RxJS, NgRx, PrimeNG, Angular Material, Bootstrap</td></tr>
+      <tr><td>Backend</td><td>NestJS, Node.js, FastAPI, Flask, Express.js</td></tr>
+      <tr><td>Databases</td><td>PostgreSQL, MySQL, Redis</td></tr>
+      <tr><td>Cloud & DevOps</td><td>AWS (EC2, S3, SNS, SQS), Azure (AI Search, OpenAI, Storage, Functions), Docker, Nginx</td></tr>
+      <tr><td>AI / ML</td><td>OpenAI GPT, Google Gemini, DSPy, Tesseract OCR, Vector Embeddings, Semantic Search</td></tr>
+      <tr><td>Queues & Realtime</td><td>Celery, Bull/BullMQ, Redis Queue, WebSockets, Socket.IO</td></tr>
+      <tr><td>Integrations</td><td>Razorpay, Stripe, Twilio, MSG91, Firebase</td></tr>
+      <tr><td>Tools</td><td>Git, Azure DevOps, Swagger/OpenAPI, TypeORM, Pydantic</td></tr>
+    </table>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Professional Experience</div>
+
+    <div class="exp-header">
+      <span class="exp-title">Full Stack Developer</span>
+      <span class="exp-date">Oct 2022 &ndash; Present</span>
+    </div>
+    <div class="exp-meta">
+      <span class="exp-company">Finstein</span>
+      <span class="exp-location">Chennai, Tamil Nadu, India</span>
+    </div>
+
+    <div class="project-label">Document Intelligence & Workflow Automation Platform</div>
+    <ul class="bullets">
+      <li>Architected a full-stack document processing platform automating data extraction from invoices, claims, and contracts using AI/LLM models, significantly reducing manual data entry</li>
+      <li>Built NestJS backend with modular monolith architecture (20+ modules) including workflow engine, form builder, connector framework, and usage-based billing system</li>
+      <li>Developed FastAPI microservices for AI-powered extraction using OpenAI GPT and Google Gemini, with DSPy-based automatic prompt optimization</li>
+      <li>Designed configurable workflow engine with approval gates, data transformations, webhook triggers, and payment nodes for end-to-end business process automation</li>
+      <li>Implemented real-time updates via Socket.IO and async job processing with Bull/BullMQ and Redis for non-blocking document pipelines</li>
+      <li>Built pluggable connector SDK for Gmail, Outlook, AWS S3, and webhook integrations enabling multi-channel document ingestion</li>
+      <li>Integrated Razorpay payments with usage-based metering; led database design with ER diagrams and PostgreSQL schemas (TypeORM) for multi-tenant isolation</li>
+      <li>Containerized application with Docker; managed AWS EC2 deployments with Nginx via custom shell scripts</li>
+    </ul>
+
+    <div class="project-label">Insurance Market Recommendation System</div>
+    <ul class="bullets">
+      <li>Built conversational AI system for insurance market discovery through natural language queries with real-time SSE streaming responses</li>
+      <li>Implemented semantic search across multiple market indices using Azure AI Search with vector embeddings (text-embedding-ada-002)</li>
+      <li>Developed dynamic filter extraction from natural language using Pydantic-based structured LLM output parsing with conflict resolution</li>
+      <li>Built geospatial data pipelines using GeoPandas, Shapely, and PyGeoHash for location-based market analysis and risk assessment</li>
+      <li>Created Azure Durable Functions for automated daily data ingestion: MySQL fetch, CSV flattening, batch embedding, and search indexing</li>
+      <li>Implemented sentiment analysis for recommendation quality tracking; built Angular 19 frontend with dashboard and chat interface</li>
+    </ul>
+
+    <div class="project-label">Additional Contributions</div>
+    <ul class="bullets">
+      <li>Developed AI-powered chatbot for a fitness application and an appointment scheduling system for a healthcare platform</li>
+      <li>Integrated Twilio and MSG91 for SMS/messaging services and Firebase for push notifications across multiple products</li>
+    </ul>
+  </div>
+
+  <div class="exp-block">
+    <div class="exp-header">
+      <span class="exp-title">Associate Developer</span>
+      <span class="exp-date">Jul 2022 &ndash; Oct 2022</span>
+    </div>
+    <div class="exp-meta">
+      <span class="exp-company">Finstein</span>
+      <span class="exp-location">Chennai, Tamil Nadu, India</span>
+    </div>
+    <ul class="bullets">
+      <li>Contributed to feature development using Angular and Node.js, building frontend components and REST API endpoints</li>
+      <li>Participated in code reviews and agile sprints, gaining exposure to production-grade full-stack development practices</li>
+    </ul>
+  </div>
+
+  <!-- OPEN SOURCE -->
+  <div class="section">
+    <div class="section-title">Open Source Contributions</div>
+    <ul class="bullets">
+      <li>Contributed to major open-source projects including <strong>VS Code</strong>, <strong>Angular</strong>, <strong>Angular Material</strong>, and <strong>Supabase</strong> on GitHub</li>
+    </ul>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-title">Education</div>
+    <div class="edu-header">
+      <span class="edu-degree">Bachelor of Engineering in Information Technology</span>
+      <span class="edu-date">2018 &ndash; 2022</span>
+    </div>
+    <div class="edu-school">University College of Engineering, Villupuram</div>
+  </div>
+
+  <!-- CERTIFICATIONS + LANGUAGES -->
+  <div class="bottom-grid">
+    <div class="section">
+      <div class="section-title">Certifications</div>
+      <div class="inline-list">Python Workshop Certification &bull; Python Certification</div>
+    </div>
+    <div class="section">
+      <div class="section-title">Languages</div>
+      <div class="inline-list">English (Professional) &bull; Tamil (Native) &bull; Hindi (Elementary)</div>
+    </div>
+  </div>
+
+</body>
+</html>
