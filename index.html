@@ -447,53 +447,75 @@ section {
   display: block;
 }
 
-/* ── EXPERIENCE ── */
+/* ── EXPERIENCE / TIMELINE ── */
 .timeline {
   position: relative;
-  padding-left: 3rem;
+  padding-left: 40px;
 }
 
 .timeline::before {
   content: '';
   position: absolute;
-  left: 0;
+  left: 7px;
   top: 0;
   bottom: 0;
-  width: 1px;
-  background: linear-gradient(to bottom, var(--accent), var(--border), transparent);
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--border) 60%, transparent);
 }
 
 .timeline-item {
   position: relative;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
-.timeline-item::before {
-  content: '';
+/* Node on the line */
+.timeline-node {
   position: absolute;
-  left: -3rem;
-  top: 8px;
-  width: 9px;
-  height: 9px;
-  background: var(--accent);
-  border: 2px solid var(--bg);
-  transform: rotate(45deg);
+  left: -40px;
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.timeline-node::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.timeline-node.active {
+  border-color: var(--green);
+  box-shadow: 0 0 12px rgba(92, 182, 122, 0.4);
+}
+
+.timeline-node.active::after {
+  background: var(--green);
+  animation: pulse 2s infinite;
+}
+
+/* Header row */
 .timeline-header {
   display: flex;
-  justify-content: space-between;
   align-items: baseline;
+  gap: 16px;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 6px;
 }
 
 .timeline-role {
   font-family: var(--display);
-  font-size: 1.6rem;
-  font-weight: 400;
+  font-size: 1.8rem;
   color: var(--text-primary);
+  line-height: 1.2;
 }
 
 .timeline-date {
@@ -501,27 +523,69 @@ section {
   font-size: 0.75rem;
   color: var(--accent);
   letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.timeline-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 1.5rem;
 }
 
 .timeline-company {
   font-family: var(--sans);
   font-size: 1rem;
   color: var(--text-secondary);
-  margin-bottom: 1.5rem;
+}
+
+.timeline-location {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.timeline-badge-current {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--green);
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timeline-badge-current::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+/* Projects grid */
+.timeline-projects {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
 }
 
 .project-block {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  padding: 2rem;
-  margin-bottom: 1.5rem;
+  padding: 1.8rem;
   position: relative;
-  transition: border-color 0.3s, transform 0.3s var(--ease-out-expo);
+  transition: border-color 0.4s, transform 0.4s var(--ease-out-expo), box-shadow 0.4s;
 }
 
 .project-block:hover {
   border-color: var(--accent-dim);
-  transform: translateX(4px);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
 }
 
 .project-block::before {
@@ -531,13 +595,17 @@ section {
   top: 0;
   bottom: 0;
   width: 3px;
-  background: var(--accent);
+  background: linear-gradient(to bottom, var(--accent), var(--accent-dim));
   opacity: 0;
   transition: opacity 0.3s;
 }
 
 .project-block:hover::before {
   opacity: 1;
+}
+
+.project-block.full-width {
+  grid-column: 1 / -1;
 }
 
 .project-name {
@@ -972,27 +1040,48 @@ footer p {
 
 /* ── MOBILE NAV ── */
 .mobile-menu {
-  display: none;
   position: fixed;
   inset: 0;
   z-index: 99;
   background: rgba(14, 14, 14, 0.97);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s var(--ease-out-expo), visibility 0.4s;
 }
 
-.mobile-menu.open { display: flex; }
+.mobile-menu.open {
+  opacity: 1;
+  visibility: visible;
+}
 
 .mobile-menu a {
   font-family: var(--display);
   font-size: 2.5rem;
   color: var(--text-primary);
   text-decoration: none;
-  transition: color 0.3s;
+  padding: 0.6rem 0;
+  transition: color 0.3s, transform 0.4s var(--ease-out-expo), opacity 0.4s;
+  opacity: 0;
+  transform: translateY(30px);
 }
+
+.mobile-menu.open a {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-menu.open a:nth-child(2) { transition-delay: 0.05s; }
+.mobile-menu.open a:nth-child(3) { transition-delay: 0.1s; }
+.mobile-menu.open a:nth-child(4) { transition-delay: 0.15s; }
+.mobile-menu.open a:nth-child(5) { transition-delay: 0.2s; }
+.mobile-menu.open a:nth-child(6) { transition-delay: 0.25s; }
 
 .mobile-menu a:hover { color: var(--accent); }
 
@@ -1003,8 +1092,15 @@ footer p {
   background: none;
   border: none;
   color: var(--text-primary);
-  font-size: 2rem;
+  font-size: 2.5rem;
   cursor: pointer;
+  transition: transform 0.3s, color 0.3s;
+  line-height: 1;
+}
+
+.mobile-close:hover {
+  transform: rotate(90deg);
+  color: var(--accent);
 }
 
 /* ── RESPONSIVE ── */
@@ -1026,7 +1122,11 @@ footer p {
 
   .hero-scroll { display: none; }
 
-  .timeline { padding-left: 2rem; }
+  .timeline { padding-left: 30px; }
+  .timeline::before { left: 5px; }
+  .timeline-node { left: -30px; width: 12px; height: 12px; }
+  .timeline-node::after { width: 4px; height: 4px; }
+  .timeline-projects { grid-template-columns: 1fr; }
 
   footer { flex-direction: column; text-align: center; }
 }
@@ -1052,7 +1152,7 @@ footer p {
     <li><a href="#opensource">Open Source</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <button class="nav-menu-btn" onclick="document.querySelector('.mobile-menu').classList.add('open')" aria-label="Menu">
+  <button class="nav-menu-btn" onclick="document.querySelector('.mobile-menu').classList.toggle('open')" aria-label="Menu">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
   </button>
 </nav>
@@ -1128,71 +1228,96 @@ footer p {
     </div>
 
     <div class="timeline">
+
       <div class="timeline-item reveal">
+        <div class="timeline-node active"></div>
         <div class="timeline-header">
           <span class="timeline-role">Full Stack Developer</span>
           <span class="timeline-date">Oct 2022 — Present</span>
+          <span class="timeline-badge-current">CURRENT</span>
         </div>
-        <p class="timeline-company">Finstein · Chennai, India</p>
+        <div class="timeline-meta">
+          <span class="timeline-company">Finstein</span>
+          <span class="timeline-location">Chennai, India</span>
+        </div>
 
-        <div class="project-block reveal reveal-delay-1">
-          <div class="project-name">Document Intelligence & Workflow Automation</div>
-          <ul class="project-bullets">
-            <li>Architected a full-stack document processing platform automating data extraction from invoices, claims, and contracts using AI/LLM models</li>
-            <li>Built NestJS backend with modular monolith architecture (20+ modules) including workflow engine, form builder, connector framework, and usage-based billing</li>
-            <li>Developed FastAPI microservices for AI-powered extraction using OpenAI GPT and Google Gemini, with DSPy-based automatic prompt optimization</li>
-            <li>Designed configurable workflow engine with approval gates, data transformations, webhook triggers, and payment nodes</li>
-            <li>Implemented real-time updates via Socket.IO and async job processing with Bull/BullMQ and Redis</li>
-            <li>Built pluggable connector SDK for Gmail, Outlook, AWS S3, and webhook integrations</li>
-            <li>Integrated Razorpay payments with usage-based metering; led database design with PostgreSQL schemas (TypeORM) for multi-tenant isolation</li>
-            <li>Containerized with Docker; managed AWS EC2 deployments with Nginx</li>
-          </ul>
-          <div class="project-tech">
-            <span class="tech-tag">NestJS</span>
-            <span class="tech-tag">FastAPI</span>
-            <span class="tech-tag">Angular</span>
-            <span class="tech-tag">OpenAI</span>
-            <span class="tech-tag">Gemini</span>
-            <span class="tech-tag">PostgreSQL</span>
-            <span class="tech-tag">Redis</span>
-            <span class="tech-tag">Docker</span>
-            <span class="tech-tag">AWS</span>
+        <div class="timeline-projects">
+          <div class="project-block reveal reveal-delay-1">
+            <div class="project-name">Document Intelligence & Workflow Automation</div>
+            <ul class="project-bullets">
+              <li>Architected a full-stack document processing platform automating data extraction from invoices, claims, and contracts using AI/LLM models</li>
+              <li>Built NestJS backend with modular monolith architecture (20+ modules) including workflow engine, form builder, connector framework, and usage-based billing</li>
+              <li>Developed FastAPI microservices for AI-powered extraction using OpenAI GPT and Google Gemini, with DSPy-based automatic prompt optimization</li>
+              <li>Designed configurable workflow engine with approval gates, data transformations, webhook triggers, and payment nodes</li>
+              <li>Implemented real-time updates via Socket.IO and async job processing with Bull/BullMQ and Redis</li>
+              <li>Built pluggable connector SDK for Gmail, Outlook, AWS S3, and webhook integrations</li>
+              <li>Integrated Razorpay payments with usage-based metering; led database design with PostgreSQL schemas (TypeORM) for multi-tenant isolation</li>
+              <li>Containerized with Docker; managed AWS EC2 deployments with Nginx</li>
+            </ul>
+            <div class="project-tech">
+              <span class="tech-tag">NestJS</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">Angular</span>
+              <span class="tech-tag">OpenAI</span>
+              <span class="tech-tag">Gemini</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Redis</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">AWS</span>
+            </div>
           </div>
-        </div>
 
-        <div class="project-block reveal reveal-delay-2">
-          <div class="project-name">Insurance Market Recommendation System</div>
-          <ul class="project-bullets">
-            <li>Built conversational AI system for insurance market discovery through natural language queries with real-time SSE streaming</li>
-            <li>Implemented semantic search across multiple market indices using Azure AI Search with vector embeddings</li>
-            <li>Developed dynamic filter extraction from natural language using Pydantic-based structured LLM output parsing</li>
-            <li>Built geospatial data pipelines using GeoPandas, Shapely, and PyGeoHash for location-based market analysis</li>
-            <li>Created Azure Durable Functions for automated daily data ingestion and search indexing</li>
-            <li>Built Angular 19 frontend with dashboard and conversational chat interface</li>
-          </ul>
-          <div class="project-tech">
-            <span class="tech-tag">FastAPI</span>
-            <span class="tech-tag">Angular 19</span>
-            <span class="tech-tag">Azure AI Search</span>
-            <span class="tech-tag">Azure Functions</span>
-            <span class="tech-tag">GeoPandas</span>
-            <span class="tech-tag">SSE</span>
+          <div class="project-block reveal reveal-delay-2">
+            <div class="project-name">Insurance Market Recommendation System</div>
+            <ul class="project-bullets">
+              <li>Built conversational AI system for insurance market discovery through natural language queries with real-time SSE streaming</li>
+              <li>Implemented semantic search across multiple market indices using Azure AI Search with vector embeddings</li>
+              <li>Developed dynamic filter extraction from natural language using Pydantic-based structured LLM output parsing</li>
+              <li>Built geospatial data pipelines using GeoPandas, Shapely, and PyGeoHash for location-based market analysis</li>
+              <li>Created Azure Durable Functions for automated daily data ingestion and search indexing</li>
+              <li>Built Angular 19 frontend with dashboard and conversational chat interface</li>
+            </ul>
+            <div class="project-tech">
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">Angular 19</span>
+              <span class="tech-tag">Azure AI Search</span>
+              <span class="tech-tag">Azure Functions</span>
+              <span class="tech-tag">GeoPandas</span>
+              <span class="tech-tag">SSE</span>
+            </div>
           </div>
-        </div>
 
-        <div class="project-block reveal reveal-delay-3">
-          <div class="project-name">Additional Projects</div>
-          <ul class="project-bullets">
-            <li>Developed AI-powered chatbot for a fitness application and appointment scheduling system for healthcare</li>
-            <li>Integrated Twilio and MSG91 for SMS/messaging and Firebase for push notifications across multiple products</li>
-          </ul>
-          <div class="project-tech">
-            <span class="tech-tag">Twilio</span>
-            <span class="tech-tag">MSG91</span>
-            <span class="tech-tag">Firebase</span>
+          <div class="project-block reveal reveal-delay-3">
+            <div class="project-name">Fitness & Wellness Platform</div>
+            <ul class="project-bullets">
+              <li>Led the development team for a comprehensive fitness platform connecting users with gyms, yoga studios, turfs, and wellness facilities through a single mobile app</li>
+              <li>Built AI-powered chatbot for personalized fitness guidance, buddy workout matching system, and real-time analytics tracking (steps, calories, heart rate)</li>
+              <li>Implemented seamless gym discovery and booking with OTP-based authentication, subscription management (Day Pass, Monthly, Yearly tiers), and push notifications</li>
+            </ul>
+            <div class="project-tech">
+              <span class="tech-tag">Mobile App</span>
+              <span class="tech-tag">AI Chatbot</span>
+              <span class="tech-tag">Real-time Analytics</span>
+              <span class="tech-tag">Firebase</span>
+              <span class="tech-tag">Push Notifications</span>
+            </div>
+          </div>
+
+          <div class="project-block reveal reveal-delay-4">
+            <div class="project-name">Healthcare Scheduling Platform</div>
+            <ul class="project-bullets">
+              <li>Built appointment scheduling system for a healthcare platform with automated reminders and booking management</li>
+              <li>Integrated Twilio and MSG91 for SMS/messaging and Firebase for push notifications across multiple products</li>
+            </ul>
+            <div class="project-tech">
+              <span class="tech-tag">Twilio</span>
+              <span class="tech-tag">MSG91</span>
+              <span class="tech-tag">Firebase</span>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
