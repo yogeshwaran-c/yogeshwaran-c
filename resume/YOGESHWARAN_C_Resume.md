@@ -2,7 +2,7 @@
 
 **Full Stack Developer**
 
-Phone: 8760233346 | Email: ycyogesh183@gmail.com | Location: Chennai, Tamil Nadu, India
+Phone: 8760233346 | Email: yogeshwaran.chandrakasan@gmail.com | Location: Chennai, Tamil Nadu, India
 LinkedIn: linkedin.com/in/yogeshwaran-c-070720192 | GitHub: github.com/yogeshwaran-c
 
 ---
@@ -29,7 +29,7 @@ Full Stack Developer with nearly 4 years of experience building scalable web app
 
 ## PROFESSIONAL EXPERIENCE
 
-### Full Stack Developer | Finstein | Oct 2022 -- Present | Chennai, India
+### Full Stack Developer | Finstein | Jul 2022 -- Present | Chennai, India
 
 **Document Intelligence & Workflow Automation Platform**
 
@@ -61,7 +61,7 @@ Full Stack Developer with nearly 4 years of experience building scalable web app
 - Integrated third-party services including Twilio and MSG91 for SMS/messaging and Firebase for push notifications
 - Contributed to open-source projects including VS Code, Angular, Angular Material, and Supabase
 
-### Associate Developer | Finstein | Jul 2022 -- Oct 2022 | Chennai, India
+### Associate Developer | Finstein | Jul 2022 -- Jul 2022 | Chennai, India
 
 - Onboarded to full-stack development practices and contributed to feature development using Angular and Node.js
 - Assisted in building frontend components and REST API endpoints for internal applications
@@ -71,7 +71,7 @@ Full Stack Developer with nearly 4 years of experience building scalable web app
 
 ## EDUCATION
 
-**Bachelor of Engineering in Information Technology**
+**Bachelor of Technology in Information Technology**
 University College of Engineering, Villupuram | 2018 -- 2022
 
 ---
