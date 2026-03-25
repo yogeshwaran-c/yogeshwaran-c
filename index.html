@@ -603,6 +603,7 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 gsap.registerPlugin(ScrollTrigger);
+gsap.defaults({ immediateRender: false });
 
 /* ═══════ A11Y: custom cursor class ═══════ */
 if (window.matchMedia('(pointer:fine)').matches) {
@@ -932,6 +933,9 @@ ScrollTrigger.create({
 });
 
 document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Refresh ScrollTrigger after all setup — fixes reload-while-scrolled issues
+ScrollTrigger.refresh();
 });
 </script>
 </body>
