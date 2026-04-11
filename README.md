@@ -4,7 +4,7 @@
 
 **Full Stack Developer** · Building AI-powered platforms & enterprise SaaS
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-0e0e0e?style=for-the-badge&logo=googlechrome&logoColor=d4a843)](https://yogeshwaran.com/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-07080b?style=for-the-badge&logo=googlechrome&logoColor=00e5c8)](https://yogeshwaran.com/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yogeshwaran-c-070720192)
 [![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:yogeshwaran.chandrakasan@gmail.com)
 
@@ -18,7 +18,7 @@ Full Stack Developer with nearly 4 years of experience architecting scalable web
 
 - 🔭 Currently building **Document Intelligence** and **AI-powered workflow automation** platforms
 - 🤖 Working with **OpenAI GPT**, **Google Gemini**, and **vector search** for intelligent document processing
-- 🌱 Contributing to open source — **VS Code**, **Angular**, **Angular Material**, **Supabase**
+- 🌱 Active OSS contributor with **68+ merged PRs** across **VS Code**, **NestJS CLI**, **Angular Material**, **BullMQ**, **Supabase**, and **Next.js**
 - 📍 Based in **Chennai, India**
 
 ---
@@ -83,10 +83,65 @@ Full Stack Developer with nearly 4 years of experience architecting scalable web
 
 ### Open Source Contributions
 
-<a href="https://github.com/microsoft/vscode"><img src="https://img.shields.io/badge/VS_Code-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white" alt="VS Code"></a>
-<a href="https://github.com/angular/angular"><img src="https://img.shields.io/badge/Angular-DD0031?style=flat-square&logo=angular&logoColor=white" alt="Angular"></a>
-<a href="https://github.com/angular/components"><img src="https://img.shields.io/badge/Angular_Material-DD0031?style=flat-square&logo=angular&logoColor=white" alt="Angular Material"></a>
-<a href="https://github.com/supabase/supabase"><img src="https://img.shields.io/badge/Supabase-3FCF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase"></a>
+Active contributor across major open-source projects — **68+ merged PRs** and counting.
+
+<table>
+<tr>
+<td align="center">
+<a href="https://github.com/nestjs/nest-cli/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/NestJS_CLI-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS CLI"><br>
+<sub><b>24 merged</b></sub>
+</a>
+</td>
+<td align="center">
+<a href="https://github.com/microsoft/vscode/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="VS Code"><br>
+<sub><b>17 merged</b></sub>
+</a>
+</td>
+<td align="center">
+<a href="https://github.com/angular/components/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/Angular_Material-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular Material"><br>
+<sub><b>13 merged</b></sub>
+</a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<a href="https://github.com/taskforcesh/bullmq/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/BullMQ-DC382D?style=for-the-badge&logo=redis&logoColor=white" alt="BullMQ"><br>
+<sub><b>7 merged</b></sub>
+</a>
+</td>
+<td align="center">
+<a href="https://github.com/supabase/supabase/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase"><br>
+<sub><b>6 merged</b></sub>
+</a>
+</td>
+<td align="center">
+<a href="https://github.com/angular/angular/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular"><br>
+<sub><b>1 merged</b></sub>
+</a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<a href="https://github.com/vercel/next.js/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js"><br>
+<sub><b>contributing</b></sub>
+</a>
+</td>
+<td align="center">
+<a href="https://github.com/nestjs/schematics/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/NestJS_Schematics-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS Schematics"><br>
+<sub><b>contributing</b></sub>
+</a>
+</td>
+<td></td>
+</tr>
+</table>
 
 ---
 
@@ -94,10 +149,12 @@ Full Stack Developer with nearly 4 years of experience architecting scalable web
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=yogeshwaran-c&show_icons=true&theme=github_dark&hide_border=true&bg_color=0e0e0e&title_color=d4a843&icon_color=d4a843&text_color=8a8680" height="170">
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=yogeshwaran-c&layout=compact&theme=github_dark&hide_border=true&bg_color=0e0e0e&title_color=d4a843&text_color=8a8680" height="170">
+<img src="https://github-readme-stats.vercel.app/api?username=yogeshwaran-c&show_icons=true&count_private=true&include_all_commits=true&hide_border=true&bg_color=07080b&title_color=00e5c8&icon_color=00e5c8&text_color=b0b5cc" height="170" alt="GitHub Stats">
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=yogeshwaran-c&layout=compact&hide_border=true&bg_color=07080b&title_color=00e5c8&text_color=b0b5cc" height="170" alt="Top Languages">
 
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=yogeshwaran-c&theme=dark&hide_border=true&background=0e0e0e&ring=d4a843&fire=d4a843&currStreakLabel=d4a843&sideLabels=8a8680&dates=5a5754" width="700">
+<img src="https://streak-stats.demolab.com?user=yogeshwaran-c&hide_border=true&background=07080b&ring=00e5c8&fire=00e5c8&currStreakLabel=00e5c8&sideLabels=b0b5cc&dates=6e7494&stroke=222640" width="700" alt="GitHub Streak">
+
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=yogeshwaran-c&bg_color=07080b&color=00e5c8&line=00e5c8&point=ff9e6d&area=true&hide_border=true&custom_title=Contribution%20Activity" width="700" alt="Activity Graph">
 
 </div>
 

@@ -59,13 +59,26 @@ Full Stack Developer with nearly 4 years of experience building scalable web app
 
 - Developed an AI-powered chatbot for a fitness application and an appointment scheduling system for healthcare
 - Integrated third-party services including Twilio and MSG91 for SMS/messaging and Firebase for push notifications
-- Contributed to open-source projects including VS Code, Angular, Angular Material, and Supabase
 
 ### Associate Developer | Finstein | Jul 2022 -- Jul 2022 | Chennai, India
 
 - Onboarded to full-stack development practices and contributed to feature development using Angular and Node.js
 - Assisted in building frontend components and REST API endpoints for internal applications
 - Participated in code reviews and agile sprint cycles, gaining exposure to production-grade software development
+
+---
+
+## OPEN SOURCE CONTRIBUTIONS
+
+Active contributor to major open-source projects with **68+ merged pull requests** across the following repositories:
+
+- **NestJS CLI** (nestjs/nest-cli) -- 24 merged PRs: compiler fixes, watch mode improvements, configuration handling, test coverage
+- **Visual Studio Code** (microsoft/vscode) -- 17 merged PRs: editor improvements, markdown/math fixes, debug console, SCM, terminal
+- **Angular Material** (angular/components) -- 13 merged PRs: component fixes and accessibility improvements
+- **BullMQ** (taskforcesh/bullmq) -- 7 merged PRs: type safety, worker fixes, documentation improvements
+- **Supabase** (supabase/supabase) -- 6 merged PRs
+- **Angular** (angular/angular) -- 1 merged PR
+- Ongoing contributions to **Next.js** (vercel/next.js) and **NestJS Schematics**
 
 ---
 
