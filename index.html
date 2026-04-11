@@ -183,14 +183,17 @@ nav.scrolled{background:rgba(8,9,12,.92);backdrop-filter:blur(20px);-webkit-back
 .skill-tag::after{content:',';color:var(--text3);margin-left:2px}
 .skill-tag:last-child::after{content:''}
 /* OSS */
+.oss-intro{font-size:1rem;line-height:1.75;color:var(--text2);max-width:720px;margin-bottom:3rem;margin-top:-1.5rem}
+.oss-intro em{font-style:normal;color:var(--accent);font-weight:500}
 .oss-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);contain:layout style paint}
 .oss-card{background:var(--bg);padding:3rem 2rem;text-align:center;transition:all .5s var(--spring);position:relative;overflow:hidden}
 .oss-card:hover{background:var(--bg2);transform:translateY(-3px)}
 .oss-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--warm));transform:scaleX(0);transition:transform .6s var(--ease)}
 .oss-card:hover::after{transform:scaleX(1)}
-.oss-name{font-family:var(--display);font-size:1.3rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
-.oss-sub{font-family:var(--mono);font-size:.65rem;color:var(--text3);letter-spacing:.06em}
-.oss-arrow{font-size:.8rem;color:var(--text3);margin-top:1rem;display:block;transition:all .4s var(--spring)}
+.oss-name{font-family:var(--display);font-size:1.25rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.4rem;line-height:1.1}
+.oss-sub{font-family:var(--mono);font-size:.6rem;color:var(--text3);letter-spacing:.06em}
+.oss-count{font-family:var(--mono);font-size:.62rem;color:var(--accent);letter-spacing:.1em;margin-top:.9rem;display:block;text-transform:uppercase}
+.oss-arrow{font-size:.8rem;color:var(--text3);margin-top:.6rem;display:block;transition:all .4s var(--spring)}
 .oss-card:hover .oss-arrow{color:var(--accent);transform:translateX(8px)}
 /* EDU + CERTS */
 .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
@@ -525,11 +528,16 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 <section id="oss" class="sec">
   <div class="sec-label">04 — Open Source</div>
   <h2 class="sec-title">Community <em>Contributions</em></h2>
+  <p class="oss-intro">Shipping real fixes and features to the tools developers use every day — <em>68+ merged pull requests</em> across major open-source projects.</p>
   <div class="oss-grid">
-    <a href="https://github.com/microsoft/vscode" target="_blank" rel="noopener noreferrer" class="oss-card" aria-label="VS Code on GitHub (opens in new tab)"><div class="oss-name">VS Code</div><div class="oss-sub">Microsoft</div><span class="oss-arrow" aria-hidden="true">→</span></a>
-    <a href="https://github.com/angular/angular" target="_blank" rel="noopener noreferrer" class="oss-card" aria-label="Angular on GitHub (opens in new tab)"><div class="oss-name">Angular</div><div class="oss-sub">Google</div><span class="oss-arrow" aria-hidden="true">→</span></a>
-    <a href="https://github.com/angular/components" target="_blank" rel="noopener noreferrer" class="oss-card" aria-label="Angular Material on GitHub (opens in new tab)"><div class="oss-name">Angular Material</div><div class="oss-sub">Google</div><span class="oss-arrow" aria-hidden="true">→</span></a>
-    <a href="https://github.com/supabase/supabase" target="_blank" rel="noopener noreferrer" class="oss-card" aria-label="Supabase on GitHub (opens in new tab)"><div class="oss-name">Supabase</div><div class="oss-sub">Open Source</div><span class="oss-arrow" aria-hidden="true">→</span></a>
+    <a href="https://github.com/nestjs/nest-cli/pulls?q=is%3Apr+author%3Ayogeshwaran-c" target="_blank" rel="noopener noreferrer" class="oss-card" aria-label="NestJS CLI contributions on GitHub (opens in new tab)"><div class="oss-name">NestJS CLI</div><div class="oss-sub">nestjs</div><span class="oss-count">24 merged</span><span class="oss-arrow" aria-hidden="true">→</span></a>
+    <a href="https://github.com/microsoft/vscode/pulls?q=is%3Apr+author%3Ayogeshwaran-c" target="_blank" rel="noopener noreferrer" class="oss-card" aria-label="VS Code contributions on GitHub (opens in new tab)"><div class="oss-name">VS Code</div><div class="oss-sub">Microsoft</div><span class="oss-count">17 merged</span><span class="oss-arrow" aria-hidden="true">→</span></a>
+    <a href="https://github.com/angular/components/pulls?q=is%3Apr+author%3Ayogeshwaran-c" target="_blank" rel="noopener noreferrer" class="oss-card" aria-label="Angular Material contributions on GitHub (opens in new tab)"><div class="oss-name">Angular Material</div><div class="oss-sub">Google</div><span class="oss-count">13 merged</span><span class="oss-arrow" aria-hidden="true">→</span></a>
+    <a href="https://github.com/taskforcesh/bullmq/pulls?q=is%3Apr+author%3Ayogeshwaran-c" target="_blank" rel="noopener noreferrer" class="oss-card" aria-label="BullMQ contributions on GitHub (opens in new tab)"><div class="oss-name">BullMQ</div><div class="oss-sub">taskforcesh</div><span class="oss-count">7 merged</span><span class="oss-arrow" aria-hidden="true">→</span></a>
+    <a href="https://github.com/supabase/supabase/pulls?q=is%3Apr+author%3Ayogeshwaran-c" target="_blank" rel="noopener noreferrer" class="oss-card" aria-label="Supabase contributions on GitHub (opens in new tab)"><div class="oss-name">Supabase</div><div class="oss-sub">supabase</div><span class="oss-count">6 merged</span><span class="oss-arrow" aria-hidden="true">→</span></a>
+    <a href="https://github.com/angular/angular/pulls?q=is%3Apr+author%3Ayogeshwaran-c" target="_blank" rel="noopener noreferrer" class="oss-card" aria-label="Angular contributions on GitHub (opens in new tab)"><div class="oss-name">Angular</div><div class="oss-sub">Google</div><span class="oss-count">1 merged</span><span class="oss-arrow" aria-hidden="true">→</span></a>
+    <a href="https://github.com/vercel/next.js/pulls?q=is%3Apr+author%3Ayogeshwaran-c" target="_blank" rel="noopener noreferrer" class="oss-card" aria-label="Next.js contributions on GitHub (opens in new tab)"><div class="oss-name">Next.js</div><div class="oss-sub">Vercel</div><span class="oss-count">contributing</span><span class="oss-arrow" aria-hidden="true">→</span></a>
+    <a href="https://github.com/nestjs/schematics/pulls?q=is%3Apr+author%3Ayogeshwaran-c" target="_blank" rel="noopener noreferrer" class="oss-card" aria-label="NestJS Schematics contributions on GitHub (opens in new tab)"><div class="oss-name">NestJS Schematics</div><div class="oss-sub">nestjs</div><span class="oss-count">contributing</span><span class="oss-arrow" aria-hidden="true">→</span></a>
   </div>
 </section>
 
