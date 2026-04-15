@@ -70,15 +70,15 @@ Full Stack Developer with nearly 4 years of experience building scalable web app
 
 ## OPEN SOURCE CONTRIBUTIONS
 
-Active contributor to major open-source projects with **68+ merged pull requests** across the following repositories:
+Active contributor to major open-source projects with **78+ merged pull requests** across the following repositories:
 
-- **NestJS CLI** (nestjs/nest-cli) -- 24 merged PRs: compiler fixes, watch mode improvements, configuration handling, test coverage
-- **Visual Studio Code** (microsoft/vscode) -- 17 merged PRs: editor improvements, markdown/math fixes, debug console, SCM, terminal
+- **NestJS CLI** (nestjs/nest-cli) -- 27 merged PRs: compiler fixes, watch mode improvements, configuration handling, test coverage
+- **Visual Studio Code** (microsoft/vscode) -- 20 merged PRs: editor improvements, markdown/math fixes, debug console, SCM, terminal
 - **Angular Material** (angular/components) -- 13 merged PRs: component fixes and accessibility improvements
-- **BullMQ** (taskforcesh/bullmq) -- 7 merged PRs: type safety, worker fixes, documentation improvements
+- **BullMQ** (taskforcesh/bullmq) -- 11 merged PRs: type safety, worker fixes, documentation improvements
 - **Supabase** (supabase/supabase) -- 6 merged PRs
 - **Angular** (angular/angular) -- 1 merged PR
-- Ongoing contributions to **Next.js** (vercel/next.js) and **NestJS Schematics**
+- Ongoing contributions to **Appwrite** (appwrite/appwrite), **Next.js** (vercel/next.js), **Directus** (directus/directus), and **NestJS Schematics**
 
 ---
 
