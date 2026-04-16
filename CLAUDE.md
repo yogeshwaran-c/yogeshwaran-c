@@ -1,20 +1,43 @@
 # CLAUDE.md — Project Conventions
 
-## Branching & Merging
+## Branching & Merging — git-flow
 
-**Always create a feature branch before making changes. Never commit or merge directly on `main`. Every merge goes through a GitHub Pull Request.**
+**Three branch layers. Every change goes through a Pull Request. Never commit or merge directly on `main` or `develop`.**
 
-Required flow:
+- **`main`** — production. Only receives merges from `develop` via release PR.
+- **`develop`** — integration. All feature PRs target this branch.
+- **`feature/<slug>`** — work branches. Cut from `develop`, PR'd back into `develop`.
 
-1. `git checkout -b feature/<slug>`
-2. Make changes, commit
-3. `git push origin feature/<slug>`
-4. `gh pr create --title "..." --body "..."` — open a PR to `main`
-5. `gh pr merge <number> --merge` — merge via the PR (NOT `git merge` on the command line)
+### Feature work flow
 
-Branch naming: `feature/<descriptive-slug>` or `feature/portfolio-redesign-v<N>` for continued redesign work.
+```bash
+git checkout develop && git pull origin develop
+git checkout -b feature/<slug>
+# make changes, commit
+git push -u origin feature/<slug>
+gh pr create --base develop --title "..." --body "..."
+gh pr merge <N> --merge --delete-branch
+```
 
-Why: every change has a reviewable PR artifact on GitHub, `main`'s history is tied to PR numbers, rollback of a logical unit is trivial.
+The `--base develop` flag is required. `gh pr create` defaults to `main` — don't let it.
+
+### Release flow (periodic, when ready to ship to production)
+
+```bash
+gh pr create --base main --head develop --title "Release: ..." --body "..."
+gh pr merge <N> --merge
+```
+
+### Branch naming
+
+- `feature/portfolio-redesign-v<N>` for continued redesign arcs
+- `feature/<descriptive-slug>` otherwise (e.g. `feature/blog-vscode-debug-console`)
+
+### Why this matters
+
+- `main` stays clean — only release-worthy merge commits
+- `develop` accumulates day-to-day changes so they integrate together
+- Every change has a PR artifact on GitHub (reviewable, linkable, rollbackable)
 
 ## Commits
 
