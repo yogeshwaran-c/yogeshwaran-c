@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The bug where VS Code's Debug Console was pasting 'repl:1' into my clipboard — Yogeshwaran C</title>
+<meta name="description" content="A 2-line CSS fix in VS Code that taught me how user-select: text cascades through every descendant — even the decorative ones.">
+<meta name="author" content="Yogeshwaran C">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://yogeshwaran.com/blog/2026-04-vscode-debug-console-copy-paste">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="The bug where VS Code's Debug Console was pasting 'repl:1' into my clipboard">
+<meta property="og:description" content="A 2-line CSS fix in VS Code that taught me how user-select: text cascades through every descendant — even the decorative ones.">
+<meta property="og:url" content="https://yogeshwaran.com/blog/2026-04-vscode-debug-console-copy-paste">
+<meta property="og:site_name" content="Yogeshwaran C">
+<meta property="article:author" content="Yogeshwaran Chandrakasan">
+<meta property="article:published_time" content="2026-04-16">
+<meta property="article:tag" content="vscode">
+<meta property="article:tag" content="css">
+<meta property="article:tag" content="debugging">
+<meta property="article:tag" content="open-source">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A 2-line CSS fix in VS Code's Debug Console">
+<meta name="twitter:description" content="Why user-select: text was dragging source annotations into my clipboard — and the 2-line fix.">
+
+<meta name="theme-color" content="#07080b">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
+<link rel="stylesheet" href="./post.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav aria-label="Main navigation">
+  <a href="/" class="nav-logo">Yogesh<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/blog/" class="active">Writing</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<article class="post">
+  <header class="post-header">
+    <a href="./" class="back-link">← All posts</a>
+    <div class="post-meta">
+      <time datetime="2026-04-16">April 16, 2026</time>
+      <span class="dot" aria-hidden="true"></span>
+      <span>6 min read</span>
+    </div>
+    <h1 class="post-title">The bug where VS Code's Debug Console was pasting 'repl:1' into my clipboard</h1>
+    <div class="post-tags">
+      <span class="post-tag">vscode</span>
+      <span class="post-tag">css</span>
+      <span class="post-tag">debugging</span>
+      <span class="post-tag">open-source</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <p>A few weeks ago I was debugging a Node.js script in VS Code. A familiar workflow: drop a <code>console.log</code>, hit the breakpoint, copy the multi-line output out of the Debug Console, paste it into a Slack message for a teammate.</p>
+
+    <p>Except what landed in Slack wasn't my output.</p>
+
+<pre><code class="language-none">hello
+repl:1
+ there</code></pre>
+
+    <p>The weird <code>repl:1</code> in the middle wasn't my log. It was VS Code's own <em>source annotation</em> — the small grey label it renders next to each Debug Console line pointing at where the log came from. It looks like decoration. Visually, it is. But somehow, it had ended up as text in my clipboard.</p>
+
+    <p>That's when I started reading the VS Code source.</p>
+
+    <h2>What broke, precisely</h2>
+
+    <p>VS Code's Debug Console renders each output line inside a tree view (<code>monaco-tl-contents</code>). To make the output selectable — which you need, otherwise you couldn't copy any logs — it sets:</p>
+
+<pre><code class="language-css">.monaco-workbench .repl .repl-tree .monaco-tl-contents {
+  user-select: text;
+}</code></pre>
+
+    <p>Fine so far. That gives you the ability to drag-select output text.</p>
+
+    <p>But inside that same selectable container, each line also renders a <code>.source</code> element — that's the <code>repl:1</code> / <code>file.ts:42</code> annotation rendered by <code>SourceWidget</code>. It lives in the same flex row as the log value:</p>
+
+<pre><code class="language-none">.value-and-source
+├── .value          ← your actual log
+└── .source         ← "repl:1"</code></pre>
+
+    <p>Because <code>user-select: text</code> on the parent cascades, the browser happily included the <code>.source</code> text in any native selection that spanned multiple lines. On copy, the clipboard got the source annotation interleaved with the real output.</p>
+
+    <h2>What I thought it was (wrong first, as always)</h2>
+
+    <p>My first instinct was that this was a bug in VS Code's <strong>copy handler</strong> — that it was pulling <code>innerText</code> from the whole row instead of just the value. I spent an hour stepping through the debug console's <code>onCopy</code> / clipboard code looking for a selector that was too broad.</p>
+
+    <p>Nothing. The copy handler was fine. It was using <code>document.getSelection()</code> — the standard browser API. The problem was upstream of the handler: the <strong>selection itself</strong> already contained the source annotations by the time copy ran.</p>
+
+    <p>That reframed the problem. The fix wasn't in JavaScript. It was in CSS.</p>
+
+    <h2>The fix</h2>
+
+    <p>Two lines:</p>
+
+<pre><code class="language-diff"> .monaco-workbench .repl .repl-tree .expression .source {
+     /* Use direction so the source shows elipses on the left */
+     direction: rtl;
+     max-width: 400px;
++    user-select: none;
++    -webkit-user-select: none;
+ }</code></pre>
+
+    <p><a href="https://github.com/microsoft/vscode/pull/308925" target="_blank" rel="noopener noreferrer">PR #308925 on microsoft/vscode</a></p>
+
+    <p><code>user-select: none</code> on a child overrides the <code>user-select: text</code> on the ancestor, scoped just to that element. The <code>.source</code> annotation is still <strong>visible</strong>, still <strong>clickable</strong> (click it and it navigates to the source line), but it no longer participates in the browser's text selection. Drag across 10 output lines and your clipboard now contains just the logs.</p>
+
+    <p>The <code>-webkit-user-select</code> prefix is belt-and-suspenders for Electron's Chromium vintage — VS Code targets multiple versions across stable and insiders, and the prefixed form stays the safer default in their codebase.</p>
+
+    <h2>How to reproduce before/after</h2>
+
+<pre><code class="language-javascript">// in a running debug session
+console.log('hello');
+console.log(' there');</code></pre>
+
+    <p><strong>Before the fix:</strong> select both lines in the Debug Console → copy → paste. You get <code>hello\nrepl:1\n there</code>.</p>
+
+    <p><strong>After the fix:</strong> paste gives you exactly <code>hello\n there</code>.</p>
+
+    <h2>The takeaway</h2>
+
+    <p><strong>If a container has <code>user-select: text</code>, every descendant is in your selection by default — even the metadata, the decorations, the "it's just a label" stuff.</strong> If you've built a custom widget that renders secondary info inside selectable content, add <code>user-select: none</code> to the secondary parts explicitly. The browser won't figure out your intent from the visual hierarchy.</p>
+
+    <p>The broader lesson: when a "bug in the copy handler" is actually a "bug in what was selected," stop looking at JavaScript. Look at the CSS cascading through your tree.</p>
+
+    <h2>Why this PR is a good first OSS contribution</h2>
+
+    <p>If you're looking at the VS Code repo and feeling intimidated — this fix was 2 lines. 1 file. No test changes. The hardest part was the reading (finding <code>.value-and-source</code>, understanding how <code>SourceWidget</code> renders into the REPL tree, confirming <code>user-select</code> inheritance was the real story). The writing was trivial.</p>
+
+    <p>There are hundreds of bugs like this in every large codebase. The ones that look like runtime bugs but turn out to be CSS cascading. The ones that look like state bugs but turn out to be event ordering. Once you learn to smell them, the patches write themselves.</p>
+  </div>
+
+  <footer class="post-footer">
+    <p class="signoff">
+      <em>Written after merging <a href="https://github.com/microsoft/vscode/pull/308925" target="_blank" rel="noopener noreferrer">#308925</a> into microsoft/vscode. Part of an ongoing series on fixes I've shipped to open-source projects — follow at <a href="/">yogeshwaran.com</a>.</em>
+    </p>
+  </footer>
+</article>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; <span id="yr"></span> Yogeshwaran Chandrakasan</span>
+    <span><a href="/">← Back to portfolio</a></span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-diff.min.js"></script>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>

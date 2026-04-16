@@ -77,4 +77,4 @@ gh pr merge <N> --merge
 
 - Posts live in `blog/<YYYY-MM>-<slug>.md` with front-matter (title, date, tags, canonical, pr).
 - Canonical URL is `yogeshwaran.com/blog/<slug>`; cross-post to Hashnode/Dev.to with canonical pointing back.
-- See `BLOG_GUIDE.md` for the monthly writing system.
+- See `docs/BLOG_GUIDE.md` for the monthly writing system, `docs/BLOG_DISCIPLINE.md` for sustainable-blogging rules, and `docs/BLOG_PUBLISHING.md` for the canonical URL + cross-posting runbook.
