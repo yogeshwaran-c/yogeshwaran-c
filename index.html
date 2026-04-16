@@ -1002,9 +1002,16 @@ gsap.to('.hero-glow1', {
   scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .4 }
 });
 
-/* ═══════ HORIZONTAL SCROLL PROJECTS ═══════ */
-const track = document.getElementById('projectsTrack');
-if (track) {
+/* ═══════ HORIZONTAL SCROLL PROJECTS ═══════
+   Pin setup is deferred until fonts are loaded because card widths
+   (and therefore the horizontal scroll distance) depend on the fonts
+   having settled. Setting up too early with system-fallback fonts would
+   give a wrong distance, making the pin-spacer wrong, which would
+   collapse all sections below #work into the pin area on reload. */
+function setupProjectsPin() {
+  const track = document.getElementById('projectsTrack');
+  if (!track) return;
+
   ScrollTrigger.matchMedia({
     '(min-width: 769px)': function() {
       function getDist() {
@@ -1015,19 +1022,19 @@ if (track) {
         const padX = parseFloat(getComputedStyle(track).paddingLeft) + parseFloat(getComputedStyle(track).paddingRight);
         return totalW + padX - window.innerWidth;
       }
-      if (getDist() > 0) {
-        gsap.to(track, {
-          x: () => -getDist(),      // recomputed on each refresh
-          ease: 'none',
-          scrollTrigger: {
-            trigger: '#work', start: 'top top',
-            end: () => '+=' + (getDist() + 400),
-            pin: true, scrub: .6,
-            invalidateOnRefresh: true,
-            anticipatePin: 1
-          }
-        });
-      }
+      // Always create the pin — dist is a live function, so later refreshes recompute
+      gsap.to(track, {
+        x: () => Math.max(0, -getDist()),     // never positive; clamp at 0
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#work', start: 'top top',
+          end: () => '+=' + Math.max(400, getDist() + 400),
+          pin: true, scrub: .6,
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+          pinType: 'fixed'
+        }
+      });
     },
     '(max-width: 768px)': function() {
       gsap.set(track, { x: 0, clearProps: 'transform' });
@@ -1039,6 +1046,13 @@ if (track) {
       });
     }
   });
+}
+
+// Defer pin setup until fonts are ready — card widths depend on loaded fonts
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(setupProjectsPin);
+} else {
+  setupProjectsPin();
 }
 
 /* ═══════ NAV ═══════ */

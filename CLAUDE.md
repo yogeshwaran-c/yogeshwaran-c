@@ -16,10 +16,12 @@ git checkout -b feature/<slug>
 # make changes, commit
 git push -u origin feature/<slug>
 gh pr create --base develop --title "..." --body "..."
-gh pr merge <N> --merge --delete-branch
+gh pr merge <N> --merge
 ```
 
 The `--base develop` flag is required. `gh pr create` defaults to `main` — don't let it.
+
+**Never use `--delete-branch` on `gh pr merge`.** Feature branches stay around on origin after merge — they're cheap, they preserve history, and they're useful for cherry-picking or revisiting a prior change set.
 
 ### Release flow (periodic, when ready to ship to production)
 
