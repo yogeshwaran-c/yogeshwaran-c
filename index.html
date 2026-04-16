@@ -730,6 +730,16 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
+/* ═══════ FORCE START AT TOP ON RELOAD ═══════
+   The GSAP pin on #work (horizontal project scroll) creates a pin-spacer
+   at setup time. If the browser restores scroll position mid-page BEFORE
+   the pin is set up, the page layout collapses (sections below work
+   render at wrong positions). Disabling scrollRestoration makes every
+   reload start at scroll 0 — GSAP sets up the pin cleanly, and the user
+   can scroll down with everything positioned correctly. */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
 gsap.registerPlugin(ScrollTrigger);
 gsap.defaults({ immediateRender: false });
 
@@ -992,29 +1002,39 @@ gsap.to('.hero-glow1', {
   scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .4 }
 });
 
-/* ═══════ HORIZONTAL SCROLL PROJECTS ═══════ */
-const track = document.getElementById('projectsTrack');
-if (track) {
+/* ═══════ HORIZONTAL SCROLL PROJECTS ═══════
+   Pin setup is deferred until fonts are loaded because card widths
+   (and therefore the horizontal scroll distance) depend on the fonts
+   having settled. Setting up too early with system-fallback fonts would
+   give a wrong distance, making the pin-spacer wrong, which would
+   collapse all sections below #work into the pin area on reload. */
+function setupProjectsPin() {
+  const track = document.getElementById('projectsTrack');
+  if (!track) return;
+
   ScrollTrigger.matchMedia({
     '(min-width: 769px)': function() {
-      const cards = track.querySelectorAll('.project-card');
-      let totalW = 0;
-      cards.forEach(c => totalW += c.offsetWidth);
-      totalW += (cards.length - 1) * 32;
-      const padX = parseFloat(getComputedStyle(track).paddingLeft) + parseFloat(getComputedStyle(track).paddingRight);
-      const dist = totalW + padX - window.innerWidth;
-
-      if (dist > 0) {
-        gsap.to(track, {
-          x: -dist, ease: 'none',
-          scrollTrigger: {
-            trigger: '#work', start: 'top top',
-            end: () => '+=' + (dist + 400),
-            pin: true, scrub: .6,
-            invalidateOnRefresh: true, anticipatePin: 1
-          }
-        });
+      function getDist() {
+        const cards = track.querySelectorAll('.project-card');
+        let totalW = 0;
+        cards.forEach(c => totalW += c.offsetWidth);
+        totalW += (cards.length - 1) * 32;
+        const padX = parseFloat(getComputedStyle(track).paddingLeft) + parseFloat(getComputedStyle(track).paddingRight);
+        return totalW + padX - window.innerWidth;
       }
+      // Always create the pin — dist is a live function, so later refreshes recompute
+      gsap.to(track, {
+        x: () => Math.max(0, -getDist()),     // never positive; clamp at 0
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#work', start: 'top top',
+          end: () => '+=' + Math.max(400, getDist() + 400),
+          pin: true, scrub: .6,
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+          pinType: 'fixed'
+        }
+      });
     },
     '(max-width: 768px)': function() {
       gsap.set(track, { x: 0, clearProps: 'transform' });
@@ -1026,6 +1046,13 @@ if (track) {
       });
     }
   });
+}
+
+// Defer pin setup until fonts are ready — card widths depend on loaded fonts
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(setupProjectsPin);
+} else {
+  setupProjectsPin();
 }
 
 /* ═══════ NAV ═══════ */
@@ -1078,8 +1105,18 @@ if (window.scrollY > 60) navEl.classList.add('scrolled');
   }
 })();
 
-// Refresh ScrollTrigger after all setup
+// Refresh ScrollTrigger after everything loads (fonts + images)
+// Two-phase refresh:
+//   1. Immediate — triggers with default fonts rendered
+//   2. After fonts load — fixes pin distances that depend on text-width-aware layout
 ScrollTrigger.refresh();
+Promise.all([
+  document.fonts ? document.fonts.ready : Promise.resolve(),
+  new Promise(res => {
+    if (document.readyState === 'complete') res();
+    else window.addEventListener('load', res, { once: true });
+  })
+]).then(() => ScrollTrigger.refresh());
 </script>
 </body>
 </html>
