@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Yogeshwaran C — Writing</title>
+    <link>https://yogeshwaran.com/blog/</link>
+    <atom:link href="https://yogeshwaran.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Notes from shipping production code, debugging open-source projects, and building AI-powered systems.</description>
+    <language>en-us</language>
+    <managingEditor>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</managingEditor>
+    <webMaster>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</webMaster>
+    <lastBuildDate>Wed, 16 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <generator>hand-rolled</generator>
+    <image>
+      <url>https://yogeshwaran.com/favicon.svg</url>
+      <title>Yogeshwaran C — Writing</title>
+      <link>https://yogeshwaran.com/blog/</link>
+    </image>
+
+    <item>
+      <title>The bug where VS Code's Debug Console was pasting 'repl:1' into my clipboard</title>
+      <link>https://yogeshwaran.com/blog/2026-04-vscode-debug-console-copy-paste</link>
+      <guid isPermaLink="true">https://yogeshwaran.com/blog/2026-04-vscode-debug-console-copy-paste</guid>
+      <pubDate>Wed, 16 Apr 2026 00:00:00 +0000</pubDate>
+      <author>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</author>
+      <category>vscode</category>
+      <category>css</category>
+      <category>debugging</category>
+      <category>open-source</category>
+      <description><![CDATA[A 2-line CSS fix in VS Code that taught me how user-select: text cascades through every descendant — even the decorative ones. The fix for my own misread of the bug: stop looking at JavaScript, start looking at the cascade.]]></description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found · Yogeshwaran C</title>
+<meta name="description" content="The page you're looking for doesn't exist on yogeshwaran.com.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07080b">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="mask-icon" href="/favicon.svg" color="#00e5c8">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#07080b;--bg2:#0f1118;--border:#222640;
+  --text:#f0f2f8;--text2:#b0b5cc;--text3:#6e7494;
+  --accent:#00e5c8;--warm:#ff9e6d;
+  --display:'Outfit',sans-serif;--body:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;line-height:1.6;position:relative;overflow:hidden}
+a{color:inherit;text-decoration:none}
+
+/* Ambient bg */
+.glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 40% at 50% 40%,rgba(0,229,200,.08),transparent 70%)}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.025;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px}
+
+main{position:relative;z-index:2;max-width:560px}
+
+.code{font-family:var(--display);font-size:clamp(5rem,18vw,12rem);font-weight:900;line-height:1;letter-spacing:-.04em;background:linear-gradient(180deg,var(--text),var(--text3));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
+.code em{font-style:normal;color:var(--accent);-webkit-text-fill-color:var(--accent)}
+
+.headline{font-family:var(--display);font-size:clamp(1.25rem,3vw,1.75rem);font-weight:700;margin-bottom:1rem;letter-spacing:-.01em}
+
+.subhead{color:var(--text2);margin-bottom:2.5rem;font-size:1rem;line-height:1.7}
+.subhead code{font-family:var(--mono);background:var(--bg2);border:1px solid var(--border);padding:2px 8px;border-radius:3px;font-size:.9em;color:var(--accent)}
+
+.actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:12px 22px;border-radius:4px;transition:all .35s cubic-bezier(.175,.885,.32,1.275);display:inline-block;border:1px solid var(--border)}
+.btn.primary{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.btn.primary:hover{background:var(--warm);border-color:var(--warm);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,229,200,.2)}
+.btn.ghost{color:var(--text2)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+
+footer{position:fixed;bottom:1.5rem;left:0;right:0;text-align:center;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:var(--text3);text-transform:uppercase;z-index:2}
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<main>
+  <div class="code">4<em>0</em>4</div>
+  <h1 class="headline">This page got lost in the cascade.</h1>
+  <p class="subhead">The URL you tried doesn't exist here. Maybe a typo, maybe a link that rotted, maybe something was moved. Head back and pick a path you know.</p>
+  <div class="actions">
+    <a href="/" class="btn primary">Back to home</a>
+    <a href="/blog/" class="btn ghost">Read the blog</a>
+  </div>
+</main>
+<footer>yogeshwaran.com</footer>
+</body>
+</html>
