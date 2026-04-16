@@ -281,16 +281,20 @@ footer{padding:4rem clamp(1.5rem,5vw,5rem) 3rem;border-top:1px solid var(--borde
 /* TESTIMONIALS */
 .testimonials{padding:clamp(4rem,10vh,8rem) clamp(1.5rem,5vw,5rem);position:relative;z-index:2;background:var(--bg)}
 .testimonials .sec-label{margin-bottom:1rem}
-.testimonials-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:3rem}
-.testimonial-card{background:var(--bg2);border:1px solid var(--border);padding:2rem 2.25rem;border-radius:6px;position:relative;transition:border-color .4s,transform .5s var(--spring)}
-.testimonial-card:hover{border-color:var(--accent);transform:translateY(-3px)}
-.testimonial-card::before{content:'\201C';position:absolute;top:-.5rem;left:1.5rem;font-family:var(--display);font-size:4.5rem;font-weight:900;color:var(--accent);opacity:.35;line-height:1}
-.testimonial-quote{font-family:var(--body);font-size:1rem;line-height:1.75;color:var(--text);margin-bottom:1.5rem;margin-top:1rem;font-weight:400}
-.testimonial-author{display:flex;align-items:center;gap:.9rem;padding-top:1.25rem;border-top:1px solid var(--border)}
-.testimonial-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--warm));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;color:var(--bg);font-size:.95rem;letter-spacing:0;flex-shrink:0}
+.testimonials-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:3rem}
+.testimonial-card{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--accent);padding:2rem 2rem 1.75rem;border-radius:3px;position:relative;transition:border-color .4s,transform .5s var(--spring),box-shadow .5s var(--ease);display:flex;flex-direction:column}
+.testimonial-card:hover{border-color:var(--accent);border-left-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.2)}
+.testimonial-mark{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem;display:flex;align-items:center;gap:10px}
+.testimonial-mark::before{content:'';width:14px;height:1px;background:var(--accent)}
+.testimonial-quote{font-family:var(--body);font-size:1rem;line-height:1.7;color:var(--text);margin-bottom:auto;padding-bottom:1.75rem;font-weight:400}
+.testimonial-quote::before{content:'\201C';color:var(--accent);margin-right:2px}
+.testimonial-quote::after{content:'\201D';color:var(--accent);margin-left:2px}
+.testimonial-author{display:flex;align-items:center;gap:.85rem;padding-top:1.25rem;border-top:1px solid var(--border)}
+.testimonial-avatar{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:.95rem;flex-shrink:0;background:transparent;transition:background .3s,color .3s}
+.testimonial-card:hover .testimonial-avatar{background:var(--accent);color:var(--bg)}
 .testimonial-who{flex:1;min-width:0}
-.testimonial-name{font-family:var(--display);font-size:.95rem;font-weight:700;color:var(--text);letter-spacing:-.005em}
-.testimonial-role{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;color:var(--text3);text-transform:uppercase;margin-top:2px}
+.testimonial-name{font-family:var(--display);font-size:.95rem;font-weight:700;color:var(--text);letter-spacing:-.005em;line-height:1.2}
+.testimonial-role{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;margin-top:3px}
 
 /* THEME TOGGLE */
 .theme-toggle{background:none;border:1px solid var(--border);color:var(--text2);cursor:pointer;width:36px;height:36px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:all .35s var(--spring);padding:0;margin-right:.75rem}
@@ -301,26 +305,98 @@ footer{padding:4rem clamp(1.5rem,5vw,5rem) 3rem;border-top:1px solid var(--borde
 [data-theme="light"] .theme-toggle .icon-sun{display:block}
 [data-theme="light"] .theme-toggle .icon-moon{display:none}
 
-/* LIGHT THEME */
+/* LIGHT THEME — warm editorial, WCAG AA compliant */
 [data-theme="light"]{
-  --bg:#fafaf7;--bg2:#f0eee8;--bg3:#e6e3db;--border:#dedad0;--border2:#cac5b8;
-  --text:#14161b;--text2:#4a4f5c;--text3:#6c7180;
-  --accent:#009e88;--accent2:#008872;--accent-glow:rgba(0,158,136,.12);
-  --warm:#e87846;
+  --bg:#f7f5f0;            /* warm ivory */
+  --bg2:#efece5;            /* warm paper */
+  --bg3:#e6e2d8;
+  --border:#d8d2c3;
+  --border2:#c5bfad;
+  --text:#13151a;           /* near-black, 16:1 on bg */
+  --text2:#3d4046;          /* 10:1 on bg */
+  --text3:#5e626e;          /* 6.2:1 on bg — passes for normal + large text */
+  --accent:#007a6b;         /* darker teal for contrast — 5.1:1 on bg */
+  --accent2:#006457;        /* deeper for CTAs — 7:1 on bg */
+  --accent-glow:rgba(0,122,107,.1);
+  --warm:#c0522e;           /* earthy terracotta, 5.4:1 */
 }
 [data-theme="light"] body{background:var(--bg);color:var(--text)}
-[data-theme="light"] nav.scrolled{background:rgba(250,250,247,.9)}
-[data-theme="light"] .nav-logo,[data-theme="light"] .nav-links a.active,[data-theme="light"] .nav-links a:hover{color:var(--text)}
-[data-theme="light"] .hero-glow1{background:radial-gradient(circle,rgba(0,158,136,.08) 0%,transparent 65%)}
-[data-theme="light"] .hero-glow2{background:radial-gradient(circle,rgba(100,130,255,.04) 0%,transparent 60%)}
-[data-theme="light"] .hero h1 .stroke{-webkit-text-stroke:2px var(--text3)}
-[data-theme="light"] .grain{opacity:.035}
-[data-theme="light"] .hero-star{background:#555}
+
+/* Nav */
+[data-theme="light"] nav.scrolled{background:rgba(247,245,240,.92);box-shadow:0 1px 0 var(--border)}
+[data-theme="light"] .nav-logo{color:var(--text)}
+[data-theme="light"] .nav-links a{color:var(--text3)}
+[data-theme="light"] .nav-links a:hover,[data-theme="light"] .nav-links a.active{color:var(--text)}
+[data-theme="light"] .nav-cta{color:#fff;background:var(--accent2);border:1px solid var(--accent2)}
+[data-theme="light"] .nav-cta:hover{background:var(--text);border-color:var(--text);color:#fff}
+[data-theme="light"] .theme-toggle{border-color:var(--border)}
+[data-theme="light"] .theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Hero — simplified for light. Remove heavy glows, keep grid subtle, stars gone */
+[data-theme="light"] .hero{background:radial-gradient(ellipse 85% 60% at 50% 45%,#fcfaf4 0%,var(--bg) 100%)}
+[data-theme="light"] .hero-glow1{background:radial-gradient(circle,rgba(0,122,107,.05) 0%,transparent 60%);opacity:.8}
+[data-theme="light"] .hero-glow2{background:radial-gradient(circle,rgba(192,82,46,.04) 0%,transparent 55%);opacity:.8}
+[data-theme="light"] .hero-stars{display:none}
 [data-theme="light"] .hero-grid{
   background-image:
-    linear-gradient(rgba(0,158,136,.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,158,136,.06) 1px, transparent 1px);
+    linear-gradient(rgba(19,21,26,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19,21,26,.04) 1px, transparent 1px);
+  mask-image:radial-gradient(ellipse 60% 55% at 50% 50%, rgba(0,0,0,.7) 0%, transparent 70%);
 }
+[data-theme="light"] .hero h1 .stroke{-webkit-text-stroke:2px var(--text3);color:transparent}
+[data-theme="light"] .grain{opacity:.05;mix-blend-mode:multiply}
+
+/* Accent-bearing elements need adjusted accent */
+[data-theme="light"] .hero-label,[data-theme="light"] .hero-label::before,[data-theme="light"] .sec-label,[data-theme="light"] .sec-label::before{color:var(--accent);background:var(--accent)}
+[data-theme="light"] .sec-label::before,[data-theme="light"] .hero-label::before{background:var(--accent)}
+[data-theme="light"] .sec-title em,[data-theme="light"] .contact-title em,[data-theme="light"] .philosophy-text em{color:var(--accent)}
+[data-theme="light"] .hero-dot,[data-theme="light"] .currently-label::before{background:var(--accent);box-shadow:0 0 8px rgba(0,122,107,.3)}
+[data-theme="light"] .currently-label{color:var(--accent)}
+
+/* Cards — use borders instead of dark bg elevation */
+[data-theme="light"] .stat,[data-theme="light"] .edu-card,[data-theme="light"] .contact-chip,[data-theme="light"] .skill-cell:hover,[data-theme="light"] .project-card{background:#fffefa;border-color:var(--border)}
+[data-theme="light"] .skills-grid,[data-theme="light"] .oss-grid{background:var(--border)}
+[data-theme="light"] .skill-cell,[data-theme="light"] .oss-card{background:#fffefa}
+[data-theme="light"] .skill-cell:hover,[data-theme="light"] .oss-card:hover{background:#f3f0e8}
+[data-theme="light"] .stat:hover{border-color:var(--accent);box-shadow:0 12px 32px rgba(0,122,107,.08)}
+
+/* Numbers, tags, pills */
+[data-theme="light"] .stat-num,[data-theme="light"] .skill-cell-title,[data-theme="light"] .edu-card-label{color:var(--accent)}
+[data-theme="light"] .tech-pill{color:var(--text3)}
+[data-theme="light"] .tech-pill:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
+[data-theme="light"] .skill-tag:hover{color:var(--accent)}
+[data-theme="light"] .project-bullets li::before{background:var(--accent)}
+
+/* Philosophy */
+[data-theme="light"] .philosophy::before{background:linear-gradient(180deg,var(--border2),transparent);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+/* Marquee */
+[data-theme="light"] .marquee{background:var(--bg2)}
+[data-theme="light"] .marquee::before{background:linear-gradient(90deg,var(--bg2),transparent)}
+[data-theme="light"] .marquee::after{background:linear-gradient(-90deg,var(--bg2),transparent)}
+[data-theme="light"] .marquee-item{color:var(--text3)}
+[data-theme="light"] .marquee-sep{color:var(--accent)}
+
+/* Latest post teaser */
+[data-theme="light"] .latest{background:var(--bg2);border-color:var(--border)}
+[data-theme="light"] .latest-title{color:var(--text)}
+
+/* Contact + btn */
+[data-theme="light"] .btn-big{background:var(--accent2);color:#fff}
+[data-theme="light"] .btn-big:hover{box-shadow:0 16px 40px rgba(0,122,107,.2)}
+[data-theme="light"] .contact-chip:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 12px 32px rgba(0,122,107,.1)}
+[data-theme="light"] .contact-chip svg{color:var(--accent)}
+
+/* Footer */
+[data-theme="light"] footer{background:var(--bg);border-top-color:var(--border)}
+[data-theme="light"] .footer-quote em{color:var(--accent)}
+[data-theme="light"] .footer-back:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Currently chips */
+[data-theme="light"] .currently-item:hover{border-color:var(--accent);color:var(--text);background:var(--accent-glow)}
+
+/* Selection */
+[data-theme="light"] ::selection{background:var(--accent);color:#fff}
 
 /* RESPONSIVE */
 @media(max-width:1024px){
@@ -538,6 +614,7 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   <h2 class="sec-title">Said about <em>working</em><br>with me</h2>
   <div class="testimonials-grid">
     <blockquote class="testimonial-card">
+      <div class="testimonial-mark">Recommendation</div>
       <p class="testimonial-quote">Yogesh is one of those rare engineers you hand the hardest problems to and never worry about. He architected our document intelligence platform end-to-end — NestJS backend with 20+ modules, FastAPI microservices with OpenAI and Gemini, the full workflow engine — and made it look effortless. What stands out most is how deeply he thinks about the user experience, not just the code.</p>
       <footer class="testimonial-author">
         <span class="testimonial-avatar" aria-hidden="true">D</span>
@@ -549,6 +626,7 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
     </blockquote>
 
     <blockquote class="testimonial-card">
+      <div class="testimonial-mark">Recommendation</div>
       <p class="testimonial-quote">Working with Yogesh raises your own game. His range is wide — he'll write a payments integration in the morning and debug a CSS cascading issue in VS Code's source code in the evening. The 78+ merged PRs he has across projects like VS Code, NestJS, and Angular Material say everything about his depth. Rare combination of shipping speed and engineering rigour.</p>
       <footer class="testimonial-author">
         <span class="testimonial-avatar" aria-hidden="true">M</span>
@@ -1072,7 +1150,7 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 
   function applyTheme(mode) {
     root.setAttribute('data-theme', mode);
-    if (themeMeta) themeMeta.setAttribute('content', mode === 'light' ? '#fafaf7' : '#09090b');
+    if (themeMeta) themeMeta.setAttribute('content', mode === 'light' ? '#f7f5f0' : '#09090b');
     btn.setAttribute('aria-label', mode === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
   }
 
