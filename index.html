@@ -1024,7 +1024,7 @@ function setupProjectsPin() {
       }
       // Always create the pin — dist is a live function, so later refreshes recompute
       gsap.to(track, {
-        x: () => Math.max(0, -getDist()),     // never positive; clamp at 0
+        x: () => -Math.max(0, getDist()),     // negative when dist > 0; 0 otherwise
         ease: 'none',
         scrollTrigger: {
           trigger: '#work', start: 'top top',
