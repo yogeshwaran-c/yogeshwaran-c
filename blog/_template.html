@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+  Template for a new blog post.
+  To publish:
+    1. Copy this file to blog/<YYYY-MM>-<slug>.html
+    2. Replace every {{PLACEHOLDER}} below
+    3. Add the post entry to blog/index.html
+    4. See docs/BLOG_PUBLISHING.md for the full flow
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{POST_TITLE}} — Yogeshwaran C</title>
+<meta name="description" content="{{POST_DESCRIPTION}}">
+<meta name="author" content="Yogeshwaran C">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://yogeshwaran.com/blog/{{POST_SLUG}}">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{POST_TITLE}}">
+<meta property="og:description" content="{{POST_DESCRIPTION}}">
+<meta property="og:url" content="https://yogeshwaran.com/blog/{{POST_SLUG}}">
+<meta property="og:site_name" content="Yogeshwaran C">
+<meta property="article:author" content="Yogeshwaran Chandrakasan">
+<meta property="article:published_time" content="{{POST_ISO_DATE}}">
+<meta property="article:tag" content="{{POST_TAG_1}}">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{POST_TITLE}}">
+<meta name="twitter:description" content="{{POST_DESCRIPTION}}">
+
+<meta name="theme-color" content="#07080b">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Syntax highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
+<link rel="stylesheet" href="./post.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav aria-label="Main navigation">
+  <a href="/" class="nav-logo">Yogesh<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/blog/" class="active">Writing</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<article class="post">
+  <header class="post-header">
+    <a href="./" class="back-link">← All posts</a>
+    <div class="post-meta">
+      <time datetime="{{POST_ISO_DATE}}">{{POST_DISPLAY_DATE}}</time>
+      <span class="dot" aria-hidden="true"></span>
+      <span>{{POST_READ_TIME}} min read</span>
+    </div>
+    <h1 class="post-title">{{POST_TITLE}}</h1>
+    <div class="post-tags">
+      <span class="post-tag">{{POST_TAG_1}}</span>
+      <!-- Duplicate for each tag -->
+    </div>
+  </header>
+
+  <div class="post-body">
+    <!--
+      Paste the post body HTML here.
+      Use <h2>, <h3> for section headers.
+      <pre><code class="language-css">...</code></pre> for code blocks.
+      <blockquote> for quotes.
+      <a href="..."> for links.
+    -->
+  </div>
+
+  <footer class="post-footer">
+    <p class="signoff">
+      <em>Written after merging <a href="{{PR_URL}}">{{PR_LABEL}}</a>. Part of an ongoing series on fixes I've shipped to open-source projects — follow at <a href="/">yogeshwaran.com</a>.</em>
+    </p>
+  </footer>
+</article>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; <span id="yr"></span> Yogeshwaran Chandrakasan</span>
+    <span><a href="/">← Back to portfolio</a></span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-diff.min.js"></script>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
