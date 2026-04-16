@@ -6,10 +6,6 @@ canonical: https://yogeshwaran.com/blog/2026-04-vscode-debug-console-copy-paste
 pr: https://github.com/microsoft/vscode/pull/308925
 ---
 
-> **Note to self:** personalize the *"What I thought it was"* section before publishing — it's currently generic. Everything else is accurate to the actual PR.
-
----
-
 A few weeks ago I was debugging a Node.js script in VS Code. A familiar workflow: drop a `console.log`, hit the breakpoint, copy the multi-line output out of the Debug Console, paste it into a Slack message for a teammate.
 
 Except what landed in Slack wasn't my output.
