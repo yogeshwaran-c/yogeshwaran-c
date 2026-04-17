@@ -107,10 +107,18 @@ Edit `blog/index.html` — add the new post at the top:
 </article>
 ```
 
-### 4. Commit and push
+### 4. Regenerate the sitemap
 
 ```bash
-git add blog/ BLOG_PUBLISHING.md
+node generate-sitemap.js
+```
+
+This scans all `.html` files in the repo (skipping templates, 404, etc.) and rebuilds `sitemap.xml` with the new post URL. No manual XML editing needed.
+
+### 5. Commit and push
+
+```bash
+git add blog/ sitemap.xml
 git commit -m "Publish: <post title>
 
 - Adds blog/<YYYY-MM>-<slug>.html
@@ -119,7 +127,7 @@ git commit -m "Publish: <post title>
 git push -u origin feature/blog-<post-slug>
 ```
 
-### 5. Open PR → develop
+### 6. Open PR → develop
 
 ```bash
 gh pr create --base develop \
@@ -127,13 +135,13 @@ gh pr create --base develop \
   --body "Summary, post link, test plan"
 ```
 
-### 6. Merge feature → develop
+### 7. Merge feature → develop
 
 ```bash
 gh pr merge <N> --merge --delete-branch
 ```
 
-### 7. Release develop → main
+### 8. Release develop → main
 
 When you're ready for the post to go live:
 
@@ -146,7 +154,7 @@ gh pr merge <N> --merge
 
 GitHub Pages will deploy in ~1 minute. Verify the post is live at the canonical URL.
 
-### 8. Cross-post to Hashnode
+### 9. Cross-post to Hashnode
 
 1. Go to `hashnode.com/create-story`
 2. Paste the markdown content (minus the front-matter)
@@ -155,7 +163,7 @@ GitHub Pages will deploy in ~1 minute. Verify the post is live at the canonical 
 5. Enter: `https://yogeshwaran.com/blog/<slug>`
 6. Publish
 
-### 9. Cross-post to Dev.to
+### 10. Cross-post to Dev.to
 
 1. Go to `dev.to/new`
 2. Paste the markdown content — Dev.to parses front-matter natively
@@ -173,7 +181,7 @@ cover_image: https://yogeshwaran.com/blog/images/<slug>-cover.png
 
 4. Publish
 
-### 10. Social distribution (within 24h of publishing)
+### 11. Social distribution (within 24h of publishing)
 
 **Twitter/X:**
 - One-sentence hook + code screenshot + link
