@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yogeshwaran.com/sitemap.xml
+
+# Block internal/template files
+Disallow: /blog/_template.html
+Disallow: /og-template.html

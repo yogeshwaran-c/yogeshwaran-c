@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LinkedIn Banner — Yogeshwaran C</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1584px;height:396px;overflow:hidden}
+body{background:#07080b;color:#f0f2f8;font-family:'Outfit',sans-serif;position:relative}
+
+.grid{position:absolute;inset:0;background-image:
+  linear-gradient(rgba(0,229,200,.04) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(0,229,200,.04) 1px,transparent 1px);
+  background-size:50px 50px;
+  mask-image:radial-gradient(ellipse 70% 80% at 50% 50%,black 0%,transparent 75%)}
+
+.glow-a{position:absolute;top:-150px;right:100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,229,200,.12),transparent 65%);filter:blur(80px)}
+.glow-b{position:absolute;bottom:-100px;left:200px;width:400px;height:400px;background:radial-gradient(circle,rgba(255,158,109,.06),transparent 65%);filter:blur(60px)}
+
+.content{position:relative;z-index:2;height:100%;display:flex;align-items:center;padding:0 100px;gap:80px}
+
+.left{flex:1}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#00e5c8;display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.eyebrow::before{content:'';width:24px;height:1px;background:#00e5c8}
+.name{font-size:72px;font-weight:900;line-height:.98;letter-spacing:-.03em;text-transform:uppercase}
+.name .second{display:block;-webkit-text-stroke:1.5px #b0b5cc;color:transparent;font-size:64px}
+.tagline{font-size:18px;font-weight:500;color:#b0b5cc;line-height:1.5;margin-top:18px;max-width:600px}
+.tagline strong{color:#f0f2f8}
+.tagline em{font-style:normal;color:#00e5c8;font-weight:700}
+
+.right{display:flex;gap:36px}
+.stat{text-align:center}
+.stat-num{font-size:36px;font-weight:800;color:#00e5c8;line-height:1;letter-spacing:-.02em}
+.stat-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#6e7494;margin-top:6px}
+
+.url{position:absolute;bottom:24px;right:100px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;color:#6e7494;z-index:2}
+</style>
+</head>
+<body>
+<div class="grid"></div>
+<div class="glow-a"></div>
+<div class="glow-b"></div>
+<div class="content">
+  <div class="left">
+    <div class="eyebrow">Full Stack Developer · Open Source</div>
+    <h1 class="name">Yogeshwaran<span class="second">Chandrakasan</span></h1>
+    <p class="tagline">Building <em>AI-powered platforms</em> and shipping production software. <strong>78+ merged PRs</strong> to VS Code, NestJS, Angular Material, BullMQ.</p>
+  </div>
+  <div class="right">
+    <div class="stat"><div class="stat-num">78+</div><div class="stat-label">Merged PRs</div></div>
+    <div class="stat"><div class="stat-num">10+</div><div class="stat-label">OSS Projects</div></div>
+    <div class="stat"><div class="stat-num">4+</div><div class="stat-label">Years</div></div>
+  </div>
+</div>
+<div class="url">yogeshwaran.com</div>
+</body>
+</html>
