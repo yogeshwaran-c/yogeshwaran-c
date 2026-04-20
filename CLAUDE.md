@@ -30,6 +30,8 @@ gh pr create --base main --head develop --title "Release: ..." --body "..."
 gh pr merge <N> --merge
 ```
 
+**Only release user-facing changes to `main`.** Internal docs (`docs/**`, `CLAUDE.md`, `README.md`, the blog guide docs) don't need to reach `main` — they're not served to visitors. Doc-only PRs stop at `develop`. Bundle them into the next real release PR if you want them on `main` eventually, but don't cut a standalone release for docs.
+
 ### Branch naming
 
 - `feature/portfolio-redesign-v<N>` for continued redesign arcs
