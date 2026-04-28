@@ -92,6 +92,17 @@ footer{padding:3rem clamp(1.5rem,5vw,5rem);border-top:1px solid var(--border);po
 .footer-inner a{transition:color .3s}
 .footer-inner a:hover{color:var(--accent)}
 
+/* UPCOMING POST CARD */
+.post-card--upcoming{cursor:default;border-bottom:1px dashed var(--border)}
+.post-card--upcoming:hover{transform:none}
+.post-card--upcoming .post-title{color:var(--text2);background-image:none;cursor:default}
+.post-card--upcoming .post-title:hover{color:var(--text2)}
+.upcoming-badge{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);padding:3px 9px;border:1px solid var(--accent);border-radius:3px;display:inline-flex;align-items:center;gap:6px}
+.upcoming-badge::before{content:'';width:5px;height:5px;background:var(--accent);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.upcoming-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem;display:flex;align-items:center;gap:10px}
+.upcoming-eyebrow::before{content:'';width:14px;height:1px;background:var(--accent)}
+
 @media(max-width:768px){
   .post-card:hover{transform:none}
   .footer-inner{flex-direction:column;text-align:center}
@@ -121,6 +132,21 @@ footer{padding:3rem clamp(1.5rem,5vw,5rem);border-top:1px solid var(--border);po
 
 <main class="posts">
   <div class="posts-heading">All Posts</div>
+
+  <article class="post-card post-card--upcoming" aria-label="Upcoming post">
+    <div class="upcoming-eyebrow">Up next</div>
+    <div class="post-meta">
+      <span class="upcoming-badge">Releasing May 16, 2026</span>
+    </div>
+    <h2 class="post-title">BullMQ was crashing on getRanges() because Python's <code style="font-family:var(--mono);font-size:.85em">list.reverse()</code> returns None</h2>
+    <p class="post-excerpt">A 1-line fix in BullMQ's Python port that taught me the universal lesson about Python's mutating-vs-returning method conventions. <code>.reverse()</code>, <code>.sort()</code>, <code>.append()</code> — they all mutate in place and return None.</p>
+    <div class="post-tags">
+      <span class="post-tag">bullmq</span>
+      <span class="post-tag">python</span>
+      <span class="post-tag">debugging</span>
+      <span class="post-tag">open-source</span>
+    </div>
+  </article>
 
   <article class="post-card">
     <div class="post-meta">
