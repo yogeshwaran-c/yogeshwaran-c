@@ -277,6 +277,10 @@ footer{padding:4rem clamp(1.5rem,5vw,5rem) 3rem;border-top:1px solid var(--borde
 .latest-excerpt{font-size:.9rem;line-height:1.6;color:var(--text2);max-width:620px}
 .latest-more{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;margin-top:.5rem;display:inline-block;transition:color .3s}
 .latest-card:hover .latest-more{color:var(--accent)}
+.latest-upcoming{margin-top:1.25rem;padding-top:1rem;border-top:1px dashed var(--border);display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;font-size:.82rem;color:var(--text2)}
+.latest-upcoming-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(0,229,200,.5);animation:pulse 2s ease-in-out infinite;flex-shrink:0}
+.latest-upcoming-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+.latest-upcoming-title{color:var(--text2);font-weight:500}
 
 /* TESTIMONIALS */
 .testimonials{padding:clamp(4rem,10vh,8rem) clamp(1.5rem,5vw,5rem);position:relative;z-index:2;background:var(--bg)}
@@ -481,6 +485,11 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
       <p class="latest-excerpt">A 2-line CSS fix in VS Code that taught me how <code style="font-family:var(--mono);color:var(--accent)">user-select: text</code> cascades through every descendant — even the decorative ones.</p>
       <span class="latest-more">Read post →</span>
     </a>
+    <div class="latest-upcoming" aria-label="Upcoming post">
+      <span class="latest-upcoming-dot" aria-hidden="true"></span>
+      <span class="latest-upcoming-label">Up next · May 16</span>
+      <span class="latest-upcoming-title">BullMQ was crashing on getRanges() because Python's list.reverse() returns None</span>
+    </div>
   </div>
 </section>
 
