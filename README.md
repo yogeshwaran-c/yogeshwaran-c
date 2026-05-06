@@ -18,7 +18,7 @@ Full Stack Developer with nearly 4 years of experience architecting scalable web
 
 - 🔭 Currently building **Document Intelligence** and **AI-powered workflow automation** platforms
 - 🤖 Working with **OpenAI GPT**, **Google Gemini**, and **vector search** for intelligent document processing
-- 🌱 Active OSS contributor with **103+ merged PRs** across the **NestJS** ecosystem (CLI, GraphQL, Swagger, TypeORM), **BullMQ**, **VS Code**, **Angular Material**, **Directus**, and more
+- 🌱 Active OSS contributor with **152+ merged PRs** across the **NestJS** ecosystem (CLI, GraphQL, Swagger, TypeORM), **BullMQ**, **VS Code**, **Angular Material**, **Supabase**, **Directus**, and more
 - 📍 Based in **Chennai, India**
 
 ---
@@ -83,26 +83,32 @@ Full Stack Developer with nearly 4 years of experience architecting scalable web
 
 ### Open Source Contributions
 
-Active contributor across major open-source projects — **103+ merged PRs** and counting.
+Active contributor across major open-source projects — **152+ merged PRs** and counting.
 
 <table>
 <tr>
 <td align="center">
+<a href="https://github.com/nestjs/nest-cli/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/NestJS_CLI-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS CLI"><br>
+<sub><b>44 merged</b></sub>
+</a>
+</td>
+<td align="center">
 <a href="https://github.com/taskforcesh/bullmq/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
 <img src="https://img.shields.io/badge/BullMQ-DC382D?style=for-the-badge&logo=redis&logoColor=white" alt="BullMQ"><br>
-<sub><b>26 merged</b></sub>
+<sub><b>32 merged</b></sub>
 </a>
 </td>
 <td align="center">
 <a href="https://github.com/microsoft/vscode/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
 <img src="https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="VS Code"><br>
-<sub><b>21 merged</b></sub>
+<sub><b>23 merged</b></sub>
 </a>
 </td>
 <td align="center">
-<a href="https://github.com/nestjs/nest-cli/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
-<img src="https://img.shields.io/badge/NestJS_CLI-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS CLI"><br>
-<sub><b>18 merged</b></sub>
+<a href="https://github.com/nestjs/graphql/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/NestJS_GraphQL-E0234E?style=for-the-badge&logo=graphql&logoColor=white" alt="NestJS GraphQL"><br>
+<sub><b>16 merged</b></sub>
 </a>
 </td>
 <td align="center">
@@ -111,17 +117,17 @@ Active contributor across major open-source projects — **103+ merged PRs** and
 <sub><b>13 merged</b></sub>
 </a>
 </td>
-<td align="center">
-<a href="https://github.com/nestjs/graphql/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
-<img src="https://img.shields.io/badge/NestJS_GraphQL-E0234E?style=for-the-badge&logo=graphql&logoColor=white" alt="NestJS GraphQL"><br>
-<sub><b>10 merged</b></sub>
-</a>
-</td>
 </tr>
 <tr>
 <td align="center">
 <a href="https://github.com/nestjs/swagger/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
 <img src="https://img.shields.io/badge/NestJS_Swagger-E0234E?style=for-the-badge&logo=swagger&logoColor=white" alt="NestJS Swagger"><br>
+<sub><b>10 merged</b></sub>
+</a>
+</td>
+<td align="center">
+<a href="https://github.com/supabase/supabase/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase"><br>
 <sub><b>7 merged</b></sub>
 </a>
 </td>
@@ -135,12 +141,6 @@ Active contributor across major open-source projects — **103+ merged PRs** and
 <a href="https://github.com/directus/directus/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
 <img src="https://img.shields.io/badge/Directus-6644FF?style=for-the-badge&logo=directus&logoColor=white" alt="Directus"><br>
 <sub><b>2 merged</b></sub>
-</a>
-</td>
-<td align="center">
-<a href="https://github.com/supabase/supabase/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
-<img src="https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase"><br>
-<sub><b>1 merged</b></sub>
 </a>
 </td>
 <td align="center">

@@ -70,17 +70,18 @@ Full Stack Developer with nearly 4 years of experience building scalable web app
 
 ## OPEN SOURCE CONTRIBUTIONS
 
-Active contributor to major open-source projects with **103+ merged pull requests** across the following repositories:
+Active contributor to major open-source projects with **152+ merged pull requests** across the following repositories:
 
-- **BullMQ** (taskforcesh/bullmq) -- 26 merged PRs: type safety, worker fixes, scheduler improvements, documentation
-- **Visual Studio Code** (microsoft/vscode) -- 21 merged PRs: editor improvements, markdown/math fixes, debug console, SCM, terminal
-- **NestJS CLI** (nestjs/nest-cli) -- 18 merged PRs: compiler fixes, watch mode improvements, configuration handling, test coverage
+- **NestJS CLI** (nestjs/nest-cli) -- 44 merged PRs: compiler fixes, watch mode improvements, configuration handling, test coverage
+- **BullMQ** (taskforcesh/bullmq) -- 32 merged PRs: type safety, worker fixes, scheduler improvements, documentation
+- **Visual Studio Code** (microsoft/vscode) -- 23 merged PRs: editor improvements, markdown/math fixes, debug console, SCM, terminal
+- **NestJS GraphQL** (nestjs/graphql) -- 16 merged PRs: schema generation, federation, resolver fixes
 - **Angular Material** (angular/components) -- 13 merged PRs: component fixes and accessibility improvements
-- **NestJS GraphQL** (nestjs/graphql) -- 10 merged PRs: schema generation, federation, resolver fixes
-- **NestJS Swagger** (nestjs/swagger) -- 7 merged PRs: OpenAPI spec generation, decorator fixes
+- **NestJS Swagger** (nestjs/swagger) -- 10 merged PRs: OpenAPI spec generation, decorator fixes
+- **Supabase** (supabase/supabase) -- 7 merged PRs
 - **NestJS TypeORM** (nestjs/typeorm) -- 3 merged PRs
 - **Directus** (directus/directus) -- 2 merged PRs
-- **Supabase**, **Angular**, **NestJS Schematics** -- 1 merged PR each
+- **Angular**, **NestJS Schematics** -- 1 merged PR each
 - Ongoing contributions to **Appwrite**, **Swagger UI**, **Next.js** (vercel/next.js), and **shadcn/ui**
 
 ---
