@@ -8,13 +8,26 @@
     <language>en-us</language>
     <managingEditor>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</managingEditor>
     <webMaster>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</webMaster>
-    <lastBuildDate>Wed, 16 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 16 May 2026 00:00:00 +0000</lastBuildDate>
     <generator>hand-rolled</generator>
     <image>
       <url>https://yogeshwaran.com/favicon.svg</url>
       <title>Yogeshwaran C — Writing</title>
       <link>https://yogeshwaran.com/blog/</link>
     </image>
+
+    <item>
+      <title>BullMQ was crashing on getRanges() because Python's list.reverse() returns None</title>
+      <link>https://yogeshwaran.com/blog/2026-05-bullmq-python-list-reverse-returns-none</link>
+      <guid isPermaLink="true">https://yogeshwaran.com/blog/2026-05-bullmq-python-list-reverse-returns-none</guid>
+      <pubDate>Sat, 16 May 2026 00:00:00 +0000</pubDate>
+      <author>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</author>
+      <category>bullmq</category>
+      <category>python</category>
+      <category>debugging</category>
+      <category>open-source</category>
+      <description><![CDATA[A 1-line fix in BullMQ's Python port that turned on the universal lesson about Python's mutating-vs-returning method conventions. list.reverse(), list.sort(), list.append() — they all mutate in place and return None.]]></description>
+    </item>
 
     <item>
       <title>The bug where VS Code's Debug Console was pasting 'repl:1' into my clipboard</title>
