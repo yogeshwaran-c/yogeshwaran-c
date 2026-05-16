@@ -133,13 +133,14 @@ footer{padding:3rem clamp(1.5rem,5vw,5rem);border-top:1px solid var(--border);po
 <main class="posts">
   <div class="posts-heading">All Posts</div>
 
-  <article class="post-card post-card--upcoming" aria-label="Upcoming post">
-    <div class="upcoming-eyebrow">Up next</div>
+  <article class="post-card">
     <div class="post-meta">
-      <span class="upcoming-badge">Releasing May 16, 2026</span>
+      <time datetime="2026-05-16">May 16, 2026</time>
+      <span class="dot" aria-hidden="true"></span>
+      <span>5 min read</span>
     </div>
-    <h2 class="post-title">BullMQ was crashing on getRanges() because Python's <code style="font-family:var(--mono);font-size:.85em">list.reverse()</code> returns None</h2>
-    <p class="post-excerpt">A 1-line fix in BullMQ's Python port that taught me the universal lesson about Python's mutating-vs-returning method conventions. <code>.reverse()</code>, <code>.sort()</code>, <code>.append()</code> — they all mutate in place and return None.</p>
+    <h2 class="post-title"><a href="./2026-05-bullmq-python-list-reverse-returns-none">BullMQ was crashing on getRanges() because Python's <code style="font-family:var(--mono);font-size:.85em">list.reverse()</code> returns None</a></h2>
+    <p class="post-excerpt">A 1-line fix in BullMQ's Python port that turned on the universal lesson about Python's mutating-vs-returning method conventions. <code>.reverse()</code>, <code>.sort()</code>, <code>.append()</code> — they all mutate in place and return None.</p>
     <div class="post-tags">
       <span class="post-tag">bullmq</span>
       <span class="post-tag">python</span>
