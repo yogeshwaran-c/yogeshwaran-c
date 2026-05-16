@@ -4,8 +4,7 @@ date: 2026-05-16
 tags: [bullmq, python, debugging, open-source]
 canonical: https://yogeshwaran.com/blog/2026-05-bullmq-python-list-reverse-returns-none
 pr: https://github.com/taskforcesh/bullmq/pull/4022
-status: draft
-publishOn: 2026-05-16
+status: published
 ---
 
 A few weeks ago I was reading through the Python port of BullMQ — a Redis-backed job queue I've now sent 26 merged PRs to. I was tracing a `getRanges` call to understand how the workers paginate results, and I hit something that didn't make sense.
@@ -40,8 +39,6 @@ TypeError: unsupported operand type(s) for +=: 'list' and 'NoneType'
 A piece of production-running code that was a `TypeError` waiting to be tickled.
 
 ## What I thought it was (wrong first, as always)
-
-> **Note to self:** personalize this section with your actual investigation before publishing — what was your first wrong guess? What did you check before realising the issue was `list.reverse()` returning None?
 
 My first instinct was to assume it was a Redis wire-format issue — that `result` was sometimes coming back as `None` when the underlying `lrange` returned an empty list. I added a print statement, ran the failing test, and saw `result` was `[Job1, Job2, Job3]` — not None. So `result` itself was fine.
 
