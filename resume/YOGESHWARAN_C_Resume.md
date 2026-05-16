@@ -70,14 +70,14 @@ Full Stack Developer with nearly 4 years of experience building scalable web app
 
 ## OPEN SOURCE CONTRIBUTIONS
 
-Active contributor to major open-source projects with **152+ merged pull requests** across the following repositories:
+Active contributor to major open-source projects with **187+ merged pull requests** across the following repositories:
 
-- **NestJS CLI** (nestjs/nest-cli) -- 44 merged PRs: compiler fixes, watch mode improvements, configuration handling, test coverage
-- **BullMQ** (taskforcesh/bullmq) -- 32 merged PRs: type safety, worker fixes, scheduler improvements, documentation
-- **Visual Studio Code** (microsoft/vscode) -- 23 merged PRs: editor improvements, markdown/math fixes, debug console, SCM, terminal
-- **NestJS GraphQL** (nestjs/graphql) -- 16 merged PRs: schema generation, federation, resolver fixes
+- **BullMQ** (taskforcesh/bullmq) -- 51 merged PRs: type safety, worker fixes, scheduler improvements, documentation
+- **NestJS CLI** (nestjs/nest-cli) -- 49 merged PRs: compiler fixes, watch mode improvements, configuration handling, test coverage
+- **Visual Studio Code** (microsoft/vscode) -- 24 merged PRs: editor improvements, markdown/math fixes, debug console, SCM, terminal
+- **NestJS GraphQL** (nestjs/graphql) -- 21 merged PRs: schema generation, federation, resolver fixes
+- **NestJS Swagger** (nestjs/swagger) -- 15 merged PRs: OpenAPI spec generation, decorator fixes
 - **Angular Material** (angular/components) -- 13 merged PRs: component fixes and accessibility improvements
-- **NestJS Swagger** (nestjs/swagger) -- 10 merged PRs: OpenAPI spec generation, decorator fixes
 - **Supabase** (supabase/supabase) -- 7 merged PRs
 - **NestJS TypeORM** (nestjs/typeorm) -- 3 merged PRs
 - **Directus** (directus/directus) -- 2 merged PRs
