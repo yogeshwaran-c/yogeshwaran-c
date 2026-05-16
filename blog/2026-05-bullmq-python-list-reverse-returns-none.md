@@ -7,7 +7,7 @@ pr: https://github.com/taskforcesh/bullmq/pull/4022
 status: published
 ---
 
-A few weeks ago I was reading through the Python port of BullMQ — a Redis-backed job queue I've now sent 26 merged PRs to. I was tracing a `getRanges` call to understand how the workers paginate results, and I hit something that didn't make sense.
+A few weeks ago I was reading through the Python port of BullMQ — a Redis-backed job queue I've now sent 51 merged PRs to. I was tracing a `getRanges` call to understand how the workers paginate results, and I hit something that didn't make sense.
 
 A line that should have been one of the most boring lines in the file:
 
