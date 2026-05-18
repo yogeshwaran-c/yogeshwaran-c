@@ -18,7 +18,7 @@ Full Stack Developer with nearly 4 years of experience architecting scalable web
 
 - 🔭 Currently building **Document Intelligence** and **AI-powered workflow automation** platforms
 - 🤖 Working with **OpenAI GPT**, **Google Gemini**, and **vector search** for intelligent document processing
-- 🌱 Active OSS contributor with **187+ merged PRs** across **BullMQ**, the **NestJS** ecosystem (CLI, GraphQL, Swagger, TypeORM), **VS Code**, **Angular Material**, **Supabase**, **Directus**, and more
+- 🌱 Active OSS contributor with **200+ merged PRs** across the **NestJS** ecosystem (CLI, GraphQL, Swagger, TypeORM), **BullMQ**, **VS Code**, **Angular Material**, **Ant Design**, **Supabase**, **Directus**, and more
 - 📍 Based in **Chennai, India**
 
 ---
@@ -83,20 +83,20 @@ Full Stack Developer with nearly 4 years of experience architecting scalable web
 
 ### Open Source Contributions
 
-Active contributor across major open-source projects — **187+ merged PRs** and counting.
+Active contributor across major open-source projects — **200+ merged PRs** and counting.
 
 <table>
 <tr>
 <td align="center">
-<a href="https://github.com/taskforcesh/bullmq/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
-<img src="https://img.shields.io/badge/BullMQ-DC382D?style=for-the-badge&logo=redis&logoColor=white" alt="BullMQ"><br>
-<sub><b>51 merged</b></sub>
+<a href="https://github.com/nestjs/nest-cli/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/NestJS_CLI-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS CLI"><br>
+<sub><b>54 merged</b></sub>
 </a>
 </td>
 <td align="center">
-<a href="https://github.com/nestjs/nest-cli/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
-<img src="https://img.shields.io/badge/NestJS_CLI-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS CLI"><br>
-<sub><b>49 merged</b></sub>
+<a href="https://github.com/taskforcesh/bullmq/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/BullMQ-DC382D?style=for-the-badge&logo=redis&logoColor=white" alt="BullMQ"><br>
+<sub><b>51 merged</b></sub>
 </a>
 </td>
 <td align="center">
@@ -126,6 +126,12 @@ Active contributor across major open-source projects — **187+ merged PRs** and
 </a>
 </td>
 <td align="center">
+<a href="https://github.com/ant-design/ant-design/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/Ant_Design-1677FF?style=for-the-badge&logo=antdesign&logoColor=white" alt="Ant Design"><br>
+<sub><b>8 merged</b></sub>
+</a>
+</td>
+<td align="center">
 <a href="https://github.com/supabase/supabase/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
 <img src="https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase"><br>
 <sub><b>7 merged</b></sub>
@@ -143,14 +149,14 @@ Active contributor across major open-source projects — **187+ merged PRs** and
 <sub><b>2 merged</b></sub>
 </a>
 </td>
+</tr>
+<tr>
 <td align="center">
 <a href="https://github.com/angular/angular/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
 <img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular"><br>
 <sub><b>1 merged</b></sub>
 </a>
 </td>
-</tr>
-<tr>
 <td align="center">
 <a href="https://github.com/nestjs/schematics/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
 <img src="https://img.shields.io/badge/NestJS_Schematics-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS Schematics"><br>
