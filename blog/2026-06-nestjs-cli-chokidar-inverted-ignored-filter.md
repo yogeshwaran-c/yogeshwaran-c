@@ -4,13 +4,11 @@ date: 2026-06-16
 tags: [nestjs, chokidar, swc, debugging, open-source]
 canonical: https://yogeshwaran.com/blog/2026-06-nestjs-cli-chokidar-inverted-ignored-filter
 pr: https://github.com/nestjs/nest-cli/pull/3346
-status: draft
+status: published
 publishOn: 2026-06-16
 ---
 
-> Working draft. Outline only. Expand to full post before June 16.
-
-## Hook (1 paragraph)
+## Hook
 
 Scenario: working on a NestJS service in watch mode (`nest start --watch --builder swc`). Every time I edited the README, or touched a `.env`, or saved a config file, the SWC compiler kicked off a full TypeScript rebuild. Files chokidar should have ignored were waking up the compiler.
 
@@ -44,7 +42,11 @@ That one negates. That one uses `endsWith` so dot/no-dot does not matter.
 
 ## What I thought it was (wrong first, as always)
 
-[ Fill in: my first guess was that chokidar was misbehaving on Windows because of path separators. Spent some time on that. Was wrong. The wire was right; the predicate was wrong. ]
+My first instinct was to blame Windows. SWC + watch mode + Node on Windows is exactly the kind of combo where path separator quirks show up, so I assumed chokidar was getting `C:\Users\...\src\README.md`, `path.extname` was choking on a backslash edge case, and every file was slipping past the filter as 'no extension.'
+
+Forty minutes later I had logs proving the path coming into the predicate was clean — proper forward slashes, proper extension. The wire was right. So I logged what the predicate was actually returning instead. `false` for every single file. README.md, .env, .ts, doesn't matter.
+
+That's when I stopped squinting at the line and actually read it. The bug was not in chokidar, and it was not in path handling. It was in two lines of JavaScript I had glanced past four times already.
 
 ## The fix
 
@@ -63,7 +65,9 @@ Two characters of difference between 'kind of broken' and 'completely inverted':
 
 ## The takeaway
 
-[ Fill in: chokidar's `ignored` API has a famously confusing semantic, the option name reads like an allowlist but it's a blocklist. The general lesson is to check whether your predicate's polarity matches the API's polarity, especially when the option name is a noun like `ignored`, `excluded`, `denied`, `blocked`. The same trap exists in webpack's `exclude`, jest's `testPathIgnorePatterns`, gitignore syntax, and rsync's `--exclude`. ]
+The lesson that travels: when an API option is named for what it excludes — `ignored`, `excluded`, `denied`, `--exclude` — your predicate should evaluate to truthy when you want to *skip* the file. Not 'this matches my filter,' but 'this should be skipped.' The mental flip is small, easy to invert, and TypeScript will not save you because every predicate is `(file) => boolean`. Both polarities type-check.
+
+This is a recurring footgun. chokidar's `ignored`, webpack's `exclude`, jest's `testPathIgnorePatterns`, gitignore syntax, rsync's `--exclude` — all of them are sentences about what *not* to do, and humans are bad at writing 'not' predicates. The rule I'm trying to internalize: before writing any 'should this be kept' filter, read one line of docs to confirm whether `true` means keep or skip. The option's name gives the answer half the time and lies the other half.
 
 Screenshot-worthy line: **"chokidar's `ignored` is a blocklist, not an allowlist. If your predicate looks like an allowlist, it's inverted."**
 
@@ -76,7 +80,11 @@ Screenshot-worthy line: **"chokidar's `ignored` is a blocklist, not an allowlist
 
 ## Why this PR is a good first OSS contribution
 
-[ Fill in: 2 additions, 2 deletions, 1 file. The bug had been live in `main` because the predicate failed silently, files just got recompiled more than necessary, nothing crashed. Easy to miss in review. The hard work was reading the sibling method and noticing the shape was different. ]
+The diff is 2 additions, 2 deletions, 1 file. The bug had been sitting in `main` because the failure was silent — no crash, no stack trace, just SWC doing more work than it needed to. Easy to miss in review, easy to miss in production because watch mode is already noisy in the terminal.
+
+The actual work was not the patch. The actual work was reading `watchFilesInOutDir()` right next to `watchFilesInSrcDir()` and noticing the two methods looked almost identical except for the predicate. The sibling already had the right shape. Once I saw that shape mismatch, the fix wrote itself.
+
+If you want to find PRs like this in a project you have never touched: open the project in watch mode, change something it should ignore, and watch what happens. Tail the dev logs while you edit a comment. The bugs that hide are the ones that do not crash.
 
 ---
 
