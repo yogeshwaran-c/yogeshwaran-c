@@ -133,12 +133,13 @@ footer{padding:3rem clamp(1.5rem,5vw,5rem);border-top:1px solid var(--border);po
 <main class="posts">
   <div class="posts-heading">All Posts</div>
 
-  <article class="post-card post-card--upcoming" aria-label="Upcoming post">
-    <div class="upcoming-eyebrow">
-      <span class="upcoming-badge">Up next</span>
+  <article class="post-card">
+    <div class="post-meta">
       <time datetime="2026-06-16">June 16, 2026</time>
+      <span class="dot" aria-hidden="true"></span>
+      <span>6 min read</span>
     </div>
-    <h2 class="post-title">Why editing a README was rebuilding my entire NestJS project: an inverted <code style="font-family:var(--mono);font-size:.85em">chokidar</code> filter</h2>
+    <h2 class="post-title"><a href="./2026-06-nestjs-cli-chokidar-inverted-ignored-filter">Why editing a README was rebuilding my entire NestJS project: an inverted <code style="font-family:var(--mono);font-size:.85em">chokidar</code> filter</a></h2>
     <p class="post-excerpt">A 2-line fix in NestJS CLI's SWC watcher. Two layered bugs in one predicate: a string-format mismatch on file extensions, plus an inverted boolean that turned the <code>ignored</code> filter into an <code>included</code> filter. A README save was triggering full TypeScript recompilation.</p>
     <div class="post-tags">
       <span class="post-tag">nestjs</span>

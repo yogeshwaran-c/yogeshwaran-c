@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://yogeshwaran.com/</loc>
-    <lastmod>2026-05-18</lastmod>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://yogeshwaran.com/blog/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -21,6 +21,12 @@
   <url>
     <loc>https://yogeshwaran.com/blog/2026-05-bullmq-python-list-reverse-returns-none</loc>
     <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://yogeshwaran.com/blog/2026-06-nestjs-cli-chokidar-inverted-ignored-filter</loc>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
