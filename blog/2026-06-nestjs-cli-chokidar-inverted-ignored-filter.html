@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why editing a README was rebuilding my entire NestJS project: an inverted chokidar filter — Yogeshwaran C</title>
+<meta name="description" content="A 2-line fix in NestJS CLI's SWC watcher. Two layered bugs in one predicate: a string-format mismatch on file extensions, plus an inverted boolean that turned the ignored filter into an included filter.">
+<meta name="author" content="Yogeshwaran C">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://yogeshwaran.com/blog/2026-06-nestjs-cli-chokidar-inverted-ignored-filter">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Why editing a README was rebuilding my entire NestJS project: an inverted chokidar filter">
+<meta property="og:description" content="A 2-line fix in NestJS CLI's SWC watcher. Two layered bugs in one predicate that turned chokidar's ignored filter into an included filter.">
+<meta property="og:url" content="https://yogeshwaran.com/blog/2026-06-nestjs-cli-chokidar-inverted-ignored-filter">
+<meta property="og:site_name" content="Yogeshwaran C">
+<meta property="article:author" content="Yogeshwaran Chandrakasan">
+<meta property="article:published_time" content="2026-06-16">
+<meta property="article:tag" content="nestjs">
+<meta property="article:tag" content="chokidar">
+<meta property="article:tag" content="swc">
+<meta property="article:tag" content="debugging">
+<meta property="article:tag" content="open-source">
+<meta property="og:image" content="https://yogeshwaran.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="An inverted chokidar filter was rebuilding my entire NestJS project on every README save">
+<meta name="twitter:description" content="A 2-line fix in NestJS CLI's SWC watcher and the universal lesson about exclusion-named APIs.">
+<meta name="twitter:image" content="https://yogeshwaran.com/og-image.png">
+
+<meta name="theme-color" content="#07080b">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="mask-icon" href="/favicon.svg" color="#00e5c8">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="alternate" type="application/rss+xml" title="Yogeshwaran C — Writing" href="/blog/feed.xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
+<link rel="stylesheet" href="./post.css">
+<script async src="https://plausible.io/js/pa-XXSB3KnJ2ChBu03k9DMK-.js"></script>
+<script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav aria-label="Main navigation">
+  <a href="/" class="nav-logo">Yogesh<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/blog/" class="active">Writing</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<article class="post">
+  <header class="post-header">
+    <a href="./" class="back-link">← All posts</a>
+    <div class="post-meta">
+      <time datetime="2026-06-16">June 16, 2026</time>
+      <span class="dot" aria-hidden="true"></span>
+      <span>6 min read</span>
+    </div>
+    <h1 class="post-title">Why editing a README was rebuilding my entire NestJS project: an inverted <code style="font-family:var(--mono);font-size:.85em">chokidar</code> filter</h1>
+    <div class="post-tags">
+      <span class="post-tag">nestjs</span>
+      <span class="post-tag">chokidar</span>
+      <span class="post-tag">swc</span>
+      <span class="post-tag">debugging</span>
+      <span class="post-tag">open-source</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <p>Scenario: working on a NestJS service in watch mode (<code>nest start --watch --builder swc</code>). Every time I edited the README, or touched a <code>.env</code>, or saved a config file, the SWC compiler kicked off a full TypeScript rebuild. Files chokidar should have ignored were waking up the compiler.</p>
+
+    <p>The clue: the rebuild wasn't filtered by extension at all. Anything in <code>src/</code> triggered it.</p>
+
+    <h2>What broke</h2>
+
+    <p><code>watchFilesInSrcDir()</code> in <code>SwcCompiler</code> (<code>lib/compiler/swc/swc-compiler.ts</code>) had a chokidar <code>ignored</code> predicate that was supposed to ignore everything that wasn't a <code>.ts</code> or <code>.js</code> file. It did the opposite. Two layered bugs in one expression.</p>
+
+    <p>The original code, paraphrased:</p>
+
+<pre><code class="language-typescript">ignored: (file) =&gt; extensions.includes(path.extname(file).slice(1)),</code></pre>
+
+    <p>Two things wrong:</p>
+
+    <ol>
+      <li><strong>Extension format mismatch.</strong> <code>extensions</code> from <code>swcDefaultsFactory</code> was <code>['.js', '.ts']</code> (with dots). <code>path.extname(file).slice(1)</code> returns <code>'ts'</code> (no dot). So <code>.includes()</code> was always <code>false</code>. The predicate returned <code>false</code> for every file.</li>
+      <li><strong>Inverted predicate.</strong> Even if the strings had matched, the boolean was wrong. chokidar's <code>ignored</code> option takes a function that returns <code>true</code> to <strong>ignore</strong> a file. The code as written said 'ignore files that match my source extensions' which is the exact opposite of intent.</li>
+    </ol>
+
+    <p>Net effect: predicate always returns <code>false</code> (because of bug #1), so chokidar treats everything as 'do not ignore', and the watcher fires on every file in <code>src/</code>. Touch a README in the source tree, SWC starts recompiling.</p>
+
+    <p>The sibling method <code>watchFilesInOutDir()</code> had the correct shape already:</p>
+
+<pre><code class="language-typescript">ignored: (file) =&gt; !extensions.some(ext =&gt; file.endsWith(ext)),</code></pre>
+
+    <p>That one negates. That one uses <code>endsWith</code> so dot/no-dot does not matter.</p>
+
+    <h2>What I thought it was (wrong first, as always)</h2>
+
+    <p>My first instinct was to blame Windows. SWC + watch mode + Node on Windows is exactly the kind of combo where path separator quirks show up, so I assumed chokidar was getting <code>C:\Users\...\src\README.md</code>, <code>path.extname</code> was choking on a backslash edge case, and every file was slipping past the filter as 'no extension.'</p>
+
+    <p>Forty minutes later I had logs proving the path coming into the predicate was clean — proper forward slashes, proper extension. The wire was right. So I logged what the predicate was actually returning instead. <code>false</code> for every single file. README.md, .env, .ts, doesn't matter.</p>
+
+    <p>That's when I stopped squinting at the line and actually read it. The bug was not in chokidar, and it was not in path handling. It was in two lines of JavaScript I had glanced past four times already.</p>
+
+    <h2>The fix</h2>
+
+<pre><code class="language-diff">- ignored: (file) =&gt; extensions.includes(path.extname(file).slice(1)),
++ ignored: (file) =&gt; !extensions.some((ext) =&gt; file.endsWith(ext)),</code></pre>
+
+    <p><a href="https://github.com/nestjs/nest-cli/pull/3346" target="_blank" rel="noopener noreferrer">PR #3346 on nestjs/nest-cli</a></p>
+
+    <p>Two characters of difference between 'kind of broken' and 'completely inverted': the leading <code>!</code> and the switch from <code>.includes</code> to <code>.some(... endsWith)</code>. Three things happen in those two lines:</p>
+
+    <ul>
+      <li><code>endsWith(ext)</code> works whether <code>ext</code> starts with <code>.</code> or not, killing the format-mismatch bug.</li>
+      <li><code>.some()</code> short-circuits on the first matching extension.</li>
+      <li><code>!</code> flips the predicate so 'has source extension' → 'do not ignore'.</li>
+    </ul>
+
+    <h2>The takeaway</h2>
+
+    <p>The lesson that travels: when an API option is named for what it excludes — <code>ignored</code>, <code>excluded</code>, <code>denied</code>, <code>--exclude</code> — your predicate should evaluate to truthy when you want to <em>skip</em> the file. Not 'this matches my filter,' but 'this should be skipped.' The mental flip is small, easy to invert, and TypeScript will not save you because every predicate is <code>(file) =&gt; boolean</code>. Both polarities type-check.</p>
+
+    <p>This is a recurring footgun. chokidar's <code>ignored</code>, webpack's <code>exclude</code>, jest's <code>testPathIgnorePatterns</code>, gitignore syntax, rsync's <code>--exclude</code> — all of them are sentences about what <em>not</em> to do, and humans are bad at writing 'not' predicates. The rule I'm trying to internalize: before writing any 'should this be kept' filter, read one line of docs to confirm whether <code>true</code> means keep or skip. The option's name gives the answer half the time and lies the other half.</p>
+
+    <p><strong>Screenshot-worthy line: "chokidar's <code>ignored</code> is a blocklist, not an allowlist. If your predicate looks like an allowlist, it's inverted."</strong></p>
+
+    <table class="post-table">
+      <thead>
+        <tr><th>API</th><th>Means</th><th>Common misread</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>chokidar <code>ignored</code></td><td>files to skip</td><td>'files to watch'</td></tr>
+        <tr><td>webpack <code>exclude</code></td><td>files to skip</td><td>'files to bundle'</td></tr>
+        <tr><td>jest <code>testPathIgnorePatterns</code></td><td>files to skip</td><td>'files to test'</td></tr>
+        <tr><td>rsync <code>--exclude</code></td><td>files to skip</td><td>'files to copy'</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Why this PR is a good first OSS contribution</h2>
+
+    <p>The diff is 2 additions, 2 deletions, 1 file. The bug had been sitting in <code>main</code> because the failure was silent — no crash, no stack trace, just SWC doing more work than it needed to. Easy to miss in review, easy to miss in production because watch mode is already noisy in the terminal.</p>
+
+    <p>The actual work was not the patch. The actual work was reading <code>watchFilesInOutDir()</code> right next to <code>watchFilesInSrcDir()</code> and noticing the two methods looked almost identical except for the predicate. The sibling already had the right shape. Once I saw that shape mismatch, the fix wrote itself.</p>
+
+    <p>If you want to find PRs like this in a project you have never touched: open the project in watch mode, change something it should ignore, and watch what happens. Tail the dev logs while you edit a comment. The bugs that hide are the ones that do not crash.</p>
+  </div>
+
+  <footer class="post-footer">
+    <p class="signoff">
+      <em>Written after merging <a href="https://github.com/nestjs/nest-cli/pull/3346" target="_blank" rel="noopener noreferrer">#3346</a> into nestjs/nest-cli. Part of an ongoing series on fixes I've shipped to open-source projects — follow at <a href="/">yogeshwaran.com</a>.</em>
+    </p>
+    <p class="signoff" style="margin-top:1rem">
+      <em>See also: <a href="./2026-05-bullmq-python-list-reverse-returns-none">BullMQ was crashing on getRanges() because Python's list.reverse() returns None</a> — another small fix with a universal lesson about API conventions.</em>
+    </p>
+  </footer>
+</article>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; <span id="yr"></span> Yogeshwaran Chandrakasan</span>
+    <span><a href="/">← Back to portfolio</a></span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-diff.min.js"></script>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
