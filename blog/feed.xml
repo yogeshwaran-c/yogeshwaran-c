@@ -8,13 +8,27 @@
     <language>en-us</language>
     <managingEditor>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</managingEditor>
     <webMaster>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</webMaster>
-    <lastBuildDate>Sat, 16 May 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jun 2026 00:00:00 +0000</lastBuildDate>
     <generator>hand-rolled</generator>
     <image>
       <url>https://yogeshwaran.com/favicon.svg</url>
       <title>Yogeshwaran C — Writing</title>
       <link>https://yogeshwaran.com/blog/</link>
     </image>
+
+    <item>
+      <title>Why editing a README was rebuilding my entire NestJS project: an inverted chokidar filter</title>
+      <link>https://yogeshwaran.com/blog/2026-06-nestjs-cli-chokidar-inverted-ignored-filter</link>
+      <guid isPermaLink="true">https://yogeshwaran.com/blog/2026-06-nestjs-cli-chokidar-inverted-ignored-filter</guid>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 +0000</pubDate>
+      <author>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</author>
+      <category>nestjs</category>
+      <category>chokidar</category>
+      <category>swc</category>
+      <category>debugging</category>
+      <category>open-source</category>
+      <description><![CDATA[A 2-line fix in NestJS CLI's SWC watcher. Two layered bugs in one chokidar predicate: a string-format mismatch on file extensions, plus an inverted boolean that turned the ignored filter into an included filter. A README save was triggering full TypeScript recompilation.]]></description>
+    </item>
 
     <item>
       <title>BullMQ was crashing on getRanges() because Python's list.reverse() returns None</title>
