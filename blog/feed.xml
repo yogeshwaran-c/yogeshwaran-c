@@ -8,13 +8,27 @@
     <language>en-us</language>
     <managingEditor>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</managingEditor>
     <webMaster>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</webMaster>
-    <lastBuildDate>Tue, 16 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Jul 2026 00:00:00 +0000</lastBuildDate>
     <generator>hand-rolled</generator>
     <image>
       <url>https://yogeshwaran.com/favicon.svg</url>
       <title>Yogeshwaran C — Writing</title>
       <link>https://yogeshwaran.com/blog/</link>
     </image>
+
+    <item>
+      <title>Why Swagger UI was crashing on a valid OpenAPI spec: an unguarded .getIn() chain</title>
+      <link>https://yogeshwaran.com/blog/2026-07-swagger-ui-request-body-no-content</link>
+      <guid isPermaLink="true">https://yogeshwaran.com/blog/2026-07-swagger-ui-request-body-no-content</guid>
+      <pubDate>Thu, 16 Jul 2026 00:00:00 +0000</pubDate>
+      <author>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</author>
+      <category>swagger-ui</category>
+      <category>openapi</category>
+      <category>immutable-js</category>
+      <category>debugging</category>
+      <category>open-source</category>
+      <description><![CDATA[A 5-line fix in Swagger UI's spec selector. An Immutable.js .getIn(['content']) chain assumed the key existed, so a valid-but-unusual OpenAPI 3.0 spec (a GET with a requestBody carrying no content) crashed the browser render with a TypeError.]]></description>
+    </item>
 
     <item>
       <title>Why editing a README was rebuilding my entire NestJS project: an inverted chokidar filter</title>
