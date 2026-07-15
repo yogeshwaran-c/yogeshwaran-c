@@ -135,6 +135,23 @@ footer{padding:3rem clamp(1.5rem,5vw,5rem);border-top:1px solid var(--border);po
 
   <article class="post-card">
     <div class="post-meta">
+      <time datetime="2026-07-16">July 16, 2026</time>
+      <span class="dot" aria-hidden="true"></span>
+      <span>6 min read</span>
+    </div>
+    <h2 class="post-title"><a href="./2026-07-swagger-ui-request-body-no-content">Why Swagger UI was crashing on a valid OpenAPI spec: an unguarded <code style="font-family:var(--mono);font-size:.85em">.getIn()</code> chain</a></h2>
+    <p class="post-excerpt">A 5-line fix in Swagger UI's spec selector. An unguarded Immutable.js <code>.getIn(['content'])</code> chain crashed the browser render on a valid-but-unusual OpenAPI 3.0 spec — a codegen-emitted <code>requestBody</code> with no <code>content</code> field. The lesson generalizes: any schema-optional field is the reader's problem.</p>
+    <div class="post-tags">
+      <span class="post-tag">swagger-ui</span>
+      <span class="post-tag">openapi</span>
+      <span class="post-tag">immutable-js</span>
+      <span class="post-tag">debugging</span>
+      <span class="post-tag">open-source</span>
+    </div>
+  </article>
+
+  <article class="post-card">
+    <div class="post-meta">
       <time datetime="2026-06-16">June 16, 2026</time>
       <span class="dot" aria-hidden="true"></span>
       <span>6 min read</span>

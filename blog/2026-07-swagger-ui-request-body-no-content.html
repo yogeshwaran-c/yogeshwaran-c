@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Swagger UI was crashing on a valid OpenAPI spec: an unguarded .getIn() chain — Yogeshwaran C</title>
+<meta name="description" content="A 5-line fix in Swagger UI's spec selector. An Immutable.js .getIn(['content']) chain assumed the key existed, so a valid-but-unusual OpenAPI 3.0 spec (a GET with a requestBody carrying no content) crashed the browser render with a TypeError.">
+<meta name="author" content="Yogeshwaran C">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://yogeshwaran.com/blog/2026-07-swagger-ui-request-body-no-content">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Why Swagger UI was crashing on a valid OpenAPI spec: an unguarded .getIn() chain">
+<meta property="og:description" content="A 5-line fix in Swagger UI's spec selector. An unguarded Immutable.js .getIn(['content']) chain crashed the render when a codegen-emitted requestBody omitted content.">
+<meta property="og:url" content="https://yogeshwaran.com/blog/2026-07-swagger-ui-request-body-no-content">
+<meta property="og:site_name" content="Yogeshwaran C">
+<meta property="article:author" content="Yogeshwaran Chandrakasan">
+<meta property="article:published_time" content="2026-07-16">
+<meta property="article:tag" content="swagger-ui">
+<meta property="article:tag" content="openapi">
+<meta property="article:tag" content="immutable-js">
+<meta property="article:tag" content="debugging">
+<meta property="article:tag" content="open-source">
+<meta property="og:image" content="https://yogeshwaran.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="An unguarded .getIn() chain in Swagger UI was crashing the render on a valid OpenAPI spec">
+<meta name="twitter:description" content="A 5-line fix and the universal lesson about schema-optional fields: the reader is always responsible for the missing case.">
+<meta name="twitter:image" content="https://yogeshwaran.com/og-image.png">
+
+<meta name="theme-color" content="#07080b">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="mask-icon" href="/favicon.svg" color="#00e5c8">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="alternate" type="application/rss+xml" title="Yogeshwaran C — Writing" href="/blog/feed.xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
+<link rel="stylesheet" href="./post.css">
+<script async src="https://plausible.io/js/pa-XXSB3KnJ2ChBu03k9DMK-.js"></script>
+<script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav aria-label="Main navigation">
+  <a href="/" class="nav-logo">Yogesh<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/blog/" class="active">Writing</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<article class="post">
+  <header class="post-header">
+    <a href="./" class="back-link">← All posts</a>
+    <div class="post-meta">
+      <time datetime="2026-07-16">July 16, 2026</time>
+      <span class="dot" aria-hidden="true"></span>
+      <span>6 min read</span>
+    </div>
+    <h1 class="post-title">Why Swagger UI was crashing on a valid OpenAPI spec: an unguarded <code style="font-family:var(--mono);font-size:.85em">.getIn()</code> chain</h1>
+    <div class="post-tags">
+      <span class="post-tag">swagger-ui</span>
+      <span class="post-tag">openapi</span>
+      <span class="post-tag">immutable-js</span>
+      <span class="post-tag">debugging</span>
+      <span class="post-tag">open-source</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <p>A user opened an issue against Swagger UI: their auto-generated OpenAPI 3.0 spec was blowing up in the browser with</p>
+
+<pre><code>TypeError: Cannot read properties of undefined (reading 'entrySeq')</code></pre>
+
+    <p>The spec passed validation. It rendered fine in other tools. Their Java codegen was producing something like this on a <code>GET /catalog/regions</code> operation:</p>
+
+<pre><code class="language-json">"requestBody": {
+  "description": "",
+  "required": false
+}</code></pre>
+
+    <p>No <code>content</code> field. Weird for a GET — a GET operation shouldn't have a requestBody at all — but OpenAPI 3.0 doesn't actually require <code>content</code> on the requestBody object. It's optional. So the spec was legal, swagger-ui downloaded it, tried to render the operation, and crashed hard on that stack trace.</p>
+
+    <h2>What broke</h2>
+
+    <p><code>getOAS3RequiredRequestBodyContentType</code> in <code>src/core/plugins/spec/selectors.js</code> computes the required-content-type map for a requestBody. It reached into the Immutable.js state like this:</p>
+
+<pre><code class="language-javascript">requestBody.getIn(["content"]).entrySeq().forEach((contentType) =&gt; {
+  // ...
+})</code></pre>
+
+    <p>Two-and-a-half assumptions in one line:</p>
+
+    <ol>
+      <li><code>requestBody</code> is a Map (fine — <code>resolvedSubtrees</code> normalizes it that way).</li>
+      <li><code>requestBody.getIn(["content"])</code> returns a Map (assumed, never checked).</li>
+      <li>That Map has entries worth iterating over.</li>
+    </ol>
+
+    <p>Assumption 2 was the load-bearing one. Immutable.js <code>getIn(path)</code> returns <code>undefined</code> when any segment of the path is missing — that's the documented contract. So the moment the spec landed a requestBody without <code>content</code>, <code>.getIn(["content"])</code> returned <code>undefined</code>, <code>.entrySeq()</code> got called on <code>undefined</code>, and JavaScript threw the exception the reporter saw in their console.</p>
+
+    <h2>What I thought it was (wrong first, as always)</h2>
+
+    <p>My first theory was that something upstream was corrupting the field. Swagger UI has a chain of transforms — spec fetched, parsed, resolved, normalized, then put into Redux state — and any one of those layers could plausibly drop a <code>content</code> key it decided was 'incomplete.' So I went upstream. I logged the raw spec on fetch. I logged what came out of the OAS3 resolver. I logged the Immutable Map that eventually landed in <code>resolvedSubtrees</code>.</p>
+
+    <p>The requestBody was in there verbatim, exactly as the user's codegen had emitted it. Description, required, no content. Nothing was stripping anything. The 'incomplete' requestBody was the input all along, and every layer had faithfully passed it through.</p>
+
+    <p>Only then did I actually read the selector line by line. <code>.getIn(["content"]).entrySeq()</code>. It assumed content existed. It never asked.</p>
+
+    <p>Fifty minutes on the wrong question. The wire was fine. The consumer was wrong.</p>
+
+    <h2>The fix</h2>
+
+<pre><code class="language-diff">- requestBody.getIn(["content"]).entrySeq().forEach((contentType) =&gt; {
++ const requestBodyContent = requestBody.getIn(["content"])
++ if (!requestBodyContent) {
++   return requiredObj
++ }
++ requestBodyContent.entrySeq().forEach((contentType) =&gt; {</code></pre>
+
+    <p><a href="https://github.com/swagger-api/swagger-ui/pull/10837" target="_blank" rel="noopener noreferrer">PR #10837 on swagger-api/swagger-ui</a></p>
+
+    <p>Five lines. Pull the intermediate into a variable, null-check it, return the partial result if it's missing. <code>requiredObj</code> had already collected <code>requestBody: requestBody.getIn(["required"])</code> on a prior line, so the early return isn't a silent drop — the caller still gets the <code>required</code> flag, just without a content-type map. That matches the semantics: no content means no content-types to require.</p>
+
+    <h2>The takeaway</h2>
+
+    <p>Immutable.js <code>.getIn(path)</code> returns <code>undefined</code> when any segment of <code>path</code> doesn't exist. Every method chained after that call inherits the <code>undefined</code>. It's the same footgun as chained property access on a plain object, except optional chaining (<code>?.</code>) doesn't help you here — you're inside a fluent API where each call returns a new value, not a member access.</p>
+
+    <p>TypeScript won't save you either. Immutable.js types <code>getIn</code> loosely — the path is a runtime string array, and the compiler can't tell whether the key you asked for exists. So <code>.getIn(["content"]).entrySeq()</code> type-checks whether <code>content</code> exists in the input Map or not.</p>
+
+    <p>The rule I'm trying to internalize: <strong>any time your code walks into a schema-optional field, the reader of that field is responsible for the missing case.</strong> Not the schema, not the validation layer, not whoever produced the data. The reader. The spec is honest about what's optional; the code often isn't.</p>
+
+    <p><strong>Screenshot-worthy line: "<code>.getIn([...])</code> returns <code>undefined</code> for a missing path. Every method chained after it inherits the <code>undefined</code>."</strong></p>
+
+    <p>A quick contrast of how 'missing' behaves across the common access patterns:</p>
+
+    <table class="post-table">
+      <thead>
+        <tr><th>Access</th><th>Missing key returns</th><th>Chained method behavior</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>obj.a.b</code></td><td>throws</td><td>throws on the missing hop</td></tr>
+        <tr><td><code>obj?.a?.b</code></td><td><code>undefined</code></td><td>short-circuits the chain</td></tr>
+        <tr><td><code>_.get(obj, 'a.b')</code> (lodash)</td><td><code>undefined</code></td><td>must be null-checked before next call</td></tr>
+        <tr><td><code>map.getIn(['a', 'b'])</code> (Immutable.js)</td><td><code>undefined</code></td><td>must be null-checked before next call</td></tr>
+      </tbody>
+    </table>
+
+    <p>The bottom two rows are the same footgun with different libraries. Both hand you a raw <code>undefined</code> and put the responsibility for the missing case on you.</p>
+
+    <h2>Why this PR is a good first OSS contribution</h2>
+
+    <p>The diff is five lines of source plus a handful of unit tests. The crash was reproducible from a three-line minimal spec: a GET with a requestBody containing only <code>description</code> and <code>required</code>. Once you had the minimum repro, the stack trace pointed straight at the selector, and the fix pattern (<code>const x = getIn(...); if (!x) return; x.method()</code>) already exists throughout swagger-ui's codebase — it's the house style. Match the house style and the PR reviews itself.</p>
+
+    <p>The reason it lived in <code>main</code> for years: nobody who wrote a valid-but-unusual spec had reported it until this issue came in. Most OpenAPI specs in the wild follow the 'obvious' shape — GET has no body, POST body has content, done. Codegens occasionally produce the corners nobody writes by hand, and this was one of those corners.</p>
+
+    <p>The actual work wasn't the patch. The actual work was: read the issue, resist the instinct to blame the codegen ('Java tools emit weird specs sometimes'), reproduce the crash locally with a minimum spec, and read the surrounding selectors to see how they guarded the same pattern. The guard was already the convention. It was just missing on this one line.</p>
+
+    <p>If you want to find PRs like this in a codebase you've never touched: reproduce the reporter's failure locally, then read the three functions above and below the crash site. The house style is right there, and the missing guard is usually right there with it.</p>
+  </div>
+
+  <footer class="post-footer">
+    <p class="signoff">
+      <em>Written after merging <a href="https://github.com/swagger-api/swagger-ui/pull/10837" target="_blank" rel="noopener noreferrer">#10837</a> into swagger-api/swagger-ui. Part of an ongoing series on fixes I've shipped to open-source projects — follow at <a href="/">yogeshwaran.com</a>.</em>
+    </p>
+    <p class="signoff" style="margin-top:1rem">
+      <em>See also: <a href="./2026-06-nestjs-cli-chokidar-inverted-ignored-filter">Why editing a README was rebuilding my entire NestJS project</a> — another small fix where reading the sibling function was 90% of the work.</em>
+    </p>
+  </footer>
+</article>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; <span id="yr"></span> Yogeshwaran Chandrakasan</span>
+    <span><a href="/">← Back to portfolio</a></span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-diff.min.js"></script>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
