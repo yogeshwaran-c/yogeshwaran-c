@@ -61,7 +61,16 @@ gh pr merge <N> --merge
 - Degree on resume: `B.Tech in Information Technology` / `Bachelor of Technology in Information Technology`.
 - Experience start date: `Jul 2022` (not Oct 2022).
 - Current role phrasing: "nearly 4 years of experience".
-- Open source contribution counts live in three places (README.md, index.html, resume/*) — all three must update together when counts change.
+- Open source contribution counts (aggregate '**N**+ merged PRs' and per-repo counts) live in **eight** places — all eight must update together when counts change. Run `grep -R "<current-N>" .` before committing to catch any that this list forgets.
+  1. `README.md` — 'N+ merged PRs' aggregate (2 places: bio bullet + Open Source Contributions intro), badge table (per-repo counts, ordered descending by merged count)
+  2. `index.html` — `.oss-intro` copy ('N+ merged pull requests'), `.oss-grid` cards (per-repo counts, same descending order), `<meta property="og:image:alt">` tagline
+  3. `index.html` — **animated hero stat counter**: `<span data-count="N">0</span>` inside the 'Merged PRs' stat tile. Easy to miss because it looks like a rendered `0`. It's the number the tile counts up to on page load.
+  4. `index.html` — **Maruthu testimonial quote** (`<p class="testimonial-quote">`). Precedent (commit `512be38`, May 2026) is that this number gets refreshed during count sweeps.
+  5. `resume/YOGESHWARAN_C_Resume.md` — aggregate + per-repo bullet list, ordered descending
+  6. `resume/YOGESHWARAN_C_Resume.html` — same, in `<ul class="bullets">` under Open Source Contributions
+  7. `og-template.html` — social preview: tagline + big stat block (2 spots). After editing, regenerate `og-image.png` at 1200×630: `npx playwright screenshot --viewport-size=1200,630 file://<abs-path-to-og-template.html> og-image.png`
+  8. `linkedin-banner-template.html` — profile banner: tagline + big stat block (2 spots). After editing, regenerate `linkedin-banner.png` at 1584×396: `npx playwright screenshot --viewport-size=1584,396 file://<abs-path-to-linkedin-banner-template.html> linkedin-banner.png`
+- After regenerating the resume PDF (see below), the `?v=N` cache-bust on the three resume links in `index.html` must also bump. Not a count concern but pairs with the same refresh flow.
 
 ## Theme (v3+)
 
