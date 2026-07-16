@@ -70,20 +70,20 @@ Full Stack Developer with nearly 4 years of experience building scalable web app
 
 ## OPEN SOURCE CONTRIBUTIONS
 
-Active contributor to major open-source projects with **200+ merged pull requests** across the following repositories:
+Active contributor to major open-source projects with **220+ merged pull requests** across the following repositories:
 
 - **NestJS CLI** (nestjs/nest-cli) -- 54 merged PRs: compiler fixes, watch mode improvements, configuration handling, test coverage
 - **BullMQ** (taskforcesh/bullmq) -- 51 merged PRs: type safety, worker fixes, scheduler improvements, documentation
-- **Visual Studio Code** (microsoft/vscode) -- 24 merged PRs: editor improvements, markdown/math fixes, debug console, SCM, terminal
+- **Visual Studio Code** (microsoft/vscode) -- 30 merged PRs: editor improvements, markdown/math fixes, debug console, SCM, terminal
 - **NestJS GraphQL** (nestjs/graphql) -- 21 merged PRs: schema generation, federation, resolver fixes
+- **Ant Design** (ant-design/ant-design) -- 21 merged PRs: Table, Form, Dropdown, Layout — component fixes, accessibility, theme-token consistency
 - **NestJS Swagger** (nestjs/swagger) -- 15 merged PRs: OpenAPI spec generation, decorator fixes
 - **Angular Material** (angular/components) -- 13 merged PRs: component fixes and accessibility improvements
-- **Ant Design** (ant-design/ant-design) -- 8 merged PRs: component fixes and accessibility improvements
-- **Supabase** (supabase/supabase) -- 7 merged PRs
+- **Supabase** (supabase/supabase) -- 9 merged PRs: Studio semantic-token migrations, tooltip fixes
 - **NestJS TypeORM** (nestjs/typeorm) -- 3 merged PRs
 - **Directus** (directus/directus) -- 2 merged PRs
-- **Angular**, **NestJS Schematics** -- 1 merged PR each
-- Ongoing contributions to **Appwrite**, **Swagger UI**, **Next.js** (vercel/next.js), and **shadcn/ui**
+- **Angular**, **NestJS Schematics**, **Swagger UI** (swagger-api/swagger-ui) -- 1 merged PR each
+- Ongoing contributions to **Appwrite**, **Next.js** (vercel/next.js), and **shadcn/ui**
 
 ---
 
