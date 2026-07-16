@@ -18,7 +18,7 @@ Full Stack Developer with nearly 4 years of experience architecting scalable web
 
 - 🔭 Currently building **Document Intelligence** and **AI-powered workflow automation** platforms
 - 🤖 Working with **OpenAI GPT**, **Google Gemini**, and **vector search** for intelligent document processing
-- 🌱 Active OSS contributor with **200+ merged PRs** across the **NestJS** ecosystem (CLI, GraphQL, Swagger, TypeORM), **BullMQ**, **VS Code**, **Angular Material**, **Ant Design**, **Supabase**, **Directus**, and more
+- 🌱 Active OSS contributor with **220+ merged PRs** across the **NestJS** ecosystem (CLI, GraphQL, Swagger, TypeORM), **BullMQ**, **VS Code**, **Ant Design**, **Angular Material**, **Supabase**, **Directus**, and more
 - 📍 Based in **Chennai, India**
 
 ---
@@ -83,7 +83,7 @@ Full Stack Developer with nearly 4 years of experience architecting scalable web
 
 ### Open Source Contributions
 
-Active contributor across major open-source projects — **200+ merged PRs** and counting.
+Active contributor across major open-source projects — **220+ merged PRs** and counting.
 
 <table>
 <tr>
@@ -102,7 +102,7 @@ Active contributor across major open-source projects — **200+ merged PRs** and
 <td align="center">
 <a href="https://github.com/microsoft/vscode/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
 <img src="https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="VS Code"><br>
-<sub><b>24 merged</b></sub>
+<sub><b>30 merged</b></sub>
 </a>
 </td>
 <td align="center">
@@ -112,13 +112,19 @@ Active contributor across major open-source projects — **200+ merged PRs** and
 </a>
 </td>
 <td align="center">
+<a href="https://github.com/ant-design/ant-design/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/Ant_Design-1677FF?style=for-the-badge&logo=antdesign&logoColor=white" alt="Ant Design"><br>
+<sub><b>21 merged</b></sub>
+</a>
+</td>
+</tr>
+<tr>
+<td align="center">
 <a href="https://github.com/nestjs/swagger/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
 <img src="https://img.shields.io/badge/NestJS_Swagger-E0234E?style=for-the-badge&logo=swagger&logoColor=white" alt="NestJS Swagger"><br>
 <sub><b>15 merged</b></sub>
 </a>
 </td>
-</tr>
-<tr>
 <td align="center">
 <a href="https://github.com/angular/components/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
 <img src="https://img.shields.io/badge/Angular_Material-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular Material"><br>
@@ -126,15 +132,9 @@ Active contributor across major open-source projects — **200+ merged PRs** and
 </a>
 </td>
 <td align="center">
-<a href="https://github.com/ant-design/ant-design/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
-<img src="https://img.shields.io/badge/Ant_Design-1677FF?style=for-the-badge&logo=antdesign&logoColor=white" alt="Ant Design"><br>
-<sub><b>8 merged</b></sub>
-</a>
-</td>
-<td align="center">
 <a href="https://github.com/supabase/supabase/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
 <img src="https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase"><br>
-<sub><b>7 merged</b></sub>
+<sub><b>9 merged</b></sub>
 </a>
 </td>
 <td align="center">
@@ -164,14 +164,14 @@ Active contributor across major open-source projects — **200+ merged PRs** and
 </a>
 </td>
 <td align="center">
-<a href="https://github.com/appwrite/appwrite/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
-<img src="https://img.shields.io/badge/Appwrite-FD366E?style=for-the-badge&logo=appwrite&logoColor=white" alt="Appwrite"><br>
-<sub><b>contributing</b></sub>
+<a href="https://github.com/swagger-api/swagger-ui/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/Swagger_UI-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger UI"><br>
+<sub><b>1 merged</b></sub>
 </a>
 </td>
 <td align="center">
-<a href="https://github.com/swagger-api/swagger-ui/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
-<img src="https://img.shields.io/badge/Swagger_UI-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger UI"><br>
+<a href="https://github.com/appwrite/appwrite/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/Appwrite-FD366E?style=for-the-badge&logo=appwrite&logoColor=white" alt="Appwrite"><br>
 <sub><b>contributing</b></sub>
 </a>
 </td>
