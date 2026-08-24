@@ -91,6 +91,7 @@ Copy `blog/_template.html` (to be created — see scaffold PR) to `blog/<YYYY-MM
 - `<link rel="canonical" href="https://yogeshwaran.com/blog/<slug>">`
 - Open Graph + Twitter meta tags (og:title, og:description, og:url, og:image)
 - Post body — convert markdown to HTML preserving heading levels, code blocks, links
+- Prism language components — the template ships `css`, `typescript`, `bash`, `diff`. If the post needs another language (`json`, `python`, ...), add its `<script>` **with `integrity` + `crossorigin="anonymous"`**, same as the existing tags. Get the hash from `https://api.cdnjs.com/libraries/prism/1.29.0?fields=sri` (the `sri` field, keyed by file path) or the 'Copy SRI' button on cdnjs.com. Never hand-compute it from a download alone: on a network with a TLS-intercepting proxy the bytes you receive may not be the bytes visitors receive, and a wrong hash makes the browser refuse the script for everyone.
 - Publication date in the header
 - Sign-off paragraph (see BLOG_DISCIPLINE.md rule #10)
 
@@ -221,6 +222,7 @@ Before hitting merge on the release PR:
 - [ ] Open Graph tags (og:title, og:description, og:url, og:image) set
 - [ ] Twitter card meta tags set
 - [ ] Syntax highlighting works on all code blocks
+- [ ] Every cdnjs `<script>`/`<link>` has `integrity` + `crossorigin="anonymous"` (DevTools console shows no `Failed to find a valid digest` errors)
 - [ ] All internal links work
 - [ ] Listed on `blog/index.html`
 
