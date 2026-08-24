@@ -8,13 +8,27 @@
     <language>en-us</language>
     <managingEditor>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</managingEditor>
     <webMaster>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</webMaster>
-    <lastBuildDate>Thu, 16 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Aug 2026 00:00:00 +0000</lastBuildDate>
     <generator>hand-rolled</generator>
     <image>
       <url>https://yogeshwaran.com/favicon.svg</url>
       <title>Yogeshwaran C — Writing</title>
       <link>https://yogeshwaran.com/blog/</link>
     </image>
+
+    <item>
+      <title>Why VS Code said 'Cannot redeclare block-scoped variable' on valid HTML: every script tag is one virtual file</title>
+      <link>https://yogeshwaran.com/blog/2026-08-vscode-module-script-false-redeclaration</link>
+      <guid isPermaLink="true">https://yogeshwaran.com/blog/2026-08-vscode-module-script-false-redeclaration</guid>
+      <pubDate>Sun, 16 Aug 2026 00:00:00 +0000</pubDate>
+      <author>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</author>
+      <category>vscode</category>
+      <category>typescript</category>
+      <category>language-server</category>
+      <category>debugging</category>
+      <category>open-source</category>
+      <description><![CDATA[VS Code's HTML language server validates every script tag as one concatenated virtual JavaScript file — one shared scope. The browser gives a type="module" script its own scope, so valid HTML threw a false 'Cannot redeclare block-scoped variable' for two years. The fix builds one virtual document per module script.]]></description>
+    </item>
 
     <item>
       <title>Why Swagger UI was crashing on a valid OpenAPI spec: an unguarded .getIn() chain</title>
