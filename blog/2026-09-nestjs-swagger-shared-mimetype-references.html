@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper — Yogeshwaran C</title>
+<meta name="description" content="content['application/json'] === content['application/xml'] returned true: NestJS Swagger handed every mimetype the same schema object, so any later edit was a broadcast.">
+<meta name="author" content="Yogeshwaran C">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://yogeshwaran.com/blog/2026-09-nestjs-swagger-shared-mimetype-references">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper">
+<meta property="og:description" content="Declare a response for two media types and both entries were literally the same object. The aliasing bug in NestJS Swagger's content wrapper, and the one-expression fix.">
+<meta property="og:url" content="https://yogeshwaran.com/blog/2026-09-nestjs-swagger-shared-mimetype-references">
+<meta property="og:site_name" content="Yogeshwaran C">
+<meta property="article:author" content="Yogeshwaran Chandrakasan">
+<meta property="article:published_time" content="2026-09-16">
+<meta property="article:tag" content="nestjs">
+<meta property="article:tag" content="openapi">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="debugging">
+<meta property="article:tag" content="open-source">
+<meta property="og:image" content="https://yogeshwaran.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="If a factory returns the same object under N keys, every later mutation is a broadcast.">
+<meta name="twitter:description" content="The shared-reference bug in NestJS Swagger's mimetype content wrapper: why touching the JSON schema changed the XML one, and the === check that ended the hunt.">
+<meta name="twitter:image" content="https://yogeshwaran.com/og-image.png">
+
+<meta name="theme-color" content="#07080b">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="mask-icon" href="/favicon.svg" color="#00e5c8">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="alternate" type="application/rss+xml" title="Yogeshwaran C — Writing" href="/blog/feed.xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" integrity="sha512-vswe+cgvic/XBoF1OcM/TeJ2FW0OofqAVdCZiEYkd6dwGXthvkSFWOoGGJgS2CW70VK5dQM5Oh+7ne47s74VTg==" crossorigin="anonymous">
+
+<link rel="stylesheet" href="./post.css">
+<script async src="https://plausible.io/js/pa-XXSB3KnJ2ChBu03k9DMK-.js"></script>
+<script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav aria-label="Main navigation">
+  <a href="/" class="nav-logo">Yogesh<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/blog/" class="active">Writing</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<article class="post">
+  <header class="post-header">
+    <a href="./" class="back-link">← All posts</a>
+    <div class="post-meta">
+      <time datetime="2026-09-16">September 16, 2026</time>
+      <span class="dot" aria-hidden="true"></span>
+      <span>6 min read</span>
+    </div>
+    <h1 class="post-title">One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper</h1>
+    <div class="post-tags">
+      <span class="post-tag">nestjs</span>
+      <span class="post-tag">openapi</span>
+      <span class="post-tag">javascript</span>
+      <span class="post-tag">debugging</span>
+      <span class="post-tag">open-source</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <p>NestJS Swagger has a tiny helper called <code>MimetypeContentWrapper</code>. Its whole job is to take a schema and fan it out across the media types you declared, producing the <code>content</code> object that ends up in your OpenAPI document:</p>
+
+<pre><code class="language-typescript">const { content } = new MimetypeContentWrapper().wrap(
+  ['application/json', 'application/xml'],
+  { schema: { type: 'string' } }
+);
+
+content['application/json'] === content['application/xml']; // true</code></pre>
+
+    <p>That last line is the bug. Not <code>deepEqual</code> — triple-equals. Declare a response for two media types and both entries in <code>content</code> are <em>literally the same object</em>. Which means:</p>
+
+<pre><code class="language-typescript">content['application/json'].schema.type = 'number';
+content['application/xml'].schema.type; // 'number' — it changed too</code></pre>
+
+    <p>Touch the JSON variant, the XML variant changes. Touch either, and — it gets better — your original input object changes, because the helper also mutates its argument in place. One schema, every mimetype, and every later write is a broadcast.</p>
+
+    <h2>What broke</h2>
+
+    <p>The whole helper is about six lines (<a href="https://github.com/nestjs/swagger/pull/3945/files" target="_blank" rel="noopener noreferrer"><code>lib/services/mimetype-content-wrapper.ts</code></a>):</p>
+
+<pre><code class="language-typescript">export class MimetypeContentWrapper {
+  wrap(mimetype: string[], obj: Record&lt;string, any&gt;) {
+    const content = mimetype.reduce(
+      (acc, item) =&gt; ({ ...acc, [item]: removeUndefinedKeys(obj) }),
+      {}
+    );
+    return { content };
+  }
+}</code></pre>
+
+    <p>The <code>reduce</code> looks like it's building N entries — and it is. N <em>keys</em>. But <code>removeUndefinedKeys(obj)</code> cleans <code>obj</code> <strong>in place and returns it</strong>, so every key gets the same reference. The spread on <code>acc</code> copies the accumulator's shape, not the values sitting behind it. The result is an object that prints exactly like the one you meant to build, and shares everything.</p>
+
+    <p>Two distinct failures fall out of one line:</p>
+
+    <ol>
+      <li><strong>Aliased entries.</strong> Anything downstream that customizes one media type's schema — a plugin, a document post-processor, your own <code>SwaggerModule.createDocument</code> post-hook — silently edits all of them. The classic symptom: you tweak the JSON schema and the XML entry in the served <code>/api-json</code> document changes with it.</li>
+      <li><strong>Source mutation.</strong> <code>removeUndefinedKeys</code> strips keys from the <em>caller's</em> object. Decorator metadata in NestJS is long-lived — it's attached to the class and read on every document build. A factory that hands the same metadata object to two routes, or builds the document twice, is feeding an input that the previous run already chewed on.</li>
+    </ol>
+
+    <h2>What I thought the fix was (wrong first, as always)</h2>
+
+    <p>The symptom I chased was the broadcast: a document post-processor adjusted <code>content['application/json'].schema</code>, and the XML entry came out adjusted too. My first model of the bug was <em>"the builder is constructing the XML entry from the wrong source"</em> — some ordering problem downstream, where the last edit wins because entries get rebuilt from shared inputs. So I read the document builder looking for where the XML entry was constructed, expecting to find it copying from the JSON entry.</p>
+
+    <p>There was nothing to find, because nothing was being constructed. I logged both entries and they looked identical — <em>well, of course they do, they're built from the same schema.</em> That thought is exactly where the wrong model hides: "two copies that look alike" and "one object under two keys" print the same. The check that ends the hunt is two characters and I ran it embarrassingly late:</p>
+
+<pre><code class="language-javascript">content['application/json'] === content['application/xml']; // true. Oh.</code></pre>
+
+    <p>Identity, not equality. Once you see <code>true</code> there, the mystery collapses: there is no ordering bug, no wrong-source copy, no downstream writer. There's one object, and everyone who thinks they own a copy owns the original.</p>
+
+    <h2>The fix</h2>
+
+    <p>Clone per media type, so each key gets its own object — and the caller's input is never the thing being cleaned (<a href="https://github.com/nestjs/swagger/pull/3945" target="_blank" rel="noopener noreferrer">PR #3945</a>, +6/−1 plus a new spec file):</p>
+
+<pre><code class="language-diff">-      (acc, item) => ({ ...acc, [item]: removeUndefinedKeys(obj) }),
++      (acc, item) => ({ ...acc, [item]: removeUndefinedKeys(cloneDeep(obj)) }),</code></pre>
+
+    <p><code>cloneDeep</code> was already house style in the codebase, so the fix is genuinely one expression. The interesting part is the spec file, because the original code had two invariants that were never written down anywhere:</p>
+
+    <ul>
+      <li><strong>Entries are independent.</strong> <code>content['application/json']</code> and <code>content['application/xml']</code> must not be the same reference, and mutating one must not change the other.</li>
+      <li><strong>The input is not modified.</strong> After <code>wrap()</code>, the caller's object still deep-equals what they passed in — <code>removeUndefinedKeys</code> now chews on a clone, not the source.</li>
+    </ul>
+
+    <p>Both assertions fail against the old implementation and pass against the new one. That's the real deliverable: the next person to "optimize away that clone" gets stopped by a failing test that states the rule, instead of shipping the aliasing bug back in.</p>
+
+    <h2>The takeaway</h2>
+
+    <p><strong>If a factory returns the same object under N keys, every later mutation is a broadcast.</strong></p>
+
+    <p>The <code>reduce</code>-with-spread fan-out is an aliasing machine, and it's everywhere in JavaScript:</p>
+
+<pre><code class="language-javascript">Object.fromEntries(types.map(t => [t, defaults]))   // N keys, 1 object
+new Array(3).fill({ count: 0 })                     // 3 slots, 1 object</code></pre>
+
+    <p>JavaScript shares by default — assignment, spread, <code>fill</code>, <code>map</code> all move references, never values. That's the right default for performance and usually what you want. It goes wrong at exactly one kind of boundary: when a function <em>returns</em> structures it built from shared pieces, because the caller reasonably assumes they received their own data. At that boundary you either clone, freeze, or document — and silently sharing is the one option that looks like all the others until someone writes to it.</p>
+
+    <p>The debugging lesson compresses even smaller: when two things change together, check <code>===</code> before you build any theory involving two things. Spooky action at a distance is almost never spooky — it's usually one object wearing two names.</p>
+
+    <h2>Why this PR is a good first OSS contribution</h2>
+
+    <p>The repro is five lines with no HTTP server, no decorators, no NestJS app — instantiate the class, call <code>wrap</code>, compare with <code>===</code>. The fix is one expression in a six-line file. And yet it's a real bug that corrupted real OpenAPI documents for anyone doing multi-mimetype responses with any post-processing at all.</p>
+
+    <p>What makes it worth writing about is the shape: the hard part wasn't the diff, it was naming the invariants the original author never stated. A one-line fix plus a spec that pins "entries are independent" and "inputs are not mutated" is a bigger contribution than a fifty-line fix without them. If you're hunting for a first contribution, look for tiny utility classes in big frameworks — they're small enough to fully understand in an afternoon, old enough to have unstated assumptions, and central enough that fixing one line fixes everyone's documents.</p>
+  </div>
+
+  <footer class="post-footer">
+    <p class="signoff">
+      <em>Written after merging <a href="https://github.com/nestjs/swagger/pull/3945" target="_blank" rel="noopener noreferrer">#3945</a> into nestjs/swagger. Part of an ongoing series on fixes I've shipped to open-source projects — follow at <a href="/">yogeshwaran.com</a>.</em>
+    </p>
+    <p class="signoff" style="margin-top:1rem">
+      <em>See also: <a href="./2026-07-swagger-ui-request-body-no-content">The crash where Swagger UI assumed every request body has content</a> — same OpenAPI territory, opposite failure: there a missing key crashed a reader; here a shared reference corrupted writers.</em>
+    </p>
+  </footer>
+</article>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; <span id="yr"></span> Yogeshwaran Chandrakasan</span>
+    <span><a href="/">← Back to portfolio</a></span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js" integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js" integrity="sha512-jwrwRWZWW9J6bjmBOJxPcbRvEBSQeY4Ad0NEXSfP0vwYi/Yu9x5VhDBl3wz6Pnxs8Rx/t1P8r9/OHCRciHcT7Q==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-diff.min.js" integrity="sha512-tBR4SAva+2bw36ToxaFeOEvgqxWHON25E9xp+kEBfw175sS5OusQEH8GrigKgTdHUXcKsK1yiyfo7fctBYl+rA==" crossorigin="anonymous"></script>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
