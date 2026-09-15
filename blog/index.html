@@ -237,11 +237,11 @@ footer{padding:3rem clamp(1.5rem,5vw,5rem);border-top:1px solid var(--border);po
 
 <footer>
   <div class="footer-inner">
-    <span>&copy; <span id="yr"></span> Yogeshwaran Chandrakasan</span>
+    <span>&copy; <span id="yr"></span> Yogeshwaran Chandrakasan &middot; All rights reserved.</span>
     <span><a href="/">← Back to portfolio</a></span>
   </div>
 </footer>
 
-<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>(function(){var y=new Date().getFullYear();document.getElementById('yr').textContent=y>2025?'2025–'+y:'2025';})();</script>
 </body>
 </html>

@@ -745,7 +745,7 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
     </div>
   </div>
   <div class="footer-bottom">
-    <p>Designed & built by Yogeshwaran Chandrakasan &copy; <span id="yr"></span></p>
+    <p>Designed & built by Yogeshwaran Chandrakasan &copy; <span id="yr"></span> &middot; All rights reserved.</p>
     <a href="#" class="footer-back" role="button" aria-label="Scroll back to top of page">Back to Top</a>
   </div>
 </footer>
@@ -1110,7 +1110,7 @@ ScrollTrigger.create({
   onUpdate: self => navEl.classList.toggle('scrolled', self.scroll() > 60)
 });
 
-document.getElementById('yr').textContent = new Date().getFullYear();
+(function(){var y=new Date().getFullYear();document.getElementById('yr').textContent=y>2025?'2025–'+y:'2025';})();
 
 // Fix nav state on reload when already scrolled
 if (window.scrollY > 60) navEl.classList.add('scrolled');
