@@ -108,6 +108,11 @@ Edit `blog/index.html` — add the new post at the top:
 </article>
 ```
 
+**Also in this step:**
+
+- `blog/index.html` — add the new post to the `Blog` JSON-LD `blogPost` array (headline, url, datePublished), newest first
+- `llms.txt` — add the post to the Writing list (title, `.md` URL, one-line summary), newest first
+
 ### 4. Regenerate the sitemap
 
 ```bash
@@ -223,6 +228,7 @@ Before hitting merge on the release PR:
 - [ ] Twitter card meta tags set
 - [ ] Syntax highlighting works on all code blocks
 - [ ] Every cdnjs `<script>`/`<link>` has `integrity` + `crossorigin="anonymous"` (DevTools console shows no `Failed to find a valid digest` errors)
+- [ ] JSON-LD filled from the template placeholders (BlogPosting + BreadcrumbList) and parses as valid JSON; `blog/index.html` Blog JSON-LD and `llms.txt` list the new post
 - [ ] All internal links work
 - [ ] Listed on `blog/index.html`
 
