@@ -8,7 +8,7 @@
     <language>en-us</language>
     <managingEditor>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</managingEditor>
     <webMaster>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</webMaster>
-    <lastBuildDate>Sun, 16 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 16 Sep 2026 00:00:00 +0000</lastBuildDate>
     <generator>hand-rolled</generator>
     <image>
       <url>https://yogeshwaran.com/favicon.svg</url>
@@ -16,6 +16,19 @@
       <link>https://yogeshwaran.com/blog/</link>
     </image>
 
+    <item>
+      <title>One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper</title>
+      <link>https://yogeshwaran.com/blog/2026-09-nestjs-swagger-shared-mimetype-references</link>
+      <guid isPermaLink="true">https://yogeshwaran.com/blog/2026-09-nestjs-swagger-shared-mimetype-references</guid>
+      <pubDate>Wed, 16 Sep 2026 00:00:00 +0000</pubDate>
+      <author>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</author>
+      <category>nestjs</category>
+      <category>openapi</category>
+      <category>javascript</category>
+      <category>debugging</category>
+      <category>open-source</category>
+      <description><![CDATA[NestJS Swagger's MimetypeContentWrapper handed every declared media type the same schema object — mutate the JSON entry and the XML entry changed with it, and the caller's input got mutated in place too. The fix clones per mimetype; the new spec pins both invariants.]]></description>
+    </item>
     <item>
       <title>Why VS Code said 'Cannot redeclare block-scoped variable' on valid HTML: every script tag is one virtual file</title>
       <link>https://yogeshwaran.com/blog/2026-08-vscode-module-script-false-redeclaration</link>

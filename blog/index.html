@@ -133,6 +133,23 @@ footer{padding:3rem clamp(1.5rem,5vw,5rem);border-top:1px solid var(--border);po
 <main class="posts">
   <div class="posts-heading">All Posts</div>
 
+    <article class="post-card">
+    <div class="post-meta">
+      <time datetime="2026-09-16">September 16, 2026</time>
+      <span class="dot" aria-hidden="true"></span>
+      <span>6 min read</span>
+    </div>
+    <h2 class="post-title"><a href="./2026-09-nestjs-swagger-shared-mimetype-references">One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper</a></h2>
+    <p class="post-excerpt">Declare a response for two media types and NestJS Swagger handed both the <em>same</em> object — <code>content['application/json'] === content['application/xml']</code> was true. Mutate one, both change, and your input gets chewed too. An aliasing bug where the fix is one <code>cloneDeep</code>, and the real deliverable is the spec that states the invariants.</p>
+    <div class="post-tags">
+      <span class="post-tag">nestjs</span>
+      <span class="post-tag">openapi</span>
+      <span class="post-tag">javascript</span>
+      <span class="post-tag">debugging</span>
+      <span class="post-tag">open-source</span>
+    </div>
+  </article>
+
   <article class="post-card">
     <div class="post-meta">
       <time datetime="2026-08-16">August 16, 2026</time>
