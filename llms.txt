@@ -1,0 +1,25 @@
+# Yogeshwaran C
+
+> Full stack developer in Chennai, India (Python, TypeScript, Angular, NestJS, FastAPI). 230+ merged pull requests across VS Code, NestJS, BullMQ, Ant Design, Angular Material, Supabase and more. This site is a portfolio and a monthly engineering blog: each post walks through a real bug fixed in a major open-source project, from wrong first guess to merged fix.
+
+- Portfolio: https://yogeshwaran.com/
+- GitHub: https://github.com/yogeshwaran-c
+- LinkedIn: https://linkedin.com/in/yogeshwaran-c-070720192
+- Contact: yogeshwaran.chandrakasan@gmail.com
+- RSS: https://yogeshwaran.com/blog/feed.xml
+
+## Writing
+
+Every post is also served as clean markdown at the same URL with a .md extension — prefer those for machine reading.
+
+- [One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper](https://yogeshwaran.com/blog/2026-09-nestjs-swagger-shared-mimetype-references.md): every declared media type got the same schema object, so any later edit was a broadcast; fixed with a cloneDeep per mimetype (nestjs/swagger#3945)
+- [Why VS Code said 'Cannot redeclare block-scoped variable' on valid HTML: every script tag is one virtual file](https://yogeshwaran.com/blog/2026-08-vscode-module-script-false-redeclaration.md): the HTML language server validated N script tags as one concatenated virtual JS file; the fix models per-module scopes (microsoft/vscode#308027)
+- [Why Swagger UI was crashing on a valid OpenAPI spec: an unguarded .getIn() chain](https://yogeshwaran.com/blog/2026-07-swagger-ui-request-body-no-content.md): a requestBody without content crashed the renderer on a missing-key read (swagger-api/swagger-ui)
+- [Why editing a README was rebuilding my entire NestJS project: an inverted chokidar filter](https://yogeshwaran.com/blog/2026-06-nestjs-cli-chokidar-inverted-ignored-filter.md): nest-cli's watch mode ignored filter was inverted, so non-source files triggered rebuilds (nestjs/nest-cli)
+- [BullMQ was crashing on getRanges() because Python's list.reverse() returns None](https://yogeshwaran.com/blog/2026-05-bullmq-python-list-reverse-returns-none.md): in-place mutation chained as if fluent in the Python client (taskforcesh/bullmq)
+- [The bug where VS Code's Debug Console was pasting 'repl:1' into my clipboard](https://yogeshwaran.com/blog/2026-04-vscode-debug-console-copy-paste.md): copying from the Debug Console captured the synthetic source label instead of the text (microsoft/vscode)
+
+## Resume
+
+- [Resume (markdown)](https://yogeshwaran.com/resume/YOGESHWARAN_C_Resume.md)
+- [Resume (PDF)](https://yogeshwaran.com/resume/YOGESHWARAN_C_Resume.pdf)
