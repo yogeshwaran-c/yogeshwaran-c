@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Post OG Image Template — do not publish links to this page</title>
+<!--
+  Per-post OG image template. Populated from query params, rendered at 1200×630.
+
+  Generate (from repo root, all one line):
+    npx playwright screenshot '--viewport-size=1200,630' --wait-for-timeout=2500 "file:///<abs-repo-path>/blog/og-post-template.html?title=<url-encoded title>&date=<Mon DD, YYYY>&mins=<N>&tags=<tag1,tag2,...>" blog/og/<slug>.png
+
+  See docs/BLOG_PUBLISHING.md step 2.
+-->
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden}
+body{background:#07080b;color:#f0f2f8;font-family:'Outfit',sans-serif;position:relative}
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,200,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,200,.05) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 60% 55% at 50% 50%,black 0%,transparent 70%)}
+.glow-a{position:absolute;top:-200px;right:-150px;width:700px;height:700px;background:radial-gradient(circle,rgba(0,229,200,.15),transparent 65%);filter:blur(80px)}
+.glow-b{position:absolute;bottom:-100px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(255,158,109,.08),transparent 65%);filter:blur(60px)}
+.content{position:relative;z-index:2;padding:72px 96px;height:100%;display:flex;flex-direction:column;justify-content:space-between}
+.top{display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:24px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#f0f2f8}
+.logo em{font-style:normal;color:#00e5c8;font-weight:900}
+.badge{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#00e5c8;display:flex;align-items:center;gap:10px}
+.badge::before{content:'';width:8px;height:8px;background:#00e5c8;border-radius:50%;box-shadow:0 0 12px rgba(0,229,200,.5)}
+.main{display:flex;flex-direction:column;gap:22px}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:#00e5c8;display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:'';width:28px;height:1px;background:#00e5c8}
+.title{font-weight:800;line-height:1.12;letter-spacing:-.02em;font-size:58px;max-width:1010px}
+.tags{display:flex;gap:14px;flex-wrap:wrap;margin-top:4px}
+.tag{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.08em;color:#8be9dc;border:1px solid rgba(0,229,200,.35);border-radius:999px;padding:7px 16px}
+.bottom{display:flex;justify-content:space-between;align-items:flex-end;padding-top:28px;border-top:1px solid rgba(255,255,255,.08)}
+.author{font-size:20px;font-weight:700;color:#b0b5cc}
+.author strong{color:#f0f2f8}
+.url{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.1em;color:#b0b5cc}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="glow-a"></div>
+<div class="glow-b"></div>
+<div class="content">
+  <div class="top">
+    <div class="logo">Yogesh<em>.</em></div>
+    <div class="badge">Patch Notes · Blog</div>
+  </div>
+  <div class="main">
+    <div class="eyebrow" id="eyebrow"></div>
+    <h1 class="title" id="title"></h1>
+    <div class="tags" id="tags"></div>
+  </div>
+  <div class="bottom">
+    <div class="author"><strong>Yogeshwaran Chandrakasan</strong> · Full Stack Developer</div>
+    <div class="url">yogeshwaran.com/blog</div>
+  </div>
+</div>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var title = q.get('title') || '{{POST_TITLE}}';
+  var date = q.get('date') || '{{POST_DISPLAY_DATE}}';
+  var mins = q.get('mins') || '7';
+  var tags = (q.get('tags') || '').split(',').filter(Boolean).slice(0, 5);
+  document.getElementById('eyebrow').textContent = date + ' · ' + mins + ' min read';
+  var t = document.getElementById('title');
+  t.textContent = title;
+  var tagsEl = document.getElementById('tags');
+  tags.forEach(function (tag) {
+    var s = document.createElement('span');
+    s.className = 'tag'; s.textContent = tag; tagsEl.appendChild(s);
+  });
+  // shrink long titles until the card fits the 630px canvas
+  document.fonts.ready.then(function () {
+    var c = document.querySelector('.content');
+    var size = 58;
+    while (c.scrollHeight > c.clientHeight && size > 34) {
+      size -= 2; t.style.fontSize = size + 'px';
+    }
+  });
+})();
+</script>
+</body>
+</html>

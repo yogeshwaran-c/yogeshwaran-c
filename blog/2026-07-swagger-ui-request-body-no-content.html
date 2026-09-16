@@ -21,14 +21,15 @@
 <meta property="article:tag" content="immutable-js">
 <meta property="article:tag" content="debugging">
 <meta property="article:tag" content="open-source">
-<meta property="og:image" content="https://yogeshwaran.com/og-image.png">
+<meta property="og:image" content="https://yogeshwaran.com/blog/og/2026-07-swagger-ui-request-body-no-content.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Why Swagger UI was crashing on a valid OpenAPI spec: an unguarded .getIn() chain">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="An unguarded .getIn() chain in Swagger UI was crashing the render on a valid OpenAPI spec">
 <meta name="twitter:description" content="A 5-line fix and the universal lesson about schema-optional fields: the reader is always responsible for the missing case.">
-<meta name="twitter:image" content="https://yogeshwaran.com/og-image.png">
+<meta name="twitter:image" content="https://yogeshwaran.com/blog/og/2026-07-swagger-ui-request-body-no-content.png">
 
 <meta name="theme-color" content="#07080b">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -44,7 +45,7 @@
 <link rel="stylesheet" href="./post.css">
 <script async src="https://plausible.io/js/pa-XXSB3KnJ2ChBu03k9DMK-.js"></script>
 <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Why Swagger UI was crashing on a valid OpenAPI spec: an unguarded .getIn() chain","description":"A 5-line fix in Swagger UI's spec selector. An Immutable.js .getIn(['content']) chain assumed the key existed, so a valid-but-unusual OpenAPI 3.0 spec (a GET with a requestBody carrying no content) crashed the browser render with a TypeError.","url":"https://yogeshwaran.com/blog/2026-07-swagger-ui-request-body-no-content","mainEntityOfPage":{"@type":"WebPage","@id":"https://yogeshwaran.com/blog/2026-07-swagger-ui-request-body-no-content"},"datePublished":"2026-07-16","dateModified":"2026-07-16","author":{"@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran Chandrakasan","url":"https://yogeshwaran.com/"},"publisher":{"@id":"https://yogeshwaran.com/#person"},"image":"https://yogeshwaran.com/og-image.png","keywords":"swagger-ui, openapi, immutable-js, debugging, open-source","isPartOf":{"@type":"Blog","@id":"https://yogeshwaran.com/blog/#blog"},"inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Why Swagger UI was crashing on a valid OpenAPI spec: an unguarded .getIn() chain","description":"A 5-line fix in Swagger UI's spec selector. An Immutable.js .getIn(['content']) chain assumed the key existed, so a valid-but-unusual OpenAPI 3.0 spec (a GET with a requestBody carrying no content) crashed the browser render with a TypeError.","url":"https://yogeshwaran.com/blog/2026-07-swagger-ui-request-body-no-content","mainEntityOfPage":{"@type":"WebPage","@id":"https://yogeshwaran.com/blog/2026-07-swagger-ui-request-body-no-content"},"datePublished":"2026-07-16","dateModified":"2026-07-16","author":{"@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran Chandrakasan","url":"https://yogeshwaran.com/"},"publisher":{"@id":"https://yogeshwaran.com/#person"},"image":"https://yogeshwaran.com/blog/og/2026-07-swagger-ui-request-body-no-content.png","keywords":"swagger-ui, openapi, immutable-js, debugging, open-source","isPartOf":{"@type":"Blog","@id":"https://yogeshwaran.com/blog/#blog"},"inLanguage":"en"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://yogeshwaran.com/"},{"@type":"ListItem","position":2,"name":"Writing","item":"https://yogeshwaran.com/blog/"},{"@type":"ListItem","position":3,"name":"Why Swagger UI was crashing on a valid OpenAPI spec: an unguarded .getIn() chain"}]}</script>
 </head>
 <body>

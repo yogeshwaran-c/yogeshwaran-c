@@ -21,14 +21,15 @@
 <meta property="article:tag" content="language-server">
 <meta property="article:tag" content="debugging">
 <meta property="article:tag" content="open-source">
-<meta property="og:image" content="https://yogeshwaran.com/og-image.png">
+<meta property="og:image" content="https://yogeshwaran.com/blog/og/2026-08-vscode-module-script-false-redeclaration.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Why VS Code said 'Cannot redeclare block-scoped variable' on valid HTML: every script tag is one virtual file">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="An HTML file with N script tags was validated as one JavaScript file. The browser runs N scopes; the editor read one.">
 <meta name="twitter:description" content="How a false redeclaration error survived two years in VS Code, why the obvious fixes were wrong, and the virtual-document trick that maps diagnostics for free.">
-<meta name="twitter:image" content="https://yogeshwaran.com/og-image.png">
+<meta name="twitter:image" content="https://yogeshwaran.com/blog/og/2026-08-vscode-module-script-false-redeclaration.png">
 
 <meta name="theme-color" content="#07080b">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -44,7 +45,7 @@
 <link rel="stylesheet" href="./post.css">
 <script async src="https://plausible.io/js/pa-XXSB3KnJ2ChBu03k9DMK-.js"></script>
 <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Why VS Code said 'Cannot redeclare block-scoped variable' on valid HTML: every script tag is one virtual file","description":"A false 'Cannot redeclare block-scoped variable' in valid HTML: VS Code's language server validates every script tag as one concatenated virtual JS file.","url":"https://yogeshwaran.com/blog/2026-08-vscode-module-script-false-redeclaration","mainEntityOfPage":{"@type":"WebPage","@id":"https://yogeshwaran.com/blog/2026-08-vscode-module-script-false-redeclaration"},"datePublished":"2026-08-16","dateModified":"2026-08-16","author":{"@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran Chandrakasan","url":"https://yogeshwaran.com/"},"publisher":{"@id":"https://yogeshwaran.com/#person"},"image":"https://yogeshwaran.com/og-image.png","keywords":"vscode, typescript, language-server, debugging, open-source","isPartOf":{"@type":"Blog","@id":"https://yogeshwaran.com/blog/#blog"},"inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Why VS Code said 'Cannot redeclare block-scoped variable' on valid HTML: every script tag is one virtual file","description":"A false 'Cannot redeclare block-scoped variable' in valid HTML: VS Code's language server validates every script tag as one concatenated virtual JS file.","url":"https://yogeshwaran.com/blog/2026-08-vscode-module-script-false-redeclaration","mainEntityOfPage":{"@type":"WebPage","@id":"https://yogeshwaran.com/blog/2026-08-vscode-module-script-false-redeclaration"},"datePublished":"2026-08-16","dateModified":"2026-08-16","author":{"@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran Chandrakasan","url":"https://yogeshwaran.com/"},"publisher":{"@id":"https://yogeshwaran.com/#person"},"image":"https://yogeshwaran.com/blog/og/2026-08-vscode-module-script-false-redeclaration.png","keywords":"vscode, typescript, language-server, debugging, open-source","isPartOf":{"@type":"Blog","@id":"https://yogeshwaran.com/blog/#blog"},"inLanguage":"en"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://yogeshwaran.com/"},{"@type":"ListItem","position":2,"name":"Writing","item":"https://yogeshwaran.com/blog/"},{"@type":"ListItem","position":3,"name":"Why VS Code said 'Cannot redeclare block-scoped variable' on valid HTML: every script tag is one virtual file"}]}</script>
 </head>
 <body>
