@@ -110,6 +110,8 @@ footer{padding:3rem clamp(1.5rem,5vw,5rem);border-top:1px solid var(--border);po
 </style>
 <script async src="https://plausible.io/js/pa-XXSB3KnJ2ChBu03k9DMK-.js"></script>
 <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","@id":"https://yogeshwaran.com/blog/#blog","name":"Yogeshwaran C — Writing","url":"https://yogeshwaran.com/blog/","description":"Notes on shipping software, debugging production systems, and contributing to open-source projects.","author":{"@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran Chandrakasan","url":"https://yogeshwaran.com/"},"inLanguage":"en","blogPost":[{"@type":"BlogPosting","headline":"One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper","url":"https://yogeshwaran.com/blog/2026-09-nestjs-swagger-shared-mimetype-references","datePublished":"2026-09-16"},{"@type":"BlogPosting","headline":"Why VS Code said 'Cannot redeclare block-scoped variable' on valid HTML: every script tag is one virtual file","url":"https://yogeshwaran.com/blog/2026-08-vscode-module-script-false-redeclaration","datePublished":"2026-08-16"},{"@type":"BlogPosting","headline":"Why Swagger UI was crashing on a valid OpenAPI spec: an unguarded .getIn() chain","url":"https://yogeshwaran.com/blog/2026-07-swagger-ui-request-body-no-content","datePublished":"2026-07-16"},{"@type":"BlogPosting","headline":"Why editing a README was rebuilding my entire NestJS project: an inverted chokidar filter","url":"https://yogeshwaran.com/blog/2026-06-nestjs-cli-chokidar-inverted-ignored-filter","datePublished":"2026-06-16"},{"@type":"BlogPosting","headline":"BullMQ was crashing on getRanges() because Python's list.reverse() returns None","url":"https://yogeshwaran.com/blog/2026-05-bullmq-python-list-reverse-returns-none","datePublished":"2026-05-16"},{"@type":"BlogPosting","headline":"The bug where VS Code's Debug Console was pasting 'repl:1' into my clipboard","url":"https://yogeshwaran.com/blog/2026-04-vscode-debug-console-copy-paste","datePublished":"2026-04-16"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://yogeshwaran.com/"},{"@type":"ListItem","position":2,"name":"Writing","item":"https://yogeshwaran.com/blog/"}]}</script>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -132,6 +134,23 @@ footer{padding:3rem clamp(1.5rem,5vw,5rem);border-top:1px solid var(--border);po
 
 <main class="posts">
   <div class="posts-heading">All Posts</div>
+
+    <article class="post-card">
+    <div class="post-meta">
+      <time datetime="2026-09-16">September 16, 2026</time>
+      <span class="dot" aria-hidden="true"></span>
+      <span>6 min read</span>
+    </div>
+    <h2 class="post-title"><a href="./2026-09-nestjs-swagger-shared-mimetype-references">One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper</a></h2>
+    <p class="post-excerpt">Declare a response for two media types and NestJS Swagger handed both the <em>same</em> object — <code>content['application/json'] === content['application/xml']</code> was true. Mutate one, both change, and your input gets chewed too. An aliasing bug where the fix is one <code>cloneDeep</code>, and the real deliverable is the spec that states the invariants.</p>
+    <div class="post-tags">
+      <span class="post-tag">nestjs</span>
+      <span class="post-tag">openapi</span>
+      <span class="post-tag">javascript</span>
+      <span class="post-tag">debugging</span>
+      <span class="post-tag">open-source</span>
+    </div>
+  </article>
 
   <article class="post-card">
     <div class="post-meta">
@@ -220,11 +239,11 @@ footer{padding:3rem clamp(1.5rem,5vw,5rem);border-top:1px solid var(--border);po
 
 <footer>
   <div class="footer-inner">
-    <span>&copy; <span id="yr"></span> Yogeshwaran Chandrakasan</span>
+    <span>&copy; <span id="yr"></span> Yogeshwaran Chandrakasan &middot; All rights reserved.</span>
     <span><a href="/">← Back to portfolio</a></span>
   </div>
 </footer>
 
-<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>(function(){var y=new Date().getFullYear();document.getElementById('yr').textContent=y>2025?'2025–'+y:'2025';})();</script>
 </body>
 </html>

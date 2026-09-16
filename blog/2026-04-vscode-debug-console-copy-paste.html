@@ -43,6 +43,8 @@
 <link rel="stylesheet" href="./post.css">
 <script async src="https://plausible.io/js/pa-XXSB3KnJ2ChBu03k9DMK-.js"></script>
 <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"The bug where VS Code's Debug Console was pasting 'repl:1' into my clipboard","description":"A 2-line CSS fix in VS Code that taught me how user-select: text cascades through every descendant — even the decorative ones.","url":"https://yogeshwaran.com/blog/2026-04-vscode-debug-console-copy-paste","mainEntityOfPage":{"@type":"WebPage","@id":"https://yogeshwaran.com/blog/2026-04-vscode-debug-console-copy-paste"},"datePublished":"2026-04-16","dateModified":"2026-04-16","author":{"@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran Chandrakasan","url":"https://yogeshwaran.com/"},"publisher":{"@id":"https://yogeshwaran.com/#person"},"image":"https://yogeshwaran.com/og-image.png","keywords":"vscode, css, debugging, open-source","isPartOf":{"@type":"Blog","@id":"https://yogeshwaran.com/blog/#blog"},"inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://yogeshwaran.com/"},{"@type":"ListItem","position":2,"name":"Writing","item":"https://yogeshwaran.com/blog/"},{"@type":"ListItem","position":3,"name":"The bug where VS Code's Debug Console was pasting 'repl:1' into my clipboard"}]}</script>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -163,7 +165,7 @@ console.log(' there');</code></pre>
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <span>&copy; <span id="yr"></span> Yogeshwaran Chandrakasan</span>
+    <span>&copy; <span id="yr"></span> Yogeshwaran Chandrakasan &middot; All rights reserved.</span>
     <span><a href="/">← Back to portfolio</a></span>
   </div>
 </footer>
@@ -172,6 +174,6 @@ console.log(' there');</code></pre>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js" integrity="sha512-uMdVuOpm+9lNPCT7mV/YaMb9YQ/R4+eeON7aEMj6Ig/f4BoU+Q5k6iaZkDsX7LH9cjTHZt0CuKxbzd0/fndrWA==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js" integrity="sha512-jwrwRWZWW9J6bjmBOJxPcbRvEBSQeY4Ad0NEXSfP0vwYi/Yu9x5VhDBl3wz6Pnxs8Rx/t1P8r9/OHCRciHcT7Q==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-diff.min.js" integrity="sha512-tBR4SAva+2bw36ToxaFeOEvgqxWHON25E9xp+kEBfw175sS5OusQEH8GrigKgTdHUXcKsK1yiyfo7fctBYl+rA==" crossorigin="anonymous"></script>
-<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>(function(){var y=new Date().getFullYear();document.getElementById('yr').textContent=y>2025?'2025–'+y:'2025';})();</script>
 </body>
 </html>

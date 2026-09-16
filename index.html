@@ -29,7 +29,7 @@
 <link rel="mask-icon" href="/favicon.svg" color="#00e5c8">
 <link rel="apple-touch-icon" href="/favicon.svg">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Yogeshwaran C","jobTitle":"Full Stack Developer","url":"https://yogeshwaran.com/","email":"yogeshwaran.chandrakasan@gmail.com","telephone":"+918760233346","address":{"@type":"PostalAddress","addressLocality":"Chennai","addressRegion":"Tamil Nadu","addressCountry":"IN"},"sameAs":["https://linkedin.com/in/yogeshwaran-c-070720192","https://github.com/yogeshwaran-c"],"knowsAbout":["Python","TypeScript","Angular","NestJS","FastAPI","React","Vue.js","AWS","Azure","Docker","OpenAI","PostgreSQL","Redis"]}
+{"@context":"https://schema.org","@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran C","jobTitle":"Full Stack Developer","url":"https://yogeshwaran.com/","email":"yogeshwaran.chandrakasan@gmail.com","telephone":"+918760233346","address":{"@type":"PostalAddress","addressLocality":"Chennai","addressRegion":"Tamil Nadu","addressCountry":"IN"},"sameAs":["https://linkedin.com/in/yogeshwaran-c-070720192","https://github.com/yogeshwaran-c"],"knowsAbout":["Python","TypeScript","Angular","NestJS","FastAPI","React","Vue.js","AWS","Azure","Docker","OpenAI","PostgreSQL","Redis"]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ItemList","name":"Technical Skills","itemListElement":[{"@type":"ListItem","position":1,"name":"Python"},{"@type":"ListItem","position":2,"name":"TypeScript"},{"@type":"ListItem","position":3,"name":"Angular"},{"@type":"ListItem","position":4,"name":"NestJS"},{"@type":"ListItem","position":5,"name":"FastAPI"},{"@type":"ListItem","position":6,"name":"React"},{"@type":"ListItem","position":7,"name":"Vue.js"},{"@type":"ListItem","position":8,"name":"Node.js"},{"@type":"ListItem","position":9,"name":"PostgreSQL"},{"@type":"ListItem","position":10,"name":"Redis"},{"@type":"ListItem","position":11,"name":"Docker"},{"@type":"ListItem","position":12,"name":"AWS"},{"@type":"ListItem","position":13,"name":"Azure"},{"@type":"ListItem","position":14,"name":"OpenAI GPT"}]}
@@ -355,6 +355,7 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </style>
 <script async src="https://plausible.io/js/pa-XXSB3KnJ2ChBu03k9DMK-.js"></script>
 <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://yogeshwaran.com/#website","name":"Yogeshwaran C","url":"https://yogeshwaran.com/","description":"Portfolio and engineering writing of Yogeshwaran Chandrakasan, full stack developer.","author":{"@id":"https://yogeshwaran.com/#person"},"inLanguage":"en"}</script>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -475,14 +476,14 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 <section class="latest" aria-label="Latest writing">
   <div class="latest-inner">
     <span class="latest-label">Latest Writing</span>
-    <a href="/blog/2026-08-vscode-module-script-false-redeclaration" class="latest-card">
+    <a href="/blog/2026-09-nestjs-swagger-shared-mimetype-references" class="latest-card">
       <div class="latest-meta">
-        <time datetime="2026-08-16">August 16, 2026</time>
+        <time datetime="2026-09-16">September 16, 2026</time>
         <span>·</span>
-        <span>7 min read</span>
+        <span>6 min read</span>
       </div>
-      <h3 class="latest-title">Why VS Code said 'Cannot redeclare block-scoped variable' on valid HTML: every script tag is one virtual file</h3>
-      <p class="latest-excerpt">The browser runs N script tags as N scopes; the editor validated them as one concatenated virtual file. A two-year-old false error, and the fix that models real scoping.</p>
+      <h3 class="latest-title">One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper</h3>
+      <p class="latest-excerpt">Two media types, one object: the content wrapper returned the same reference under every mimetype key, so any later edit was a broadcast. Fixed with one cloneDeep per media type.</p>
       <span class="latest-more">Read post →</span>
     </a>
   </div>
@@ -745,7 +746,7 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
     </div>
   </div>
   <div class="footer-bottom">
-    <p>Designed & built by Yogeshwaran Chandrakasan &copy; <span id="yr"></span></p>
+    <p>Designed & built by Yogeshwaran Chandrakasan &copy; <span id="yr"></span> &middot; All rights reserved.</p>
     <a href="#" class="footer-back" role="button" aria-label="Scroll back to top of page">Back to Top</a>
   </div>
 </footer>
@@ -1110,7 +1111,7 @@ ScrollTrigger.create({
   onUpdate: self => navEl.classList.toggle('scrolled', self.scroll() > 60)
 });
 
-document.getElementById('yr').textContent = new Date().getFullYear();
+(function(){var y=new Date().getFullYear();document.getElementById('yr').textContent=y>2025?'2025–'+y:'2025';})();
 
 // Fix nav state on reload when already scrolled
 if (window.scrollY > 60) navEl.classList.add('scrolled');

@@ -44,6 +44,8 @@
 <link rel="stylesheet" href="./post.css">
 <script async src="https://plausible.io/js/pa-XXSB3KnJ2ChBu03k9DMK-.js"></script>
 <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Why Swagger UI was crashing on a valid OpenAPI spec: an unguarded .getIn() chain","description":"A 5-line fix in Swagger UI's spec selector. An Immutable.js .getIn(['content']) chain assumed the key existed, so a valid-but-unusual OpenAPI 3.0 spec (a GET with a requestBody carrying no content) crashed the browser render with a TypeError.","url":"https://yogeshwaran.com/blog/2026-07-swagger-ui-request-body-no-content","mainEntityOfPage":{"@type":"WebPage","@id":"https://yogeshwaran.com/blog/2026-07-swagger-ui-request-body-no-content"},"datePublished":"2026-07-16","dateModified":"2026-07-16","author":{"@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran Chandrakasan","url":"https://yogeshwaran.com/"},"publisher":{"@id":"https://yogeshwaran.com/#person"},"image":"https://yogeshwaran.com/og-image.png","keywords":"swagger-ui, openapi, immutable-js, debugging, open-source","isPartOf":{"@type":"Blog","@id":"https://yogeshwaran.com/blog/#blog"},"inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://yogeshwaran.com/"},{"@type":"ListItem","position":2,"name":"Writing","item":"https://yogeshwaran.com/blog/"},{"@type":"ListItem","position":3,"name":"Why Swagger UI was crashing on a valid OpenAPI spec: an unguarded .getIn() chain"}]}</script>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -180,7 +182,7 @@
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <span>&copy; <span id="yr"></span> Yogeshwaran Chandrakasan</span>
+    <span>&copy; <span id="yr"></span> Yogeshwaran Chandrakasan &middot; All rights reserved.</span>
     <span><a href="/">← Back to portfolio</a></span>
   </div>
 </footer>
@@ -189,6 +191,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js" integrity="sha512-jwrwRWZWW9J6bjmBOJxPcbRvEBSQeY4Ad0NEXSfP0vwYi/Yu9x5VhDBl3wz6Pnxs8Rx/t1P8r9/OHCRciHcT7Q==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js" integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-diff.min.js" integrity="sha512-tBR4SAva+2bw36ToxaFeOEvgqxWHON25E9xp+kEBfw175sS5OusQEH8GrigKgTdHUXcKsK1yiyfo7fctBYl+rA==" crossorigin="anonymous"></script>
-<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>(function(){var y=new Date().getFullYear();document.getElementById('yr').textContent=y>2025?'2025–'+y:'2025';})();</script>
 </body>
 </html>
