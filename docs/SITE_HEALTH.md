@@ -43,7 +43,7 @@ validator.schema.org; check Search Console for coverage errors.
 - [x] Zero images on the homepage (design is pure CSS); heaviest page ~78 KB HTML
 - [x] Font loading: preconnect + `display=swap`
 - [x] CDN scripts: only Prism (posts) and GSAP (home), SRI-pinned
-- [ ] Baseline Lighthouse scores recorded (run once, note numbers here)
+- [x] Baseline Lighthouse recorded (2026-09-16, live prod, Lighthouse 12): home 69 / 94 / 100 / 100, post 76 / 90 / 100 / 100 (perf / a11y / best-practices / seo). A11y items fixed same day (see §4) — expect 100s post-release. Perf ceiling is render-blocking font CSS (~1.5 s est. savings) plus intro animations under throttling; CLS is 0. Optional follow-up: async font loading.
 
 *Verify:* Lighthouse in Chrome DevTools on `/` and one post; expect 90+ across
 the board. Investigate anything that drops.
@@ -53,7 +53,7 @@ the board. Investigate anything that drops.
 - [x] Landmarks (`nav`, `main`, `contentinfo`), aria-labels, focus styles
 - [x] `prefers-reduced-motion` respected on homepage animations
 - [x] Semantic headings (one `h1` per page, `h2` sections)
-- [ ] Formal pass: axe/Lighthouse a11y audit — confirm cyan-on-dark contrast ratios and keyboard nav through the GSAP-pinned sections
+- [x] Formal pass done 2026-09-16: keyboard nav clean (skip link first, 40 tab stops, visible focus on all, no hidden traps). Contrast failures found and fixed (#68): `--text3` 4.38:1 → 5.2:1, diff-inserted token green, signoff link underlines, latest-card heading order, loader aria-label. Lighthouse a11y now 100 on home and posts.
 
 *Verify:* Lighthouse accessibility category; tab through the homepage end to end.
 
@@ -88,7 +88,7 @@ the board. Investigate anything that drops.
 
 - [ ] Cross-post backlog clear: every published post syndicated to Hashnode + Dev.to with canonical URL *(as of 2026-09-15: July, August pending; September after publish)*
 - [ ] Social distribution within 24h of each publish (X/LinkedIn/one subreddit — BLOG_PUBLISHING.md §11)
-- [ ] Per-post OG images (titled cards via the existing Playwright screenshot pipeline) — improves share CTR, ~1h of template work, do when convenient
+- [x] Per-post OG images shipped 2026-09-16 (#69): `blog/og/<slug>.png` from `blog/og-post-template.html`, one screenshot command per new post (runbook step 2).
 
 ---
 
@@ -110,4 +110,5 @@ Simplicity is a feature. Revisit only if the trigger fires:
 
 | Date | By | Summary |
 |---|---|---|
+| 2026-09-16 | Yogesh + Claude | September release published + verified live (raw .md serving confirmed). Lighthouse baseline recorded; a11y audit run, all findings fixed, 100/100 (#68); per-post OG cards shipped (#69). Still open: Search Console/Bing, cross-post backlog, uptime monitoring. |
 | 2026-09-15 | Yogesh + Claude | Initial audit. Shipped same day: JSON-LD graph, llms.txt, .nojekyll, copyright notices (#63, #66). Open: Search Console/Bing (manual), Lighthouse baseline, a11y pass, cross-post backlog, per-post OG images. |

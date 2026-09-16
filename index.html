@@ -43,7 +43,7 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#07080b;--bg2:#0f1118;--bg3:#171a25;--border:#222640;--border2:#2e3350;
-  --text:#f2f3fa;--text2:#b0b5cc;--text3:#6e7494;
+  --text:#f2f3fa;--text2:#b0b5cc;--text3:#7a80a0;
   --accent:#00e5c8;--accent2:#00ccb3;--accent-glow:rgba(0,229,200,.12);
   --warm:#ff9e6d;--warm-glow:rgba(255,158,109,.1);
   --display:'Outfit',sans-serif;--body:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace;
@@ -368,7 +368,7 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 <!-- LOADER -->
 <div class="loader" id="loader" role="status" aria-live="polite" aria-label="Loading portfolio">
   <div class="loader-counter" id="loaderCounter" aria-live="polite">0</div>
-  <div class="loader-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><div class="loader-fill" id="loaderFill"></div></div>
+  <div class="loader-bar" role="progressbar" aria-label="Page loading progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><div class="loader-fill" id="loaderFill"></div></div>
   <div class="loader-text">Yogeshwaran Chandrakasan</div>
 </div>
 
@@ -482,7 +482,7 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
         <span>·</span>
         <span>6 min read</span>
       </div>
-      <h3 class="latest-title">One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper</h3>
+      <h2 class="latest-title">One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper</h2>
       <p class="latest-excerpt">Two media types, one object: the content wrapper returned the same reference under every mimetype key, so any later edit was a broadcast. Fixed with one cloneDeep per media type.</p>
       <span class="latest-more">Read post →</span>
     </a>

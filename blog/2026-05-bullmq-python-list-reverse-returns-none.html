@@ -20,14 +20,15 @@
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="debugging">
 <meta property="article:tag" content="open-source">
-<meta property="og:image" content="https://yogeshwaran.com/og-image.png">
+<meta property="og:image" content="https://yogeshwaran.com/blog/og/2026-05-bullmq-python-list-reverse-returns-none.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="BullMQ was crashing on getRanges() because Python's list.reverse() returns None">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Why Python's list.reverse() returning None crashed BullMQ">
 <meta name="twitter:description" content="A 1-line fix in BullMQ's Python port that turned on Python's mutating-vs-returning method convention.">
-<meta name="twitter:image" content="https://yogeshwaran.com/og-image.png">
+<meta name="twitter:image" content="https://yogeshwaran.com/blog/og/2026-05-bullmq-python-list-reverse-returns-none.png">
 
 <meta name="theme-color" content="#07080b">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -43,7 +44,7 @@
 <link rel="stylesheet" href="./post.css">
 <script async src="https://plausible.io/js/pa-XXSB3KnJ2ChBu03k9DMK-.js"></script>
 <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"BullMQ was crashing on getRanges() because Python's list.reverse() returns None","description":"A 1-line fix in BullMQ's Python port that turned on Python's mutating-vs-returning method convention. list.reverse(), list.sort(), list.append() — they all mutate in place and return None.","url":"https://yogeshwaran.com/blog/2026-05-bullmq-python-list-reverse-returns-none","mainEntityOfPage":{"@type":"WebPage","@id":"https://yogeshwaran.com/blog/2026-05-bullmq-python-list-reverse-returns-none"},"datePublished":"2026-05-16","dateModified":"2026-05-16","author":{"@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran Chandrakasan","url":"https://yogeshwaran.com/"},"publisher":{"@id":"https://yogeshwaran.com/#person"},"image":"https://yogeshwaran.com/og-image.png","keywords":"bullmq, python, debugging, open-source","isPartOf":{"@type":"Blog","@id":"https://yogeshwaran.com/blog/#blog"},"inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"BullMQ was crashing on getRanges() because Python's list.reverse() returns None","description":"A 1-line fix in BullMQ's Python port that turned on Python's mutating-vs-returning method convention. list.reverse(), list.sort(), list.append() — they all mutate in place and return None.","url":"https://yogeshwaran.com/blog/2026-05-bullmq-python-list-reverse-returns-none","mainEntityOfPage":{"@type":"WebPage","@id":"https://yogeshwaran.com/blog/2026-05-bullmq-python-list-reverse-returns-none"},"datePublished":"2026-05-16","dateModified":"2026-05-16","author":{"@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran Chandrakasan","url":"https://yogeshwaran.com/"},"publisher":{"@id":"https://yogeshwaran.com/#person"},"image":"https://yogeshwaran.com/blog/og/2026-05-bullmq-python-list-reverse-returns-none.png","keywords":"bullmq, python, debugging, open-source","isPartOf":{"@type":"Blog","@id":"https://yogeshwaran.com/blog/#blog"},"inLanguage":"en"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://yogeshwaran.com/"},{"@type":"ListItem","position":2,"name":"Writing","item":"https://yogeshwaran.com/blog/"},{"@type":"ListItem","position":3,"name":"BullMQ was crashing on getRanges() because Python's list.reverse() returns None"}]}</script>
 </head>
 <body>
