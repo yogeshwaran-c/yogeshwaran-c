@@ -21,14 +21,15 @@
 <meta property="article:tag" content="javascript">
 <meta property="article:tag" content="debugging">
 <meta property="article:tag" content="open-source">
-<meta property="og:image" content="https://yogeshwaran.com/og-image.png">
+<meta property="og:image" content="https://yogeshwaran.com/blog/og/2026-09-nestjs-swagger-shared-mimetype-references.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="If a factory returns the same object under N keys, every later mutation is a broadcast.">
 <meta name="twitter:description" content="The shared-reference bug in NestJS Swagger's mimetype content wrapper: why touching the JSON schema changed the XML one, and the === check that ended the hunt.">
-<meta name="twitter:image" content="https://yogeshwaran.com/og-image.png">
+<meta name="twitter:image" content="https://yogeshwaran.com/blog/og/2026-09-nestjs-swagger-shared-mimetype-references.png">
 
 <meta name="theme-color" content="#07080b">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -44,7 +45,7 @@
 <link rel="stylesheet" href="./post.css">
 <script async src="https://plausible.io/js/pa-XXSB3KnJ2ChBu03k9DMK-.js"></script>
 <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper","description":"content['application/json'] === content['application/xml'] returned true: NestJS Swagger handed every mimetype the same schema object, so any later edit was a broadcast.","url":"https://yogeshwaran.com/blog/2026-09-nestjs-swagger-shared-mimetype-references","mainEntityOfPage":{"@type":"WebPage","@id":"https://yogeshwaran.com/blog/2026-09-nestjs-swagger-shared-mimetype-references"},"datePublished":"2026-09-16","dateModified":"2026-09-16","author":{"@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran Chandrakasan","url":"https://yogeshwaran.com/"},"publisher":{"@id":"https://yogeshwaran.com/#person"},"image":"https://yogeshwaran.com/og-image.png","keywords":"nestjs, openapi, javascript, debugging, open-source","isPartOf":{"@type":"Blog","@id":"https://yogeshwaran.com/blog/#blog"},"inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper","description":"content['application/json'] === content['application/xml'] returned true: NestJS Swagger handed every mimetype the same schema object, so any later edit was a broadcast.","url":"https://yogeshwaran.com/blog/2026-09-nestjs-swagger-shared-mimetype-references","mainEntityOfPage":{"@type":"WebPage","@id":"https://yogeshwaran.com/blog/2026-09-nestjs-swagger-shared-mimetype-references"},"datePublished":"2026-09-16","dateModified":"2026-09-16","author":{"@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran Chandrakasan","url":"https://yogeshwaran.com/"},"publisher":{"@id":"https://yogeshwaran.com/#person"},"image":"https://yogeshwaran.com/blog/og/2026-09-nestjs-swagger-shared-mimetype-references.png","keywords":"nestjs, openapi, javascript, debugging, open-source","isPartOf":{"@type":"Blog","@id":"https://yogeshwaran.com/blog/#blog"},"inLanguage":"en"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://yogeshwaran.com/"},{"@type":"ListItem","position":2,"name":"Writing","item":"https://yogeshwaran.com/blog/"},{"@type":"ListItem","position":3,"name":"One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper"}]}</script>
 </head>
 <body>

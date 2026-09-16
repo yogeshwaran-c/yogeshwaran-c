@@ -94,6 +94,7 @@ Copy `blog/_template.html` (to be created — see scaffold PR) to `blog/<YYYY-MM
 - Prism language components — the template ships `css`, `typescript`, `bash`, `diff`. If the post needs another language (`json`, `python`, ...), add its `<script>` **with `integrity` + `crossorigin="anonymous"`**, same as the existing tags. Get the hash from `https://api.cdnjs.com/libraries/prism/1.29.0?fields=sri` (the `sri` field, keyed by file path) or the 'Copy SRI' button on cdnjs.com. Never hand-compute it from a download alone: on a network with a TLS-intercepting proxy the bytes you receive may not be the bytes visitors receive, and a wrong hash makes the browser refuse the script for everyone.
 - Publication date in the header
 - Sign-off paragraph (see BLOG_DISCIPLINE.md rule #10)
+- Per-post OG image — generate `blog/og/<slug>.png` from `blog/og-post-template.html` (command in that file's header comment: playwright screenshot at 1200×630 with title/date/mins/tags query params). The template auto-shrinks long titles. `og:image`, `twitter:image`, `og:image:alt` and the JSON-LD `image` all point at it.
 
 ### 3. Update the listing page
 

@@ -21,14 +21,15 @@
 <meta property="article:tag" content="swc">
 <meta property="article:tag" content="debugging">
 <meta property="article:tag" content="open-source">
-<meta property="og:image" content="https://yogeshwaran.com/og-image.png">
+<meta property="og:image" content="https://yogeshwaran.com/blog/og/2026-06-nestjs-cli-chokidar-inverted-ignored-filter.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Why editing a README was rebuilding my entire NestJS project: an inverted chokidar filter">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="An inverted chokidar filter was rebuilding my entire NestJS project on every README save">
 <meta name="twitter:description" content="A 2-line fix in NestJS CLI's SWC watcher and the universal lesson about exclusion-named APIs.">
-<meta name="twitter:image" content="https://yogeshwaran.com/og-image.png">
+<meta name="twitter:image" content="https://yogeshwaran.com/blog/og/2026-06-nestjs-cli-chokidar-inverted-ignored-filter.png">
 
 <meta name="theme-color" content="#07080b">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -44,7 +45,7 @@
 <link rel="stylesheet" href="./post.css">
 <script async src="https://plausible.io/js/pa-XXSB3KnJ2ChBu03k9DMK-.js"></script>
 <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Why editing a README was rebuilding my entire NestJS project: an inverted chokidar filter","description":"A 2-line fix in NestJS CLI's SWC watcher. Two layered bugs in one predicate: a string-format mismatch on file extensions, plus an inverted boolean that turned the ignored filter into an included filter.","url":"https://yogeshwaran.com/blog/2026-06-nestjs-cli-chokidar-inverted-ignored-filter","mainEntityOfPage":{"@type":"WebPage","@id":"https://yogeshwaran.com/blog/2026-06-nestjs-cli-chokidar-inverted-ignored-filter"},"datePublished":"2026-06-16","dateModified":"2026-06-16","author":{"@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran Chandrakasan","url":"https://yogeshwaran.com/"},"publisher":{"@id":"https://yogeshwaran.com/#person"},"image":"https://yogeshwaran.com/og-image.png","keywords":"nestjs, chokidar, swc, debugging, open-source","isPartOf":{"@type":"Blog","@id":"https://yogeshwaran.com/blog/#blog"},"inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Why editing a README was rebuilding my entire NestJS project: an inverted chokidar filter","description":"A 2-line fix in NestJS CLI's SWC watcher. Two layered bugs in one predicate: a string-format mismatch on file extensions, plus an inverted boolean that turned the ignored filter into an included filter.","url":"https://yogeshwaran.com/blog/2026-06-nestjs-cli-chokidar-inverted-ignored-filter","mainEntityOfPage":{"@type":"WebPage","@id":"https://yogeshwaran.com/blog/2026-06-nestjs-cli-chokidar-inverted-ignored-filter"},"datePublished":"2026-06-16","dateModified":"2026-06-16","author":{"@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran Chandrakasan","url":"https://yogeshwaran.com/"},"publisher":{"@id":"https://yogeshwaran.com/#person"},"image":"https://yogeshwaran.com/blog/og/2026-06-nestjs-cli-chokidar-inverted-ignored-filter.png","keywords":"nestjs, chokidar, swc, debugging, open-source","isPartOf":{"@type":"Blog","@id":"https://yogeshwaran.com/blog/#blog"},"inLanguage":"en"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://yogeshwaran.com/"},{"@type":"ListItem","position":2,"name":"Writing","item":"https://yogeshwaran.com/blog/"},{"@type":"ListItem","position":3,"name":"Why editing a README was rebuilding my entire NestJS project: an inverted chokidar filter"}]}</script>
 </head>
 <body>
