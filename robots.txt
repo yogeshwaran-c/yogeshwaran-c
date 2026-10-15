@@ -5,4 +5,5 @@ Sitemap: https://yogeshwaran.com/sitemap.xml
 
 # Block internal/template files
 Disallow: /blog/_template.html
+Disallow: /blog/og-post-template.html
 Disallow: /og-template.html

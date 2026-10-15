@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The dark theme the browser didn't know about: one line of color-scheme in Swagger UI — Yogeshwaran C</title>
+<meta name="description" content="Swagger UI's dark theme styled everything CSS can reach. Scrollbars, inputs, and date pickers kept painting light because the browser was never told. The fix is one line of color-scheme.">
+<meta name="author" content="Yogeshwaran C">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://yogeshwaran.com/blog/2026-10-swagger-ui-dark-mode-color-scheme">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="The dark theme the browser didn't know about: one line of color-scheme in Swagger UI">
+<meta property="og:description" content="A class-toggled dark theme is invisible to the browser's palette choice, so every native widget rendered for a light page. The one-line fix that tells the browser what the theme already told users.">
+<meta property="og:url" content="https://yogeshwaran.com/blog/2026-10-swagger-ui-dark-mode-color-scheme">
+<meta property="og:site_name" content="Yogeshwaran C">
+<meta property="article:author" content="Yogeshwaran Chandrakasan">
+<meta property="article:published_time" content="2026-10-16">
+<meta property="article:tag" content="css">
+<meta property="article:tag" content="swagger-ui">
+<meta property="article:tag" content="dark-mode">
+<meta property="article:tag" content="debugging">
+<meta property="article:tag" content="open-source">
+<meta property="og:image" content="https://yogeshwaran.com/blog/og/2026-10-swagger-ui-dark-mode-color-scheme.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The dark theme the browser didn't know about: one line of color-scheme in Swagger UI">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The page was dark; the browser didn't know. Every pixel the page couldn't paint was still painting for a light page.">
+<meta name="twitter:description" content="Why Swagger UI's dark mode had white scrollbars, inputs, and date pickers — and the one line of color-scheme that fixes every native widget at once.">
+<meta name="twitter:image" content="https://yogeshwaran.com/blog/og/2026-10-swagger-ui-dark-mode-color-scheme.png">
+
+<meta name="theme-color" content="#07080b">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="mask-icon" href="/favicon.svg" color="#00e5c8">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="alternate" type="application/rss+xml" title="Yogeshwaran C — Writing" href="/blog/feed.xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" integrity="sha512-vswe+cgvic/XBoF1OcM/TeJ2FW0OofqAVdCZiEYkd6dwGXthvkSFWOoGGJgS2CW70VK5dQM5Oh+7ne47s74VTg==" crossorigin="anonymous">
+
+<link rel="stylesheet" href="./post.css">
+<script async src="https://plausible.io/js/pa-XXSB3KnJ2ChBu03k9DMK-.js"></script>
+<script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"The dark theme the browser didn't know about: one line of color-scheme in Swagger UI","description":"Swagger UI's dark theme styled everything CSS can reach. Scrollbars, inputs, and date pickers kept painting light because the browser was never told. The fix is one line of color-scheme.","url":"https://yogeshwaran.com/blog/2026-10-swagger-ui-dark-mode-color-scheme","mainEntityOfPage":{"@type":"WebPage","@id":"https://yogeshwaran.com/blog/2026-10-swagger-ui-dark-mode-color-scheme"},"datePublished":"2026-10-16","dateModified":"2026-10-16","author":{"@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran Chandrakasan","url":"https://yogeshwaran.com/"},"publisher":{"@id":"https://yogeshwaran.com/#person"},"image":"https://yogeshwaran.com/blog/og/2026-10-swagger-ui-dark-mode-color-scheme.png","keywords":"css, swagger-ui, dark-mode, debugging, open-source","isPartOf":{"@type":"Blog","@id":"https://yogeshwaran.com/blog/#blog"},"inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://yogeshwaran.com/"},{"@type":"ListItem","position":2,"name":"Writing","item":"https://yogeshwaran.com/blog/"},{"@type":"ListItem","position":3,"name":"The dark theme the browser didn't know about: one line of color-scheme in Swagger UI"}]}</script>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav aria-label="Main navigation">
+  <a href="/" class="nav-logo">Yogesh<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/blog/" class="active">Writing</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<article class="post">
+  <header class="post-header">
+    <a href="./" class="back-link">← All posts</a>
+    <div class="post-meta">
+      <time datetime="2026-10-16">October 16, 2026</time>
+      <span class="dot" aria-hidden="true"></span>
+      <span>5 min read</span>
+    </div>
+    <h1 class="post-title">The dark theme the browser didn't know about: one line of color-scheme in Swagger UI</h1>
+    <div class="post-tags">
+      <span class="post-tag">css</span>
+      <span class="post-tag">swagger-ui</span>
+      <span class="post-tag">dark-mode</span>
+      <span class="post-tag">debugging</span>
+      <span class="post-tag">open-source</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <p>Swagger UI ships a dark theme: toggle <code>html.dark-mode</code> and the whole page goes properly dark — background, typography, operation blocks, code samples. Then you click into an endpoint that takes a date parameter, the native date picker opens, and a blinding white panel lands in the middle of your dark page. Scroll, and the scrollbar is light too. So is every checkbox, every <code>&lt;select&gt;</code> dropdown, every text input's autofill chrome.</p>
+
+    <p>The stylesheet didn't miss those. It <em>can't reach</em> them. They're painted by the browser from its own palette, and the browser was never told this page is dark. Users had been working around it by injecting <code>&lt;meta name="color-scheme" content="light dark"&gt;</code> into whatever host page embeds Swagger UI — patching the library from the outside.</p>
+
+    <h2>What broke</h2>
+
+    <p>The browser decides how to paint the pixels it owns — scrollbars, form-control chrome, the popups for <code>&lt;input type="date"&gt;</code> and <code>&lt;input type="color"&gt;</code>, even the default canvas behind your page — from exactly two signals:</p>
+
+    <ol>
+      <li><strong>The OS preference</strong>, surfaced to CSS as <code>prefers-color-scheme</code>. This reflects the user's system setting, not your page.</li>
+      <li><strong>The page's own declaration</strong>: the CSS <code>color-scheme</code> property (or its meta-tag equivalent), which tells the browser which palettes this page actually supports.</li>
+    </ol>
+
+    <p>A class-toggled theme talks to neither. <code>html.dark-mode</code> restyles every pixel the stylesheet owns and is completely invisible to the UA's palette choice. With no declaration, the browser assumes the page is a traditional light page — that's the only safe default, because rendering dark form controls on a light page would break thirty years of the web. So Swagger UI's theme and the browser's theme disagreed, and every native widget rendered for a page that didn't exist:</p>
+
+<pre><code class="language-html">&lt;!-- the workaround users were shipping in their HOST page --&gt;
+&lt;meta name="color-scheme" content="light dark"&gt;</code></pre>
+
+    <p>That meta tag fixes it — but it belongs to the embedding page, not the library. The theme's own stylesheet should carry its own declaration.</p>
+
+    <h2>What I thought the fix was (wrong first, as always)</h2>
+
+    <p>The same path every custom dark theme starts down: restyle the controls one by one.</p>
+
+<pre><code class="language-css">/* the whack-a-mole route */
+.dark-mode { scrollbar-color: #4a4a4a #1e1e1e; }
+.dark-mode input, .dark-mode select { accent-color: #4990e2; }
+.dark-mode ::-webkit-scrollbar { background: #1e1e1e; }</code></pre>
+
+    <p>Each rule works, each covers one widget on some browsers, and the list never ends — <code>scrollbar-color</code> is standard but <code>::-webkit-scrollbar</code> isn't, <code>accent-color</code> tints checkboxes but not the dropdown panel of a <code>&lt;select&gt;</code>, and then you hit the wall: the date picker popup is an OS-level surface. No selector reaches it. You can restyle the input box; the calendar that opens from it is not your pixel, full stop.</p>
+
+    <p>That wall is the tell. When some of the pixels are unreachable by CSS, the answer can't be more CSS — it has to be the channel the browser actually listens to.</p>
+
+    <h2>The fix</h2>
+
+    <p>One line, <a href="https://github.com/swagger-api/swagger-ui/pull/10844" target="_blank" rel="noopener noreferrer">PR #10844</a>, +1/−0 in <code>src/style/_dark-mode.scss</code>:</p>
+
+<pre><code class="language-diff"> html.dark-mode {
++  color-scheme: dark;
+   background: $neutral-98;</code></pre>
+
+    <p><code>color-scheme: dark</code> on the root is the page telling the browser: this page supports dark; paint your pixels to match. The property cascades, and the UA switches its entire native palette in one move — scrollbars, form-control chrome, the <code>&lt;select&gt;</code> dropdown panel, the date and color picker popups, autofill styling, the default canvas color. Every widget the whack-a-mole list was chasing, plus the ones it hadn't found yet, including the popup CSS can't touch at all.</p>
+
+    <p>Two details worth noting. It's <code>dark</code>, not <code>light dark</code>: the declaration sits inside <code>html.dark-mode</code>, so it only exists while the dark theme is active — the claim is exact by construction. And it composes with the host-page workaround instead of fighting it: <code>color-scheme</code> resolves per element, so an embedding page that already declares its own scheme keeps it outside the Swagger UI root.</p>
+
+    <h2>The takeaway</h2>
+
+    <p><strong>A theme class is a claim you make to your users. <code>color-scheme</code> is the claim you make to the browser.</strong> A custom dark theme that only does the first has styled every pixel it can reach and left every pixel it can't — and users experience the gap as flashes of white in dark mode.</p>
+
+    <p>The layering is worth internalizing: OS setting → <code>prefers-color-scheme</code> → the page's declared <code>color-scheme</code> → the UA's widget palette. A class toggle short-circuits the first two — your JavaScript decided the theme, not the OS — so it must set the third explicitly, or the chain never reaches the browser.</p>
+
+    <p><strong>Screenshot-worthy line: "The page was dark; the browser didn't know. Every pixel the page couldn't paint was still painting for a light page."</strong></p>
+
+    <p>If you ship any class-toggled theme — <code>data-theme="dark"</code>, <code>.dark</code>, a toggle button — go check it now: the rule is that whatever flips your theme class must also flip <code>color-scheme</code>. It's the same lesson September's post taught from the other side: the page and the runtime each hold a model of the world, and bugs live wherever the two models are allowed to disagree silently.</p>
+
+    <h2>Why this PR is a good first OSS contribution</h2>
+
+    <p>It's the smallest diff of this series — one line, no logic, no tests to design — and it still took the most specific knowledge per character: knowing where CSS's authority ends and the UA's begins, and which property moves that boundary. Small diffs with sharp reasoning are ideal first contributions, because review is fast and the discussion is about the idea, not the code.</p>
+
+    <p>It's also my third merged fix in swagger-api/swagger-ui, and that's its own lesson: the second and third contributions to a codebase cost a fraction of the first. You know the build, the review culture, the file layout. Picking a repo you'll return to compounds in a way that scattering one-off PRs doesn't.</p>
+  </div>
+
+  <footer class="post-footer">
+    <p class="signoff">
+      <em>Written after merging <a href="https://github.com/swagger-api/swagger-ui/pull/10844" target="_blank" rel="noopener noreferrer">#10844</a> into swagger-api/swagger-ui. Part of an ongoing series on fixes I've shipped to open-source projects — follow at <a href="/">yogeshwaran.com</a>.</em>
+    </p>
+    <p class="signoff" style="margin-top:1rem">
+      <em>See also: <a href="./2026-07-swagger-ui-request-body-no-content">The crash where Swagger UI assumed every request body has content</a> — my first fix in this repo, where a reader crashed on a missing key; this time the bug was pixels nobody's stylesheet could own.</em>
+    </p>
+  </footer>
+</article>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; <span id="yr"></span> Yogeshwaran Chandrakasan &middot; All rights reserved.</span>
+    <span><a href="/">← Back to portfolio</a></span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js" integrity="sha512-uMdVuOpm+9lNPCT7mV/YaMb9YQ/R4+eeON7aEMj6Ig/f4BoU+Q5k6iaZkDsX7LH9cjTHZt0CuKxbzd0/fndrWA==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-diff.min.js" integrity="sha512-tBR4SAva+2bw36ToxaFeOEvgqxWHON25E9xp+kEBfw175sS5OusQEH8GrigKgTdHUXcKsK1yiyfo7fctBYl+rA==" crossorigin="anonymous"></script>
+<script>(function(){var y=new Date().getFullYear();document.getElementById('yr').textContent=y>2025?'2025–'+y:'2025';})();</script>
+</body>
+</html>

@@ -8,7 +8,7 @@
     <language>en-us</language>
     <managingEditor>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</managingEditor>
     <webMaster>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</webMaster>
-    <lastBuildDate>Wed, 16 Sep 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 00:00:00 +0000</lastBuildDate>
     <generator>hand-rolled</generator>
     <image>
       <url>https://yogeshwaran.com/favicon.svg</url>
@@ -16,6 +16,19 @@
       <link>https://yogeshwaran.com/blog/</link>
     </image>
 
+    <item>
+      <title>The dark theme the browser didn't know about: one line of color-scheme in Swagger UI</title>
+      <link>https://yogeshwaran.com/blog/2026-10-swagger-ui-dark-mode-color-scheme</link>
+      <guid isPermaLink="true">https://yogeshwaran.com/blog/2026-10-swagger-ui-dark-mode-color-scheme</guid>
+      <pubDate>Fri, 16 Oct 2026 00:00:00 +0000</pubDate>
+      <author>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</author>
+      <category>css</category>
+      <category>swagger-ui</category>
+      <category>dark-mode</category>
+      <category>debugging</category>
+      <category>open-source</category>
+      <description><![CDATA[Swagger UI's class-toggled dark theme was invisible to the browser's palette choice, so scrollbars, form controls, and the date picker popup kept rendering for a light page. One line of color-scheme: dark switches every native widget at once — including the pixels CSS can't reach.]]></description>
+    </item>
     <item>
       <title>One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper</title>
       <link>https://yogeshwaran.com/blog/2026-09-nestjs-swagger-shared-mimetype-references</link>

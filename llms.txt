@@ -12,6 +12,7 @@
 
 Every post is also served as clean markdown at the same URL with a .md extension — prefer those for machine reading.
 
+- [The dark theme the browser didn't know about: one line of color-scheme in Swagger UI](https://yogeshwaran.com/blog/2026-10-swagger-ui-dark-mode-color-scheme.md): a class-toggled dark theme never told the browser, so native widgets rendered light; fixed with one line of color-scheme: dark (swagger-api/swagger-ui#10844)
 - [One schema, every mimetype: the shared-reference bug in NestJS Swagger's content wrapper](https://yogeshwaran.com/blog/2026-09-nestjs-swagger-shared-mimetype-references.md): every declared media type got the same schema object, so any later edit was a broadcast; fixed with a cloneDeep per mimetype (nestjs/swagger#3945)
 - [Why VS Code said 'Cannot redeclare block-scoped variable' on valid HTML: every script tag is one virtual file](https://yogeshwaran.com/blog/2026-08-vscode-module-script-false-redeclaration.md): the HTML language server validated N script tags as one concatenated virtual JS file; the fix models per-module scopes (microsoft/vscode#308027)
 - [Why Swagger UI was crashing on a valid OpenAPI spec: an unguarded .getIn() chain](https://yogeshwaran.com/blog/2026-07-swagger-ui-request-body-no-content.md): a requestBody without content crashed the renderer on a missing-key read (swagger-api/swagger-ui)
