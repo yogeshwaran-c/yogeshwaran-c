@@ -18,6 +18,7 @@ const ROOT = __dirname;
 // Files/patterns to skip
 const SKIP = new Set([
   'blog/_template.html',
+  'blog/og-post-template.html',
   'og-template.html',
   'linkedin-banner-template.html',
   '404.html',

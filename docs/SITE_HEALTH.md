@@ -82,7 +82,7 @@ the board. Investigate anything that drops.
 - [x] Draft buffer per BLOG_DISCIPLINE rule #4 (check it's non-empty!)
 - [x] Deployed bytes = repo bytes (`.nojekyll`), so local verification is faithful
 - [x] 404 page
-- [ ] Uptime monitoring (UptimeRobot or similar, free tier) — optional, nice-to-have
+- [x] Uptime monitoring live since 2026-09-16: UptimeRobot free tier, two monitors — `/` and `/blog/feed.xml` (the feed is the content canary; the homepage can 200 from cache while a deploy is broken), 5-min interval, email alerts
 
 ## 8. Distribution (the site can't do this itself)
 
@@ -110,5 +110,6 @@ Simplicity is a feature. Revisit only if the trigger fires:
 
 | Date | By | Summary |
 |---|---|---|
+| 2026-09-16 | Yogesh | UptimeRobot monitors added (/ and /blog/feed.xml). Release tagging practice started (v2026.09.16, v2026.09.16-2). Remaining open: Search Console/Bing, cross-post backlog. |
 | 2026-09-16 | Yogesh + Claude | September release published + verified live (raw .md serving confirmed). Lighthouse baseline recorded; a11y audit run, all findings fixed, 100/100 (#68); per-post OG cards shipped (#69). Still open: Search Console/Bing, cross-post backlog, uptime monitoring. |
 | 2026-09-15 | Yogesh + Claude | Initial audit. Shipped same day: JSON-LD graph, llms.txt, .nojekyll, copyright notices (#63, #66). Open: Search Console/Bing (manual), Lighthouse baseline, a11y pass, cross-post backlog, per-post OG images. |

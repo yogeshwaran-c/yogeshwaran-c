@@ -30,6 +30,17 @@ gh pr create --base main --head develop --title "Release: ..." --body "..."
 gh pr merge <N> --merge
 ```
 
+After the release PR merges, tag the merge commit and publish a GitHub Release. Date-based naming, not semver — it's a website:
+
+```bash
+git fetch origin main:main
+git tag -a v<YYYY.MM.DD> <merge-sha> -m "<one-line summary>"   # second release same day: v<YYYY.MM.DD>-2
+git push origin v<YYYY.MM.DD>
+gh release create v<YYYY.MM.DD> --verify-tag --title "<short title>" --notes "<bullets from the release PR body>"
+```
+
+Tags give named rollback points and a public changelog at `/releases`. Practice started 2026-09-16 (v2026.09.16); earlier releases are deliberately untagged.
+
 **Only release user-facing changes to `main`.** Internal docs (`docs/**`, `CLAUDE.md`, `README.md`, the blog guide docs) don't need to reach `main` — they're not served to visitors. Doc-only PRs stop at `develop`. Bundle them into the next real release PR if you want them on `main` eventually, but don't cut a standalone release for docs.
 
 ### Branch naming
