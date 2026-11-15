@@ -1,6 +1,12 @@
 name: Portfolio quality
 on:
   workflow_call:
+    inputs:
+      full_audit:
+        type: boolean
+        default: false
+  schedule:
+    - cron: '17 6 * * 0'
   pull_request:
     branches: [develop, main]
   push:
@@ -27,6 +33,11 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm run check
       - run: npm audit --audit-level=high
+      - name: Classify changes
+        id: scope
+        env:
+          FORCE_RENDER: ${{ inputs.full_audit || false }}
+        run: node scripts/change-scope.cjs
       - name: Check release direction
         if: github.event_name == 'pull_request' && github.base_ref == 'main'
         env:
@@ -38,7 +49,17 @@ jobs:
       - name: Validate deployable files
         run: node scripts/check-public.cjs
       - name: Lighthouse mobile and desktop
+        if: steps.scope.outputs.render == 'true'
         run: npm run audit:lighthouse
+      - name: Browser smoke tests
+        if: steps.scope.outputs.render == 'true'
+        run: npm run test:browser
+      - name: Internal documentation changes
+        if: steps.scope.outputs.render != 'true'
+        run: echo 'Browser and Lighthouse checks N/A for internal-doc changes or scheduled maintenance; static/security/package checks still ran.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Weekly external-link review
+        if: github.event_name == 'schedule'
+        run: node scripts/external-links.mjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:

@@ -5,7 +5,11 @@
   "scripts": {
     "check": "node scripts/check-site.cjs && node scripts/check-security.cjs && node scripts/test-guards.cjs",
     "audit:lighthouse": "node scripts/lighthouse.mjs",
+    "test:browser": "node scripts/browser-smoke.mjs",
     "package:site": "node scripts/package-site.cjs"
   },
-  "devDependencies": { "lighthouse": "13.6.0" }
+  "devDependencies": {
+    "lighthouse": "13.6.0",
+    "playwright-core": "1.65.1"
+  }
 }

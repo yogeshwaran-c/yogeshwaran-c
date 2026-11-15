@@ -17,6 +17,8 @@ jobs:
   checks:
     if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/quality.yml
+    with:
+      full_audit: true
     permissions:
       contents: read
   package:
@@ -24,6 +26,8 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    outputs:
+      source: ${{ steps.payload.outputs.source }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -48,6 +52,7 @@ jobs:
           fi
           cat dist/public/deployment.json >> "$GITHUB_STEP_SUMMARY"
       - name: Validate actual public payload (including restore)
+        id: payload
         run: node scripts/check-public.cjs
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
@@ -66,4 +71,16 @@ jobs:
       - uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
         id: deployment
       - name: Verify production responds
-        run: curl --fail --retry 5 --retry-delay 5 https://yogeshwaran.com/ > /dev/null
+        env:
+          EXPECTED_SOURCE: ${{ needs.package.outputs.source }}
+        run: |
+          for attempt in $(seq 1 12); do
+            if curl --fail --silent "https://yogeshwaran.com/deployment.json?run=$GITHUB_RUN_ID-$attempt" | jq -e --arg expected "$EXPECTED_SOURCE" '.source == $expected' > /dev/null; then
+              curl --fail --retry 3 https://yogeshwaran.com/ > /dev/null
+              curl --fail --retry 3 https://yogeshwaran.com/resume/YOGESHWARAN_C_Resume.pdf > /dev/null
+              exit 0
+            fi
+            sleep 5
+          done
+          echo 'Production deployment identity did not match approved source' >&2
+          exit 1

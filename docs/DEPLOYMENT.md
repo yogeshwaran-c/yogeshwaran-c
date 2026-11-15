@@ -1,7 +1,8 @@
 # Minimal portfolio CI/CD
 
-Two workflows, no website build framework or runtime packages. Lighthouse is the
-only development dependency, pinned in package-lock.json. The security guard is
+Two workflows, no website build framework or runtime packages. Lighthouse and
+playwright-core are development-only tools pinned in package-lock.json. The
+browser driver uses installed Chrome, without a downloaded browser suite. The security guard is
 deliberately narrow; GitHub native secret scanning/push protection supplement it.
 
 ## Before deployment
@@ -9,9 +10,18 @@ deliberately narrow; GitHub native secret scanning/push protection supplement it
 Portfolio quality runs for PRs into develop/main and pushes to develop. The same
 workflow is called again by production deployment, not assumed to have run earlier.
 It checks page structure/local links, tracked-file safety, action SHA pins,
-positive/negative guard fixtures, dependency audit and Lighthouse budgets. It then
+positive/negative guard fixtures, dependency audit, browser smoke tests and Lighthouse budgets. It then
 packages public files and checks their digests and local links. Reports last 7 days.
 Manual content truth, visual review and full WCAG testing remain in the PR checklist.
+
+Internal docs-only PRs skip browser/Lighthouse while static/security/package checks
+still run and the required check remains present. Rendered content, dependency and
+workflow changes run the full suite. Pre-deployment calls explicitly force full
+checks even for a docs-only release. Browser reports include desktop/mobile screenshots.
+Sunday maintenance runs static/dependency checks and external-link review. Confirmed
+404/410 responses fail that scheduled run; timeouts/403/429 are recorded for human
+review. Scheduled failures notify through the owner's GitHub notification settings;
+they do not retroactively withdraw an already deployed site.
 
 Lighthouse budgets: mobile median of 3 runs >=90, desktop >=90, other automated
 categories 100 on home/latest post. Runner variability is reported, not hidden.
@@ -45,6 +55,9 @@ The workflow validates the tag's format, confirms a non-draft GitHub Release,
 requires its commit to be an ancestor of trusted main, and packages only the public
 blobs using current trusted code. It validates the payload and uses the same owner
 approval, deployment concurrency and live smoke check. An invalid tag fails closed.
+Post-deployment verification checks deployment.json against the approved source
+commit, then confirms the homepage and resume respond; it does not accept a 200
+response from an older cached deployment as success.
 
 This minimal restoration rebuilds public files from preserved Git history; it does
 not require stored release bundles or execute old setup scripts. External fonts/CDN
@@ -68,6 +81,7 @@ npm run check
 npm audit --audit-level=high
 npm run package:site
 node scripts/check-public.cjs
+npm run test:browser
 npm run audit:lighthouse
 ```
 
@@ -77,3 +91,10 @@ node scripts/check-public.cjs public-rollback-check.
 
 Native GitHub protections/settings must be verified separately from workflow code.
 Do not claim the gate is active merely because this file exists.
+
+Verified repository configuration before this release: required Quality and security
+check and PRs on develop/main; deletion/force-push blocked; release tags protected;
+Actions token read-only by default and workflow review approval disabled. Native
+secret scanning/push protection are enabled. github-pages requires yogeshwaran-c
+approval, accepts main only and disallows administrator bypass. Pages source is
+workflow. The existing site remains served until an approved Actions deployment.

@@ -1,5 +1,14 @@
 const assert=require('node:assert/strict');const fs=require('node:fs');const os=require('node:os');const path=require('node:path');const {spawnSync,execFileSync}=require('node:child_process');
 const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'portfolio-guards-'));const checker=path.resolve(__dirname,'check-security.cjs');
+const {evaluateRuns}=require('./budgets.cjs');
+const {needsRendering}=require('./change-scope.cjs');
+assert.equal(needsRendering(['docs/DEPLOYMENT.md','README.md']),false);
+for(const file of ['index.html','blog/2026-11-new.md','package-lock.json','.github/workflows/pages.yml'])assert.equal(needsRendering([file]),true,'Must audit '+file);
+const score=performance=>({performance,accessibility:100,'best-practices':100,seo:100});
+assert.equal(evaluateRuns([score(89),score(89),score(100)]).passed,false,'Bad median must block publication');
+assert.equal(evaluateRuns([score(90),score(96),score(100)]).passed,true);
+assert.equal(evaluateRuns([{...score(100),accessibility:99}]).passed,false,'Accessibility budget must fail');
+assert.equal(evaluateRuns([{...score(100),performance:null}]).passed,false,'Missing scores must fail');
 try{
  execFileSync('git',['init','--quiet',temporary]);
  fs.writeFileSync(path.join(temporary,'safe.txt'),'Public portfolio fixture.\n');execFileSync('git',['-C',temporary,'add','.']);
@@ -9,5 +18,14 @@ try{
  execFileSync('git',['-C',temporary,'rm','--cached','.github/setup.js']);fs.unlinkSync(path.join(temporary,'.github/setup.js'));
  fs.mkdirSync(path.join(temporary,'.github/workflows'));fs.writeFileSync(path.join(temporary,'.github/workflows/bad.yml'),'steps:\n  - uses: actions/checkout@main\n');execFileSync('git',['-C',temporary,'add','.']);
  assert.equal(spawnSync(process.execPath,[checker],{cwd:temporary}).status,1,'Unpinned action must fail');
- console.log('Positive and negative security fixtures passed.');
+ fs.mkdirSync(path.join(temporary,'scripts'));fs.mkdirSync(path.join(temporary,'blog'));
+ fs.copyFileSync(path.resolve(__dirname,'check-site.cjs'),path.join(temporary,'scripts/check-site.cjs'));
+ const html='<title>Fixture</title><main><h1>Fixture</h1></main>';
+ for(const file of ['index.html','404.html','blog/index.html'])fs.writeFileSync(path.join(temporary,file),html);
+ fs.writeFileSync(path.join(temporary,'sitemap.xml'),'<urlset><url><loc>https://yogeshwaran.com/</loc></url></urlset>');
+ fs.writeFileSync(path.join(temporary,'blog/feed.xml'),'<rss><channel></channel></rss>');
+ const linkCheck=()=>spawnSync(process.execPath,[path.join(temporary,'scripts/check-site.cjs')],{cwd:temporary});
+ assert.equal(linkCheck().status,0);fs.appendFileSync(path.join(temporary,'index.html'),'<a href="/missing.html">Missing</a>');
+ assert.equal(linkCheck().status,1,'A broken local link must fail');
+ console.log('Positive and negative security, broken-link and Lighthouse-budget fixtures passed.');
 }finally{fs.rmSync(temporary,{recursive:true,force:true});}

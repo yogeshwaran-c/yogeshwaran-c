@@ -16,3 +16,4 @@ for(const item of manifest.files){
  }
 }
 console.log('Verified '+manifest.files.length+' public files, content digests and local page links from '+manifest.source);
+if(process.env.GITHUB_OUTPUT)fs.appendFileSync(process.env.GITHUB_OUTPUT,'source='+manifest.source+'\n');
