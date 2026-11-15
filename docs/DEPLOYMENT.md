@@ -7,7 +7,9 @@ deliberately narrow; GitHub native secret scanning/push protection supplement it
 
 ## Before deployment
 
-Portfolio quality runs for PRs into develop/main and pushes to develop. The same
+Portfolio quality runs for PRs into develop/main, including updates to an open PR.
+A branch push without an open PR and a merge into develop do not trigger a
+separate duplicate quality run. The same
 workflow is called again by production deployment, not assumed to have run earlier.
 It checks page structure/local links, tracked-file safety, action SHA pins,
 positive/negative guard fixtures, dependency audit, browser smoke tests and Lighthouse budgets. It then

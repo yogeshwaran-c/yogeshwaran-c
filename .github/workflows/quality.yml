@@ -9,8 +9,6 @@ on:
     - cron: '17 6 * * 0'
   pull_request:
     branches: [develop, main]
-  push:
-    branches: [develop]
 permissions:
   contents: read
 concurrency:
