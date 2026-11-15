@@ -1,0 +1,86 @@
+name: Publish or restore portfolio
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      release:
+        description: 'Existing dated release tag to restore (leave empty to publish current main)'
+        required: false
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: portfolio-production
+  cancel-in-progress: true
+jobs:
+  checks:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/quality.yml
+    with:
+      full_audit: true
+    permissions:
+      contents: read
+  package:
+    needs: checks
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      source: ${{ steps.payload.outputs.source }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '26'
+      - run: node scripts/check-site.cjs && node scripts/check-security.cjs
+      - name: Validate and package requested release
+        env:
+          RESTORE_RELEASE: ${{ inputs.release }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "$RESTORE_RELEASE" ]; then
+            [[ "$RESTORE_RELEASE" =~ ^v[0-9]{4}\.[0-9]{2}\.[0-9]{2}(-[0-9]+)?$ ]] || exit 1
+            test "$(gh release view "$RESTORE_RELEASE" --json isDraft --jq .isDraft)" = false
+            git merge-base --is-ancestor "refs/tags/$RESTORE_RELEASE" HEAD
+            node scripts/package-site.cjs "$RESTORE_RELEASE"
+          else
+            node scripts/package-site.cjs
+          fi
+          cat dist/public/deployment.json >> "$GITHUB_STEP_SUMMARY"
+      - name: Validate actual public payload (including restore)
+        id: payload
+        run: node scripts/check-public.cjs
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: dist/public
+  deploy:
+    needs: package
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+        id: deployment
+      - name: Verify production responds
+        env:
+          EXPECTED_SOURCE: ${{ needs.package.outputs.source }}
+        run: |
+          for attempt in $(seq 1 12); do
+            if curl --fail --silent "https://yogeshwaran.com/deployment.json?run=$GITHUB_RUN_ID-$attempt" | jq -e --arg expected "$EXPECTED_SOURCE" '.source == $expected' > /dev/null; then
+              curl --fail --retry 3 https://yogeshwaran.com/ > /dev/null
+              curl --fail --retry 3 https://yogeshwaran.com/resume/YOGESHWARAN_C_Resume.pdf > /dev/null
+              exit 0
+            fi
+            sleep 5
+          done
+          echo 'Production deployment identity did not match approved source' >&2
+          exit 1

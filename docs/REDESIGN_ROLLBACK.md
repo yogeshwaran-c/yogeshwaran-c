@@ -17,6 +17,11 @@ must approve the release before it is merged or deployed. The CI/CD approval gat
 is not yet configured; do not imply GitHub currently enforces it. Record the
 feature merge SHA and eventual release merge SHA here when available.
 
+Redesign deployed as v2026.11.15-2: feature merge
+ec2564d11b29c4327fb77d8ea2cb3e1e6c97f11f, release merge
+bf32788ddc299e987d861d0f1ab2eb2cf084125e. The minimal CI/CD restore procedure is
+documented in DEPLOYMENT.md; verify environment settings before calling it active.
+
 ## Restore the old appearance after release
 
 1. Create `feature/revert-portfolio-redesign-v6` from current develop.

@@ -15,5 +15,9 @@ for(const page of pages){const html=fs.readFileSync(path.join(root,page),'utf8')
    if(target.hash&&target.disk.endsWith('.html')){const dest=fs.readFileSync(target.disk,'utf8');if(!dest.includes('id="'+target.hash+'"')&&!dest.includes("id='"+target.hash+"'"))errors.push(page+': missing anchor '+m[1]);}
  }
 }
-for(const m of fs.readFileSync(path.join(root,'sitemap.xml'),'utf8').matchAll(/<loc>(.*?)<\/loc>/g)){const target=resolveLocal(m[1],'index.html');if(target&&!fs.existsSync(target.disk))errors.push('sitemap: missing '+m[1]);}
+const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');const mapped=new Set();
+for(const m of sitemap.matchAll(/<loc>(.*?)<\/loc>/g)){const target=resolveLocal(m[1],'index.html');if(target){mapped.add(target.disk);if(!fs.existsSync(target.disk))errors.push('sitemap: missing '+m[1]);}}
+const feed=fs.readFileSync(path.join(root,'blog/feed.xml'),'utf8');const fed=new Set();const listing=fs.readFileSync(path.join(root,'blog/index.html'),'utf8');
+for(const item of feed.matchAll(/<item>([\s\S]*?)<\/item>/g)){const link=item[1].match(/<link>(.*?)<\/link>/)?.[1];if(!link){errors.push('RSS item has no link');continue;}const target=resolveLocal(link,'index.html');if(!target||!fs.existsSync(target.disk))errors.push('RSS: missing '+link);else{if(fed.has(target.disk))errors.push('RSS duplicate: '+link);fed.add(target.disk);}}
+for(const page of pages.filter(p=>/^blog\/\d{4}-\d{2}-/.test(p))){const disk=path.join(root,page);if(!mapped.has(disk))errors.push('Published post missing from sitemap: '+page);if(!fed.has(disk))errors.push('Published post missing from RSS: '+page);if(!listing.includes(path.basename(page,'.html')))errors.push('Published post missing from listing: '+page);}
 console.log(JSON.stringify({pagesChecked:pages.length,errors},null,2));if(errors.length)process.exitCode=1;
