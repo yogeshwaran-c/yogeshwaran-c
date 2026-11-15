@@ -1,0 +1,11 @@
+{
+  "name": "yogeshwaran-portfolio-checks",
+  "private": true,
+  "description": "Development-only quality tools; the portfolio has no runtime dependencies",
+  "scripts": {
+    "check": "node scripts/check-site.cjs && node scripts/check-security.cjs && node scripts/test-guards.cjs",
+    "audit:lighthouse": "node scripts/lighthouse.mjs",
+    "package:site": "node scripts/package-site.cjs"
+  },
+  "devDependencies": { "lighthouse": "13.6.0" }
+}

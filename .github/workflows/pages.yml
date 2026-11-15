@@ -1,0 +1,69 @@
+name: Publish or restore portfolio
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      release:
+        description: 'Existing dated release tag to restore (leave empty to publish current main)'
+        required: false
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: portfolio-production
+  cancel-in-progress: true
+jobs:
+  checks:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/quality.yml
+    permissions:
+      contents: read
+  package:
+    needs: checks
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '26'
+      - run: node scripts/check-site.cjs && node scripts/check-security.cjs
+      - name: Validate and package requested release
+        env:
+          RESTORE_RELEASE: ${{ inputs.release }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "$RESTORE_RELEASE" ]; then
+            [[ "$RESTORE_RELEASE" =~ ^v[0-9]{4}\.[0-9]{2}\.[0-9]{2}(-[0-9]+)?$ ]] || exit 1
+            test "$(gh release view "$RESTORE_RELEASE" --json isDraft --jq .isDraft)" = false
+            git merge-base --is-ancestor "refs/tags/$RESTORE_RELEASE" HEAD
+            node scripts/package-site.cjs "$RESTORE_RELEASE"
+          else
+            node scripts/package-site.cjs
+          fi
+          cat dist/public/deployment.json >> "$GITHUB_STEP_SUMMARY"
+      - name: Validate actual public payload (including restore)
+        run: node scripts/check-public.cjs
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: dist/public
+  deploy:
+    needs: package
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+        id: deployment
+      - name: Verify production responds
+        run: curl --fail --retry 5 --retry-delay 5 https://yogeshwaran.com/ > /dev/null
