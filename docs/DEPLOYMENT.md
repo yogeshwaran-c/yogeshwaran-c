@@ -31,10 +31,14 @@ categories 100 on home/latest post. Runner variability is reported, not hidden.
 ## Release and owner approval
 
 Feature -> develop PR, then develop -> main release PR. Preserve branches. Main
-requires the successful quality check; release direction is checked. The owner
-merges the release PR as approval to change main. Owner-authored PRs cannot also
-receive an owner's native PR review, so a separate review count is not required.
-Do not describe this as an enforced independent review.
+requires the successful quality check; release direction is checked. A separate
+main-review rule requires one approval and code-owner review from yogeshwaran-c.
+On this personal-account repository, the owner/admin has a PR-only exception to
+that review rule, so the owner can merge their own PR without self-review. Other
+collaborators must obtain owner approval. Stale reviews are dismissed on new pushes.
+The exception does not apply to the separate required-CI, PR, force-push or deletion
+rules. Everyone still uses a PR and passing checks. Review this role mapping if
+the repository is ever transferred to an organization.
 
 After main changes, the deploy workflow repeats CI, packages an allowlist of public
 assets, then waits for yogeshwaran-c in the github-pages environment before it can
@@ -100,3 +104,7 @@ Actions token read-only by default and workflow review approval disabled. Native
 secret scanning/push protection are enabled. github-pages requires yogeshwaran-c
 approval, accepts main only and disallows administrator bypass. Pages source is
 workflow. The existing site remains served until an approved Actions deployment.
+
+Main's separate owner-review rule and CODEOWNERS provide review protection for
+collaborators while keeping the owner exemption. Develop retains the existing
+PR/check requirements without a redundant self-review requirement.

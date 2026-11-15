@@ -50,6 +50,9 @@ document and AGENTS.md for the relevant confirmed preferences.
   docs/DEPLOYMENT.md. Main release PR merge is an owner decision; production and
   restore jobs wait for the owner in the github-pages environment. Do not approve
   a deployment for the owner merely because implementation work was authorized.
+- Main merge policy: the owner does not need a separate PR review for their own
+  merges; other collaborators need the owner's code-owner approval. The owner
+  exception applies only to the review rule, never to required CI or PR flow.
 
 - Preserve the established color palette, shared typography, section headings,
   spacing patterns, and component styling during scoped redesigns. Avoid local
