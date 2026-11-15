@@ -283,23 +283,37 @@ footer{padding:4rem clamp(1.5rem,5vw,5rem) 3rem;border-top:1px solid var(--borde
 .latest-upcoming-title{color:var(--text2);font-weight:500}
 
 /* TESTIMONIALS */
-.testimonials{padding:clamp(4rem,10vh,8rem) clamp(1.5rem,5vw,5rem);position:relative;z-index:2;background:var(--bg)}
-.testimonials .sec-label{margin-bottom:1rem}
-.testimonials-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:3rem}
-.testimonial-card{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--accent);padding:1.75rem 1.75rem 1.5rem;border-radius:3px;position:relative;transition:border-color .4s,transform .5s var(--spring),box-shadow .5s var(--ease);display:flex;flex-direction:column}
-.testimonial-card:hover{border-color:var(--accent);border-left-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.2)}
-.testimonial-mark{font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
-.testimonial-mark::before{content:'';width:14px;height:1px;background:var(--accent)}
-.testimonial-quote{font-family:var(--body);font-size:.93rem;line-height:1.65;color:var(--text);margin-bottom:auto;padding-bottom:1.25rem;font-weight:400}
-.testimonial-quote::before{content:'\201C';color:var(--accent);margin-right:2px}
-.testimonial-quote::after{content:'\201D';color:var(--accent);margin-left:2px}
-.testimonial-author{display:flex;align-items:center;gap:.7rem}
-.testimonial-avatar{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:.78rem;flex-shrink:0;background:transparent;transition:background .3s,color .3s}
-.testimonial-card:hover .testimonial-avatar{background:var(--accent);color:var(--bg)}
-.testimonial-who{flex:1;min-width:0;display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
-.testimonial-name{font-family:var(--display);font-size:.82rem;font-weight:700;color:var(--text);letter-spacing:-.005em;line-height:1}
-.testimonial-role{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;line-height:1}
-.testimonial-role::before{content:'· '}
+.testimonials{padding:clamp(2.5rem,6vh,4.5rem) clamp(1.5rem,5vw,5rem);position:relative;z-index:2;background:var(--bg)}
+.testimonials .sec-label{margin-bottom:.8rem}
+.testimonials-grid{display:block;margin-top:1.75rem;border-top:1px solid var(--border)}
+.testimonial-card{border-bottom:1px solid var(--border);margin:0;transition:background .2s}
+.testimonial-card[open]{background:var(--bg2)}
+.testimonial-card::details-content{overflow:hidden;block-size:0;opacity:0;transition:block-size .36s cubic-bezier(.22,1,.36,1),opacity .24s ease,content-visibility .36s;transition-behavior:allow-discrete}
+.testimonial-card[open]::details-content{block-size:auto;opacity:1}
+@supports (interpolate-size:allow-keywords){.testimonial-card{interpolate-size:allow-keywords}}
+@media(prefers-reduced-motion:reduce){.testimonial-card,.testimonial-card::details-content{transition:none}}
+.testimonial-card summary{list-style:none;display:flex;align-items:center;gap:1.25rem;padding:1.1rem .75rem;cursor:pointer}
+.testimonial-card summary::-webkit-details-marker{display:none}
+.testimonial-card summary::after{content:'+';font-family:var(--mono);font-size:1.2rem;color:var(--accent);margin-left:auto}
+.testimonial-card[open] summary::after{content:'−'}
+.testimonial-card summary:hover{background:rgba(0,229,200,.035)}
+.testimonial-card summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.testimonial-mark{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);flex-shrink:0}
+.testimonial-quote{font-family:var(--body);font-size:.95rem;line-height:1.8;color:var(--text2);max-width:850px;margin:0;padding:.25rem 3.9rem 1.5rem;font-weight:400}
+.testimonial-quote::before{content:'\201C';color:var(--accent)}
+.testimonial-quote::after{content:'\201D';color:var(--accent)}
+.testimonial-author{display:flex;align-items:center;gap:.8rem;flex:1;min-width:0}
+.testimonial-avatar{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);color:var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:.8rem;flex-shrink:0}
+.testimonial-who{display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap}
+.testimonial-name{font-family:var(--display);font-size:.95rem;font-weight:600;color:var(--text)}
+.testimonial-role{font-family:var(--mono);font-size:.6rem;color:var(--text3)}
+@media(max-width:600px){
+  .testimonial-card summary{gap:.6rem;padding:1rem .25rem}
+  .testimonial-who{display:block}
+  .testimonial-role{display:block;margin-top:.25rem;font-size:.55rem}
+  .testimonial-mark{font-size:.5rem;letter-spacing:.03em}
+  .testimonial-quote{padding:.25rem 1rem 1.25rem;font-size:.9rem}
+}
 
 /* RESPONSIVE */
 @media(max-width:1024px){
@@ -509,69 +523,64 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testimonials" aria-label="Testimonials">
+<section id="testimonials" class="testimonials" aria-label="Testimonials">
   <div class="sec-label">What colleagues say</div>
   <h2 class="sec-title">Said about <em>working</em><br>with me</h2>
   <div class="testimonials-grid">
-    <blockquote class="testimonial-card">
-      <div class="testimonial-mark">Recommendation</div>
-      <p class="testimonial-quote">Yogesh is one of those rare engineers you hand the hardest problems to and never worry about. He architected our document intelligence platform end-to-end — NestJS backend with 20+ modules, FastAPI microservices with OpenAI and Gemini, the full workflow engine — and made it look effortless. What stands out most is how deeply he thinks about the user experience, not just the code.</p>
-      <footer class="testimonial-author">
+    <details class="testimonial-card" name="colleague-quotes" open>
+      <summary><span class="testimonial-author">
         <span class="testimonial-avatar" aria-hidden="true">D</span>
-        <div class="testimonial-who">
+        <span class="testimonial-who">
           <span class="testimonial-name">Deventhiran</span>
           <span class="testimonial-role">Finstein</span>
-        </div>
-      </footer>
-    </blockquote>
+        </span>
+      </span><span class="testimonial-mark">Recommendation</span></summary>
+      <blockquote><p class="testimonial-quote">Yogesh is one of those rare engineers you hand the hardest problems to and never worry about. He architected our document intelligence platform end-to-end — NestJS backend with 20+ modules, FastAPI microservices with OpenAI and Gemini, the full workflow engine — and made it look effortless. What stands out most is how deeply he thinks about the user experience, not just the code.</p></blockquote>
+    </details>
 
-    <blockquote class="testimonial-card">
-      <div class="testimonial-mark">Recommendation</div>
-      <p class="testimonial-quote">Yogesh brings a level of calm and clarity to engineering that's genuinely rare. He'll spot the edge case before it becomes a bug, ask the sharpest question in a planning meeting before anyone else has thought of it, and quietly make the system more reliable in the process. Working alongside him made me a better engineer almost by osmosis.</p>
-      <footer class="testimonial-author">
+    <details class="testimonial-card" name="colleague-quotes">
+      <summary><span class="testimonial-author">
         <span class="testimonial-avatar" aria-hidden="true">S</span>
-        <div class="testimonial-who">
+        <span class="testimonial-who">
           <span class="testimonial-name">Suryapriya</span>
           <span class="testimonial-role">Finstein</span>
-        </div>
-      </footer>
-    </blockquote>
+        </span>
+      </span><span class="testimonial-mark">Recommendation</span></summary>
+      <blockquote><p class="testimonial-quote">Yogesh brings a level of calm and clarity to engineering that's genuinely rare. He'll spot the edge case before it becomes a bug, ask the sharpest question in a planning meeting before anyone else has thought of it, and quietly make the system more reliable in the process. Working alongside him made me a better engineer almost by osmosis.</p></blockquote>
+    </details>
 
-    <blockquote class="testimonial-card">
-      <div class="testimonial-mark">Recommendation</div>
-      <p class="testimonial-quote">Working with Yogesh raises your own game. His range is wide — he'll write a payments integration in the morning and debug a CSS cascading issue in VS Code's source code in the evening. The 230+ merged PRs across projects like VS Code, NestJS, and Angular Material say everything about his depth. Rare combination of shipping speed and engineering rigour.</p>
-      <footer class="testimonial-author">
+    <details class="testimonial-card" name="colleague-quotes">
+      <summary><span class="testimonial-author">
         <span class="testimonial-avatar" aria-hidden="true">M</span>
-        <div class="testimonial-who">
+        <span class="testimonial-who">
           <span class="testimonial-name">Maruthu</span>
           <span class="testimonial-role">Finstein</span>
-        </div>
-      </footer>
-    </blockquote>
+        </span>
+      </span><span class="testimonial-mark">Recommendation</span></summary>
+      <blockquote><p class="testimonial-quote">Working with Yogesh raises your own game. His range is wide — he'll write a payments integration in the morning and debug a CSS cascading issue in VS Code's source code in the evening. The 230+ merged PRs across projects like VS Code, NestJS, and Angular Material say everything about his depth. Rare combination of shipping speed and engineering rigour.</p></blockquote>
+    </details>
 
-    <blockquote class="testimonial-card">
-      <div class="testimonial-mark">Mentorship</div>
-      <p class="testimonial-quote">Yogesh is the kind of senior every junior hopes to work with. When I'm stuck, he doesn't just give me the answer — he walks me through his thinking so I can solve the next one myself. I've learned more about architecture, debugging, and shipping production code in the time I've worked with him than I would have in years of tutorials.</p>
-      <footer class="testimonial-author">
+    <details class="testimonial-card" name="colleague-quotes">
+      <summary><span class="testimonial-author">
         <span class="testimonial-avatar" aria-hidden="true">M</span>
-        <div class="testimonial-who">
+        <span class="testimonial-who">
           <span class="testimonial-name">Maruthan</span>
           <span class="testimonial-role">Junior Developer · Finstein</span>
-        </div>
-      </footer>
-    </blockquote>
+        </span>
+      </span><span class="testimonial-mark">Mentorship</span></summary>
+      <blockquote><p class="testimonial-quote">Yogesh is the kind of senior every junior hopes to work with. When I'm stuck, he doesn't just give me the answer — he walks me through his thinking so I can solve the next one myself. I've learned more about architecture, debugging, and shipping production code in the time I've worked with him than I would have in years of tutorials.</p></blockquote>
+    </details>
 
-    <blockquote class="testimonial-card">
-      <div class="testimonial-mark">Mentorship</div>
-      <p class="testimonial-quote">What sets Yogesh apart from other senior engineers is how approachable he is — no question feels stupid. His PR reviews are genuinely educational, and the feedback always teaches me something new about the codebase or the craft. He raises the bar of the whole team just by being on it.</p>
-      <footer class="testimonial-author">
+    <details class="testimonial-card" name="colleague-quotes">
+      <summary><span class="testimonial-author">
         <span class="testimonial-avatar" aria-hidden="true">N</span>
-        <div class="testimonial-who">
+        <span class="testimonial-who">
           <span class="testimonial-name">Nedunchezhiyan</span>
           <span class="testimonial-role">Junior Developer · Finstein</span>
-        </div>
-      </footer>
-    </blockquote>
+        </span>
+      </span><span class="testimonial-mark">Mentorship</span></summary>
+      <blockquote><p class="testimonial-quote">What sets Yogesh apart from other senior engineers is how approachable he is — no question feels stupid. His PR reviews are genuinely educational, and the feedback always teaches me something new about the codebase or the craft. He raises the bar of the whole team just by being on it.</p></blockquote>
+    </details>
   </div>
 </section>
 
