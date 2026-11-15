@@ -1,0 +1,19 @@
+// Dependency-free checks for published HTML, local links and publication feeds.
+const fs=require('node:fs');const path=require('node:path');
+const root=path.resolve(__dirname,'..');const errors=[];
+const pages=['index.html','404.html',...fs.readdirSync(path.join(root,'blog')).filter(n=>n.endsWith('.html')&&!n.startsWith('_')&&!n.includes('template')).map(n=>'blog/'+n)];
+function resolveLocal(url,from){const parsed=new URL(url,new URL(from,'https://yogeshwaran.com/'));if(parsed.origin!=='https://yogeshwaran.com')return null;let p=decodeURIComponent(parsed.pathname);if(p.endsWith('/'))p+='index.html';let disk=path.resolve(root,'.'+p);if(!disk.startsWith(root+path.sep))throw Error('Path outside repository');if(!fs.existsSync(disk)&&!path.extname(disk))disk+='.html';return {disk,hash:decodeURIComponent(parsed.hash.slice(1))};}
+for(const page of pages){const html=fs.readFileSync(path.join(root,page),'utf8');
+ if((html.match(/<h1(?:\s|>)/g)||[]).length!==1)errors.push(page+': expected one h1');
+ if(!/<title>[^<]+<\/title>/.test(html))errors.push(page+': title missing');
+ if(!/<main(?:\s|>)/.test(html))errors.push(page+': main missing');
+ for(const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)){try{JSON.parse(m[1]);}catch{errors.push(page+': invalid JSON-LD');}}
+ for(const m of html.matchAll(/(?:href|src)="([^"\s]+)"/g)){
+   if(/^(mailto:|tel:|data:|javascript:)/.test(m[1]))continue;
+   let target;try{target=resolveLocal(m[1],page);}catch{errors.push(page+': malformed URL '+m[1]);continue;}if(!target)continue;
+   if(!fs.existsSync(target.disk)){errors.push(page+': missing '+m[1]);continue;}
+   if(target.hash&&target.disk.endsWith('.html')){const dest=fs.readFileSync(target.disk,'utf8');if(!dest.includes('id="'+target.hash+'"')&&!dest.includes("id='"+target.hash+"'"))errors.push(page+': missing anchor '+m[1]);}
+ }
+}
+for(const m of fs.readFileSync(path.join(root,'sitemap.xml'),'utf8').matchAll(/<loc>(.*?)<\/loc>/g)){const target=resolveLocal(m[1],'index.html');if(target&&!fs.existsSync(target.disk))errors.push('sitemap: missing '+m[1]);}
+console.log(JSON.stringify({pagesChecked:pages.length,errors},null,2));if(errors.length)process.exitCode=1;
