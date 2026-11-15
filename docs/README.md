@@ -4,6 +4,8 @@ Internal notes and runbooks for this repo.
 
 | File | Purpose |
 |------|---------|
+| [PR_QUALITY_CHECKLIST.md](./PR_QUALITY_CHECKLIST.md) | Required quality gates for every change and PR |
+| [AUDIT_2026-11-15.md](./AUDIT_2026-11-15.md) | Local redesign measurements, content evidence and open release checks |
 | [BLOG_GUIDE.md](./BLOG_GUIDE.md) | The monthly writing system — how to pick topics, post format, distribution |
 | [BLOG_DISCIPLINE.md](./BLOG_DISCIPLINE.md) | Rules for sustaining a blog habit over years (ship-ugly, never-miss-twice, etc.) |
 | [BLOG_PUBLISHING.md](./BLOG_PUBLISHING.md) | Step-by-step runbook: canonical URLs, feature branch → develop → main flow, cross-posting to Hashnode/Dev.to |

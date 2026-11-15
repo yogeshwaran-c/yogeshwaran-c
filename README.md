@@ -14,7 +14,7 @@
 
 ### About Me
 
-Full Stack Developer with nearly 4 years of experience architecting scalable web applications, AI-powered automation systems, and enterprise SaaS platforms. I build end-to-end solutions — from database design to production deployment — integrating AI/ML pipelines, payment gateways, real-time systems, and cloud infrastructure.
+Full Stack Developer with experience since 2022 architecting scalable web applications, AI-powered automation systems, and enterprise SaaS platforms. I build end-to-end solutions — from database design to production deployment — integrating AI/ML pipelines, payment gateways, real-time systems, and cloud infrastructure.
 
 - 🔭 Currently building **Document Intelligence** and **AI-powered workflow automation** platforms
 - 🤖 Working with **OpenAI GPT**, **Google Gemini**, and **vector search** for intelligent document processing
@@ -144,16 +144,16 @@ Active contributor across major open-source projects — **230+ merged PRs** and
 </a>
 </td>
 <td align="center">
-<a href="https://github.com/directus/directus/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
-<img src="https://img.shields.io/badge/Directus-6644FF?style=for-the-badge&logo=directus&logoColor=white" alt="Directus"><br>
-<sub><b>2 merged</b></sub>
+<a href="https://github.com/swagger-api/swagger-ui/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/Swagger_UI-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger UI"><br>
+<sub><b>3 merged</b></sub>
 </a>
 </td>
 </tr>
 <tr>
 <td align="center">
-<a href="https://github.com/swagger-api/swagger-ui/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
-<img src="https://img.shields.io/badge/Swagger_UI-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger UI"><br>
+<a href="https://github.com/directus/directus/pulls?q=is%3Apr+author%3Ayogeshwaran-c">
+<img src="https://img.shields.io/badge/Directus-6644FF?style=for-the-badge&logo=directus&logoColor=white" alt="Directus"><br>
 <sub><b>2 merged</b></sub>
 </a>
 </td>

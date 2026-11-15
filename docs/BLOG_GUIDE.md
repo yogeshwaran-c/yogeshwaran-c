@@ -37,7 +37,7 @@ Your PRs are the posts. 10 titles you could write right now:
 
 **Weekly, 10 minutes:** Open a `notes.md` file. When you fix something interesting at work or in OSS, jot 3 lines — context, problem, fix. Don't write the post yet. Just the seed.
 
-**Monthly, one weekend afternoon:** Pick the best seed, expand to 800–1500 words. Publish by day 7 of the month so it becomes a habit, not a deadline.
+**Monthly, one weekend afternoon:** Pick the best seed, expand to 800–1500 words. Publish on the 16th of each month (Asia/Kolkata), the user's established cadence. Prepare the draft beforehand so publication is sustainable.
 
 ---
 

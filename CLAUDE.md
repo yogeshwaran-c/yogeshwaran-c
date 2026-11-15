@@ -1,5 +1,9 @@
 # CLAUDE.md — Project Conventions
 
+Apply `docs/PR_QUALITY_CHECKLIST.md` for every change and PR. Record relevant
+Lighthouse scores, manual checks, N/A items and unresolved failures. Historical
+checked boxes in SITE_HEALTH.md are not evidence that a new revision passes.
+
 ## Branching & Merging — git-flow
 
 **Three branch layers. Every change goes through a Pull Request. Never commit or merge directly on `main` or `develop`.**
@@ -71,7 +75,7 @@ Tags give named rollback points and a public changelog at `/releases`. Practice 
 - The public-facing email is `yogeshwaran.chandrakasan@gmail.com` — use it in all user-facing places (portfolio, resume, README).
 - Degree on resume: `B.Tech in Information Technology` / `Bachelor of Technology in Information Technology`.
 - Experience start date: `Jul 2022` (not Oct 2022).
-- Current role phrasing: "nearly 4 years of experience".
+- Experience phrasing: "building production software since 2022" or "experience since 2022"; confirmed start is July 2022. Avoid time-sensitive wording that becomes stale.
 - Open source contribution counts (aggregate '**N**+ merged PRs' and per-repo counts) live in **eight** places — all eight must update together when counts change. Run `grep -R "<current-N>" .` before committing to catch any that this list forgets.
   1. `README.md` — 'N+ merged PRs' aggregate (2 places: bio bullet + Open Source Contributions intro), badge table (per-repo counts, ordered descending by merged count)
   2. `index.html` — `.oss-intro` copy ('N+ merged pull requests'), `.oss-grid` cards (per-repo counts, same descending order), `<meta property="og:image:alt">` tagline
