@@ -1,5 +1,10 @@
 # Proposed portfolio CI/CD
 
+The owner subsequently requested the minimal implementation. See
+[DEPLOYMENT.md](./DEPLOYMENT.md) for the two-workflow approach, single-owner approval
+model and restore procedure. The larger plan below is historical design context;
+release bundles and a separate bot identity are not part of the minimal version.
+
 Plan only. No Actions workflows, branch rules, environment protections or Pages
 deployment settings have been activated. Review this after the redesign direction
 is approved. Keep the current production release until the release gate is ready.
