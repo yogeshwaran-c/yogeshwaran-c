@@ -1,5 +1,11 @@
 # SITE_HEALTH.md — Website Checklist & Audit Log
 
+Current local redesign audit: [2026-11-15](./AUDIT_2026-11-15.md). Apply
+[PR quality gates](./PR_QUALITY_CHECKLIST.md) to every new change. Checked boxes
+below describe historical reviews, not automatic verification of this revision.
+In particular, previous security checks do not clear the subsequently discovered
+malicious setup files, and the homepage no longer loads GSAP or Google Fonts CSS.
+
 A living checklist of what this site needs, what it has, and what's still open.
 Re-audit whenever a big change ships, or roughly once a quarter. Update the
 status boxes and append a row to the audit log at the bottom — don't rewrite

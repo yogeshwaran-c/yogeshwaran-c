@@ -9,7 +9,7 @@ LinkedIn: linkedin.com/in/yogeshwaran-c-070720192 | GitHub: github.com/yogeshwar
 
 ## PROFESSIONAL SUMMARY
 
-Full Stack Developer with nearly 4 years of experience building scalable web applications, AI-powered automation systems, and enterprise SaaS platforms. Proficient in Python, TypeScript, Angular, NestJS, and FastAPI with hands-on expertise in cloud services (AWS, Azure), real-time systems, and LLM-driven document processing. Proven ability to architect end-to-end solutions from database design to production deployment, with experience integrating payment gateways, messaging services, and AI/ML pipelines.
+Full Stack Developer with experience since 2022 building scalable web applications, AI-powered automation systems, and enterprise SaaS platforms. Proficient in Python, TypeScript, Angular, NestJS, and FastAPI with hands-on expertise in cloud services (AWS, Azure), real-time systems, and LLM-driven document processing. Proven ability to architect end-to-end solutions from database design to production deployment, with experience integrating payment gateways, messaging services, and AI/ML pipelines.
 
 ---
 
@@ -81,7 +81,8 @@ Active contributor to major open-source projects with **230+ merged pull request
 - **Angular Material** (angular/components) -- 13 merged PRs: component fixes and accessibility improvements
 - **Supabase** (supabase/supabase) -- 9 merged PRs: Studio semantic-token migrations, tooltip fixes
 - **NestJS TypeORM** (nestjs/typeorm) -- 3 merged PRs
-- **Directus** (directus/directus), **Swagger UI** (swagger-api/swagger-ui) -- 2 merged PRs each
+- **Swagger UI** (swagger-api/swagger-ui) -- 3 merged PRs
+- **Directus** (directus/directus) -- 2 merged PRs
 - **Angular**, **NestJS Schematics** -- 1 merged PR each
 - Ongoing contributions to **Appwrite**, **Next.js** (vercel/next.js), and **shadcn/ui**
 
