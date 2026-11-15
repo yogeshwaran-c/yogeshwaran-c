@@ -1,6 +1,12 @@
 # SITE_HEALTH.md — Website Checklist & Audit Log
 
-Current local redesign audit: [2026-11-15](./AUDIT_2026-11-15.md). Apply
+Latest verified operational state: [PROJECT_STATUS.md](./PROJECT_STATUS.md),
+2026-11-16. Redesign v6 and CI/CD are deployed; the owner-approved production
+workflow completed successfully. See DEPLOYMENT.md for active approval/restore
+controls and CI_VALIDATION.md for evidence. This supersedes older pending items
+where that newer evidence exists; it does not certify unresolved manual checks.
+
+Historical local redesign audit: [2026-11-15](./AUDIT_2026-11-15.md). Apply
 [PR quality gates](./PR_QUALITY_CHECKLIST.md) to every new change. Checked boxes
 below describe historical reviews, not automatic verification of this revision.
 In particular, previous security checks do not clear the subsequently discovered
