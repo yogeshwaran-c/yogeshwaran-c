@@ -105,6 +105,16 @@ secret scanning/push protection are enabled. github-pages requires yogeshwaran-c
 approval, accepts main only and disallows administrator bypass. Pages source is
 workflow. The existing site remains served until an approved Actions deployment.
 
+Activation verified 2026-11-16: run 43748291450 completed after owner approval.
+The production source matched 97bb008a84a7287bf9e9d422ef17f57d9d28d3d9, and the
+homepage/resume smoke checks passed. The waiting-for-first-approval state above
+describes setup history, not a currently pending deployment. PROJECT_STATUS.md
+records the dated live snapshot.
+
 Main's separate owner-review rule and CODEOWNERS provide review protection for
 collaborators while keeping the owner exemption. Develop retains the existing
 PR/check requirements without a redundant self-review requirement.
+
+On Windows PowerShell with script execution disabled, use npm.cmd instead of npm;
+do not relax execution policy just to run npm. Open a fresh terminal after tools
+are installed so their PATH entries are available.

@@ -1,13 +1,17 @@
 # Proposed portfolio CI/CD
 
+Historical proposal, superseded by the deployed setup verified 2026-11-16.
+See DEPLOYMENT.md for operation, CI_VALIDATION.md for evidence, and PROJECT_STATUS.md
+for the latest recorded state. Workflow code and approval protections are active;
+the release-bundle service and separate bot discussed below were not selected.
+
 The owner subsequently requested the minimal implementation. See
 [DEPLOYMENT.md](./DEPLOYMENT.md) for the two-workflow approach, single-owner approval
 model and restore procedure. The larger plan below is historical design context;
 release bundles and a separate bot identity are not part of the minimal version.
 
-Plan only. No Actions workflows, branch rules, environment protections or Pages
-deployment settings have been activated. Review this after the redesign direction
-is approved. Keep the current production release until the release gate is ready.
+The sections below preserve the pre-implementation design discussion; they are
+not instructions to repeat setup or evidence of current pending work.
 
 ## 1. Clean and establish a baseline
 
