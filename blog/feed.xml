@@ -8,7 +8,7 @@
     <language>en-us</language>
     <managingEditor>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</managingEditor>
     <webMaster>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</webMaster>
-    <lastBuildDate>Fri, 16 Oct 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2026 00:00:00 +0000</lastBuildDate>
     <generator>hand-rolled</generator>
     <image>
       <url>https://yogeshwaran.com/favicon.svg</url>
@@ -16,6 +16,19 @@
       <link>https://yogeshwaran.com/blog/</link>
     </image>
 
+    <item>
+      <title>x =&gt; x + 2 takes zero arguments: the regex that counts function parameters in NestJS GraphQL</title>
+      <link>https://yogeshwaran.com/blog/2026-11-nestjs-graphql-parenless-arrow-arity</link>
+      <guid isPermaLink="true">https://yogeshwaran.com/blog/2026-11-nestjs-graphql-parenless-arrow-arity</guid>
+      <pubDate>Mon, 16 Nov 2026 00:00:00 +0000</pubDate>
+      <author>yogeshwaran.chandrakasan@gmail.com (Yogeshwaran Chandrakasan)</author>
+      <category>nestjs</category>
+      <category>graphql</category>
+      <category>javascript</category>
+      <category>debugging</category>
+      <category>open-source</category>
+      <description><![CDATA[getNumberOfArguments in @nestjs/graphql serialized functions and regex-matched the first parenthesized group, so a parenless arrow — the form every minifier emits — counted as zero parameters. Why fn.length can't answer the question either, and the 16-line fix that unskipped the suite's own confession test.]]></description>
+    </item>
     <item>
       <title>The dark theme the browser didn't know about: one line of color-scheme in Swagger UI</title>
       <link>https://yogeshwaran.com/blog/2026-10-swagger-ui-dark-mode-color-scheme</link>

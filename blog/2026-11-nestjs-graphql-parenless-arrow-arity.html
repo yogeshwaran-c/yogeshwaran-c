@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>x => x + 2 takes zero arguments: the regex that counts function parameters in NestJS GraphQL — Yogeshwaran C</title>
+<meta name="description" content="NestJS GraphQL counted function parameters with a regex that had never met a parenless arrow. Why fn.length can't help, and the 16-line fix that taught it.">
+<meta name="author" content="Yogeshwaran C">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://yogeshwaran.com/blog/2026-11-nestjs-graphql-parenless-arrow-arity">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="x => x + 2 takes zero arguments: the regex that counts function parameters in NestJS GraphQL">
+<meta property="og:description" content="A parenless arrow counted as zero arguments because the library read source text with a regex. The version sniff it fed, the skipped test that confessed, and the fix.">
+<meta property="og:url" content="https://yogeshwaran.com/blog/2026-11-nestjs-graphql-parenless-arrow-arity">
+<meta property="og:site_name" content="Yogeshwaran C">
+<meta property="article:author" content="Yogeshwaran Chandrakasan">
+<meta property="article:published_time" content="2026-11-16">
+<meta property="article:tag" content="nestjs">
+<meta property="article:tag" content="graphql">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="debugging">
+<meta property="article:tag" content="open-source">
+<meta property="og:image" content="https://yogeshwaran.com/blog/og/2026-11-nestjs-graphql-parenless-arrow-arity.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="x => x + 2 takes zero arguments: the regex that counts function parameters in NestJS GraphQL">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Deleting two parentheses made an argument disappear. The runtime knew the arity; the library's text-model of the function didn't.">
+<meta name="twitter:description" content="Why @nestjs/graphql counted x => x + 2 as zero parameters, why fn.length lies about defaults, and what a regex-grown parser forgets.">
+<meta name="twitter:image" content="https://yogeshwaran.com/blog/og/2026-11-nestjs-graphql-parenless-arrow-arity.png">
+
+<meta name="theme-color" content="#07080b">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="mask-icon" href="/favicon.svg" color="#00e5c8">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="alternate" type="application/rss+xml" title="Yogeshwaran C — Writing" href="/blog/feed.xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" integrity="sha512-vswe+cgvic/XBoF1OcM/TeJ2FW0OofqAVdCZiEYkd6dwGXthvkSFWOoGGJgS2CW70VK5dQM5Oh+7ne47s74VTg==" crossorigin="anonymous">
+
+<link rel="stylesheet" href="./post.css">
+<script async src="https://plausible.io/js/pa-XXSB3KnJ2ChBu03k9DMK-.js"></script>
+<script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"x => x + 2 takes zero arguments: the regex that counts function parameters in NestJS GraphQL","description":"NestJS GraphQL counted function parameters with a regex that had never met a parenless arrow. Why fn.length can't help, and the 16-line fix that taught it.","url":"https://yogeshwaran.com/blog/2026-11-nestjs-graphql-parenless-arrow-arity","mainEntityOfPage":{"@type":"WebPage","@id":"https://yogeshwaran.com/blog/2026-11-nestjs-graphql-parenless-arrow-arity"},"datePublished":"2026-11-16","dateModified":"2026-11-16","author":{"@type":"Person","@id":"https://yogeshwaran.com/#person","name":"Yogeshwaran Chandrakasan","url":"https://yogeshwaran.com/"},"publisher":{"@id":"https://yogeshwaran.com/#person"},"image":"https://yogeshwaran.com/blog/og/2026-11-nestjs-graphql-parenless-arrow-arity.png","keywords":"nestjs, graphql, javascript, debugging, open-source","isPartOf":{"@type":"Blog","@id":"https://yogeshwaran.com/blog/#blog"},"inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://yogeshwaran.com/"},{"@type":"ListItem","position":2,"name":"Writing","item":"https://yogeshwaran.com/blog/"},{"@type":"ListItem","position":3,"name":"x => x + 2 takes zero arguments: the regex that counts function parameters in NestJS GraphQL"}]}</script>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav aria-label="Main navigation">
+  <a href="/" class="nav-logo">Yogesh<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/blog/" class="active">Writing</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main id="main-content">
+<article class="post">
+  <header class="post-header">
+    <a href="./" class="back-link">← All posts</a>
+    <div class="post-meta">
+      <time datetime="2026-11-16">November 16, 2026</time>
+      <span class="dot" aria-hidden="true"></span>
+      <span>5 min read</span>
+    </div>
+    <h1 class="post-title">x => x + 2 takes zero arguments: the regex that counts function parameters in NestJS GraphQL</h1>
+    <div class="post-tags">
+      <span class="post-tag">nestjs</span>
+      <span class="post-tag">graphql</span>
+      <span class="post-tag">javascript</span>
+      <span class="post-tag">debugging</span>
+      <span class="post-tag">open-source</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <p>Two functions, identical at runtime:</p>
+
+<pre><code class="language-typescript">(x) => x + 2
+x => x + 2</code></pre>
+
+    <p>Ask <code>@nestjs/graphql</code> how many parameters each one takes and you got two different answers: one, and zero. The utility that counts them — <code>getNumberOfArguments</code> — serializes the function with <code>toString()</code> and regex-matches the text between the first pair of parentheses. A parenless arrow has no parentheses around its parameter, so the match fails and the count comes back 0.</p>
+
+    <p>And the parenless form is not exotic. It's what Prettier writes with <code>arrowParens: "avoid"</code>, and it's what minifiers emit for <em>every</em> single-parameter arrow in a production bundle — Terser and esbuild strip those two characters on principle. The syntax most likely to reach a deployed server was exactly the syntax the counter had never heard of.</p>
+
+    <h2>Why a GraphQL library counts arguments with a regex at all</h2>
+
+    <p>JavaScript already tells you a function's arity: <code>fn.length</code>. But <code>fn.length</code> lies by design. It counts parameters only up to the first one with a default initializer, and never counts rest parameters:</p>
+
+<pre><code class="language-javascript">((a, b) => 0).length        // 2
+((a, b = 1) => 0).length    // 1 — the default hides b
+((...args) => 0).length     // 0</code></pre>
+
+    <p>nestjs/graphql needed the honest count, defaults included, for one very specific decision. Depending on your installed <code>@nestjs/core</code> version, <code>ContextIdFactory.getByRequest</code> has either an old one-parameter signature or a newer two-parameter one — and the second parameter has a default value, so <code>fn.length</code> returns 1 <em>for both versions</em>. The library couldn't tell the cores apart the native way. So it sniffed the version by reading the function's source text: serialize <code>getByRequest</code>, find the <code>(...)</code> group, count the commas.</p>
+
+    <p>That count steered a real fork in the road. Two arguments meant the modern path: delegate to <code>ContextIdFactory.getByRequest</code>, which honors the context-id strategy you register for durable request-scoped providers. Anything else fell into a backward-compatibility branch that minted a context id by hand, bypassing the strategy entirely. A wrong count never threw. It just silently routed every GraphQL request down the legacy branch, and request-scoped behavior quietly stopped matching what you'd configured.</p>
+
+    <h2>The confession in the test suite</h2>
+
+    <p>The repo knew. Sitting in <code>get-number-of-arguments.util.spec.ts</code> was this:</p>
+
+<pre><code class="language-typescript">// This test is skipped because we don't support it yet.
+it.skip('should count correctly for arrow functions without parenthesis', () => {
+  const leanArrowFunction = x => x + 2;
+
+  expect(getNumberOfArguments(leanArrowFunction)).toBe(1);
+});</code></pre>
+
+    <p>A skipped test is a bug report filed by the maintainers against themselves: reproduced, admitted, and parked. <a href="./2026-08-vscode-module-script-false-redeclaration">August's post</a> found this kind of fossil in a PR title; this one lived in the suite itself, waiting for someone to make it pass.</p>
+
+    <p>One honest wrinkle: by the time I picked this up, the version-sniffing callsite had already been retired along with its compat layer. What remained was the utility, still exported from the package's utils barrel for the next caller to import, still carrying its documented blind spot. Fixing it wasn't firefighting; it was paying down debt the test suite had been openly advertising.</p>
+
+    <h2>What I thought the fix was (wrong first, as always)</h2>
+
+    <p>Delete the regex. Return <code>fn.length</code>. Native, zero parsing, can't be wrong about syntax.</p>
+
+    <p>The utility's own JSDoc killed that in one line: <em>"Note this also counts parameters with default initializers (as opposed to checking <code>function.length</code>)"</em>. The regex isn't there because someone didn't know about <code>fn.length</code> — it's there because <code>fn.length</code> structurally cannot answer the question being asked. My simplification would have reintroduced the exact lie the utility was built to avoid, and the <code>getByRequest</code> sniff would have collapsed: both core versions, one answer.</p>
+
+    <h2>The fix</h2>
+
+    <p><a href="https://github.com/nestjs/graphql/pull/3949" target="_blank" rel="noopener noreferrer">PR #3949</a>, +16/−2. When no parenthesized parameter list matches, look for a bare identifier immediately followed by <code>=&gt;</code>, with an optional <code>async</code> in front, and return 1:</p>
+
+<pre><code class="language-diff">+  // Arrow functions with a single parameter can omit the parentheses
++  // (e.g. `x => x + 2` or `async x => x + 2`). Match a bare identifier
++  // immediately followed by `=>`, allowing an optional `async` prefix.
++  const parenlessArrowRegex = /^\s*(?:async\s+)?[a-zA-Z_$][\w$]*\s*=>/;
++  if (parenlessArrowRegex.test(functionAsStringWithoutNewLines)) {
++    return 1;
++  }
++
+   return 0;
+ }</code></pre>
+
+    <p>Plus the part I'd argue matters most: the skipped test lost its <code>.skip</code>, and an async variant joined it. The suite's confession became its regression guard.</p>
+
+    <h2>The takeaway</h2>
+
+    <p><strong><code>fn.toString()</code> reflection means you own a JavaScript parser now — one you wrote with a regex and froze on the syntax you remembered that day.</strong> Every form you forgot is a latent miscount: parenless arrows yesterday, and tomorrow whatever the language adds next.</p>
+
+    <p>I'll hold myself to the same standard: my fix is one more remembered form, not a parser. Feed the utility <code>x =&gt; add(a, b)</code> and the paren-matcher still finds <code>(a, b)</code> — in the function's <em>body</em> — and counts 2. The honest menu has three options: <code>fn.length</code>, which is native but lies about defaults and rest; a regex, which lies about whatever syntax you forgot; or a real parser, which is heavy. "How many arguments does this function take" is not one question, and the first step is noticing which version of it you're actually asking.</p>
+
+    <p><strong>Screenshot-worthy line: "Deleting two parentheses made an argument disappear. The runtime knew the arity; the library's text-model of the function didn't."</strong></p>
+
+    <p>That's the same gap <a href="./2026-10-swagger-ui-dark-mode-color-scheme">October's post</a> walked from the CSS side: two models of one reality, allowed to disagree silently. There it was the page and the browser; here it's the function object and its source text.</p>
+
+    <h2>Why this PR is a good first OSS contribution</h2>
+
+    <p>A skipped test is a pre-scoped contribution. The maintainers already wrote your spec, your reproduction, and your acceptance test — <code>it.skip</code> is the repo telling you exactly where help is wanted and how it will be judged. Grep a codebase you use for <code>it.skip</code>, <code>xit</code>, or <code>test.todo</code>, pick one whose intent you understand, and make it pass. Review is fast because the reviewer already agreed the behavior was desirable the day they parked the test.</p>
+  </div>
+
+  <footer class="post-footer">
+    <p class="signoff">
+      <em>Written after merging <a href="https://github.com/nestjs/graphql/pull/3949" target="_blank" rel="noopener noreferrer">#3949</a> into nestjs/graphql. Part of an ongoing series on fixes I've shipped to open-source projects — follow at <a href="/">yogeshwaran.com</a>.</em>
+    </p>
+    <p class="signoff" style="margin-top:1rem">
+      <em>See also: <a href="./2026-08-vscode-module-script-false-redeclaration">Why VS Code said 'Cannot redeclare block-scoped variable' on valid HTML</a> — the last time an artifact confessed to a known bug; there it was a PR title, here a skipped test.</em>
+    </p>
+  </footer>
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>&copy; <span id="yr"></span> Yogeshwaran Chandrakasan &middot; All rights reserved.</span>
+    <span><a href="/">← Back to portfolio</a></span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js" integrity="sha512-jwrwRWZWW9J6bjmBOJxPcbRvEBSQeY4Ad0NEXSfP0vwYi/Yu9x5VhDBl3wz6Pnxs8Rx/t1P8r9/OHCRciHcT7Q==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js" integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-diff.min.js" integrity="sha512-tBR4SAva+2bw36ToxaFeOEvgqxWHON25E9xp+kEBfw175sS5OusQEH8GrigKgTdHUXcKsK1yiyfo7fctBYl+rA==" crossorigin="anonymous"></script>
+<script>(function(){var y=new Date().getFullYear();document.getElementById('yr').textContent=y>2025?'2025–'+y:'2025';})();</script>
+</body>
+</html>
