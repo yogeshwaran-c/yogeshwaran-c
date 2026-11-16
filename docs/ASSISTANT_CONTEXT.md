@@ -2,6 +2,12 @@
 
 Established by the user on 2026-11-15 during migration from Claude on another laptop.
 
+Current verified state (2026-11-16): see PROJECT_STATUS.md. Redesign v6 and CI/CD
+are deployed; the owner-approved run 43748291450 completed successfully and the
+live source is 97bb008a84a7287bf9e9d422ef17f57d9d28d3d9. Restore uses the release
+field in the Publish or restore portfolio workflow on main. The pre-redesign tag
+is v2026.11.15; redesign baseline is v2026.11.15-2; CI/CD release is v2026.11.16.
+
 - This repository is the user's portfolio, GitHub profile README, resume, and
   technical blog. Use CLAUDE.md as the detailed project runbook.
 - The user wants short requests to carry enough context to complete related
@@ -21,13 +27,14 @@ Established by the user on 2026-11-15 during migration from Claude on another la
   sources and generated assets where relevant. Use confirmed facts only.
 - Time-sensitive wording such as years of experience must be checked against
   the confirmed July 2022 start date rather than copied indefinitely.
-- A monthly date is a working preference, not a background scheduler. No recurring
-  automation has been configured as part of this migration.
+- The monthly date is a working preference, not automatic blog publishing.
+  Weekly repository maintenance exists separately in the quality workflow.
 
-## New laptop status (2026-11-15)
+## Initial discovery before laptop setup (historical, 2026-11-15)
 
-Git and Windows OpenSSH are available. Origin uses HTTPS. Git identity was unset;
-no SSH directory was found. GitHub CLI, Node.js and npm were not on PATH.
+At initial inspection, origin used HTTPS, Git identity was unset, no SSH directory
+was found, and GitHub CLI/Node/npm were not on PATH. Those setup tasks are now
+complete; use LAPTOP_SETUP.md and PROJECT_STATUS.md for the verified final state.
 Reviewed memory from the old laptop's claude-migration repository has now been
 imported into Claude's project memory for this laptop's path. Codex uses this
 document and AGENTS.md for the relevant confirmed preferences.
@@ -44,8 +51,8 @@ document and AGENTS.md for the relevant confirmed preferences.
   preserve branches, and never restore malicious tooling from the baseline.
 - Every change/PR must apply docs/PR_QUALITY_CHECKLIST.md. Record measured
   Lighthouse scores for rendered changes, manual accessibility/content checks,
-  and explicit verification limits. Prepare the CI/CD plan after redesign review:
-  checks for develop PRs and an owner approval gate for main releases/deployment.
+  and explicit verification limits. The CI/CD plan has been implemented; use
+  DEPLOYMENT.md for current rules rather than the historical proposal.
 - CI/CD implementation lives in the minimal two-workflow setup documented in
   docs/DEPLOYMENT.md. Main release PR merge is an owner decision; production and
   restore jobs wait for the owner in the github-pages environment. Do not approve
@@ -90,6 +97,7 @@ registrations, custom executable agents and session transcripts were not activat
 Only reviewed writing guidance and memory were restored. Revoke the telemetry
 credential separately; do not reproduce it in project documents.
 
-The portfolio's historical setup.js is detected by Defender as a Trojan. Its
-Claude/VS Code startup files were removed by Defender; remaining Gemini/Cursor
-launch instructions were disabled locally. Never restore or execute that script.
+The historical setup.js was detected by Defender as a Trojan. All five known
+startup payload/launch files are now removed from active main/develop through
+the CI/CD release. History/tags retain them; never restore or execute that script.
+The old laptop's execution/exposure state and credential revocation are unverified.

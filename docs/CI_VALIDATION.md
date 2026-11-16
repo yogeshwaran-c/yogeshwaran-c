@@ -33,8 +33,22 @@ Native repository configuration verified through GitHub API:
   Self-review allowed intentionally for the single-owner deployment approval.
 - Pages source set to workflow. Existing public site remains available.
 
-Still requires owner action: merge the separate main release PR, then approve the
-waiting production job. No agent approval of production is implied by approving
-implementation work. Verify the waiting gate, deployed source and restore flow
-after that activation. Telemetry-credential revocation on the old migration and
-old-laptop incident review are outside what these repository checks can establish.
+Activation verified 2026-11-16: #81 and follow-up #83 merged into develop; release
+#82 merged into main under the configured owner review exception after CI passed.
+Run 43748291450 repeated full CI and packaging, visibly waited for the owner in
+github-pages, then completed successfully after the user's approval. Live
+deployment.json confirms source 97bb008a84a7287bf9e9d422ef17f57d9d28d3d9. The live
+homepage/resume/source checks passed. No agent approved the production gate.
+
+The main-review rule requires collaborator approval from the owner/code owner;
+only the personal-repository owner/Admin can bypass the review rule through a PR.
+The separate CI rule has no bypass actors. CODEOWNERS has no GitHub validation
+errors. The review exception does not grant a CI exemption.
+
+One later Lighthouse attempt (43747376651) failed its mobile median with a slow
+CPU warning. Failure evidence remains available; a single bounded retry passed
+without changing the >=90 budget. Public website files were unchanged.
+
+Live restore is not claimed as end-to-end tested: no production workflow_dispatch
+restore run was observed. Telemetry-credential revocation on the old migration and
+old-laptop incident review remain outside what these checks can establish.
