@@ -71,8 +71,8 @@ Do not import corporate settings, broad old permission grants or credentials.
 
 GitHub Actions now has weekly link/dependency maintenance. Blog publication is
 not scheduled automatically; the monthly target is the 16th in India.
-At migration, November's Markdown draft exists but its matching HTML was absent;
-inspect it before preparing the November publication.
+November's post was only an outline at migration; it was published on 2026-11-16
+(v2026.11.16-2).
 
 Defender identified the old setup.js and startup configurations as Trojans. All
 five known payload/launch files were removed from active main/develop in the CI/CD

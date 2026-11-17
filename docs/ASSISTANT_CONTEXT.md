@@ -2,11 +2,12 @@
 
 Established by the user on 2026-11-15 during migration from Claude on another laptop.
 
-Current verified state (2026-11-16): see PROJECT_STATUS.md. Redesign v6 and CI/CD
-are deployed; the owner-approved run 43748291450 completed successfully and the
-live source is 97bb008a84a7287bf9e9d422ef17f57d9d28d3d9. Restore uses the release
-field in the Publish or restore portfolio workflow on main. The pre-redesign tag
-is v2026.11.15; redesign baseline is v2026.11.15-2; CI/CD release is v2026.11.16.
+Current verified state: see PROJECT_STATUS.md, which records later releases.
+Redesign v6 and CI/CD are deployed; the owner-approved run 43748291450 completed
+successfully on 2026-11-16 with source 97bb008a84a7287bf9e9d422ef17f57d9d28d3d9.
+Restore uses the release field in the Publish or restore portfolio workflow on
+main. The pre-redesign tag is v2026.11.15; redesign baseline is v2026.11.15-2;
+CI/CD release is v2026.11.16; the November post is v2026.11.16-2.
 
 - This repository is the user's portfolio, GitHub profile README, resume, and
   technical blog. Use CLAUDE.md as the detailed project runbook.
@@ -17,6 +18,7 @@ is v2026.11.15; redesign baseline is v2026.11.15-2; CI/CD release is v2026.11.16
 - For blog work, read BLOG_GUIDE.md, BLOG_DISCIPLINE.md, and BLOG_PUBLISHING.md;
   inspect existing posts and drafts before selecting a topic. Verify technical
   claims and PR evidence; never invent personal experiences or merged work.
+  A newly published post also changes the homepage published-articles tile.
 - For OSS count updates, obtain fresh merged-PR evidence for yogeshwaran-c,
   reconcile aggregate and repository counts, and update every location listed in
   CLAUDE.md, including generated images, resume PDF, and cache-busting links.
@@ -92,9 +94,12 @@ document and AGENTS.md for the relevant confirmed preferences.
 ## Migration security
 
 The migration's global settings contain corporate telemetry configuration and an
-embedded authorization credential. These settings, old permission grants, plugin
-registrations, custom executable agents and session transcripts were not activated.
-Only reviewed writing guidance and memory were restored. Revoke the telemetry
+embedded authorization credential. The first pass restored only reviewed writing
+guidance and memory. On 2026-11-17 the owner asked for the old laptop's setup, so
+the plugins were reinstalled from the official marketplace and the two agent
+prompts and the session transcript were restored after review. The telemetry
+settings and credential, the employer plugin marketplace, automatic permission
+mode and blanket shell grants were still not activated. Revoke the telemetry
 credential separately; do not reproduce it in project documents.
 
 The historical setup.js was detected by Defender as a Trojan. All five known
