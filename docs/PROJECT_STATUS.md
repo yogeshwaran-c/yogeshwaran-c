@@ -1,7 +1,9 @@
 # Verified project state
 
-Snapshot verified 2026-11-16. Recheck live data and repository settings before
-relying on it for a later release; this is a dated record, not a live monitor.
+Snapshot verified 2026-11-16; the November publication, article count and laptop
+restore lines were rechecked on 2026-11-17. Recheck live data and repository
+settings before relying on it for a later release; this is a dated record, not a
+live monitor.
 
 ## Laptop and assistant context
 
@@ -9,7 +11,11 @@ relying on it for a later release; this is a dated record, not a live monitor.
   github-secondary authenticates as yogeshwaran-c with a passphrase-protected key.
   Windows SSH Agent starts automatically; GitHub CLI uses Windows keyring.
 - Reviewed Claude writing guidance and project memory imported on this laptop.
-  No old credentials, corporate telemetry settings or executable agents restored.
+  On 2026-11-17 the owner asked for the old laptop's setup: the ten Claude plugins
+  from the official marketplace were reinstalled, and the two user-level agent
+  prompts and the old session transcript were restored after review. Corporate
+  telemetry settings and their credential, the employer plugin marketplace,
+  automatic permission mode and blanket shell grants remain unimported.
 - Codex reads AGENTS.md -> CLAUDE.md and ASSISTANT_CONTEXT.md. Keep confirmed
   preferences in tracked docs; Claude project memory points back to these files.
 - Blog target is the 16th in Asia/Kolkata. There is no automatic blog publication.
@@ -22,11 +28,15 @@ relying on it for a later release; this is a dated record, not a live monitor.
 - Owner approved deployment run
   [43748291450](https://github.com/yogeshwaran-c/yogeshwaran-c/actions/runs/43748291450).
   It completed successfully, including source-identity/homepage/resume verification.
-- Live deployment.json confirms source
+- At that activation, live deployment.json confirmed source
   97bb008a84a7287bf9e9d422ef17f57d9d28d3d9 (release input HEAD).
+- November post published 2026-11-16 through feature PR #85 and release PR #86.
+  On 2026-11-17 live deployment.json reported source
+  7ce302503c899ad6a9fe2c2abf1a14d487fa0860 and the post URL returned 200.
 - Tags preserved: v2026.11.15 = pre-redesign appearance;
   v2026.11.15-2 = redesign v6; v2026.11.16 = CI/CD setup with the same public
-  redesign files. All 43 public file digests matched before the CI/CD release.
+  redesign files; v2026.11.16-2 = November post. All 43 public file digests
+  matched before the CI/CD release.
 
 ## Rules and workflows
 
@@ -49,8 +59,10 @@ relying on it for a later release; this is a dated record, not a live monitor.
 
 ## Content and remaining work
 
-- Modules Built stat replaced with 7 published articles. Keep that count in sync
-  after actual HTML publication; the November Markdown post remains an outline.
+- Modules Built stat replaced with the published-article count. Eight posts are
+  published (April to November 2026); the homepage tile was corrected from 7 to 8
+  on 2026-11-17 after the November release missed it. Change the tile and its
+  aria-label in the same PR as each newly published HTML post.
 - OSS evidence on 2026-11-15: 237 merged PRs across the stated external-repository
   scope. Public conservative total remains 230+; Swagger UI corrected to 3.
 - Resume wording updated to since 2022; PDF regenerated and links use v13.
